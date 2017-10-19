@@ -28,4 +28,10 @@ public class Seat {
         else
             return "[ ]";
     }
+
+    public boolean mark() {
+        if(this.booked) return false;
+        this.booked = true;
+        return true;
+    }
 }

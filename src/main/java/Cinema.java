@@ -4,7 +4,7 @@
 public class Cinema {
     private final String name;
     private Seat[][] seats;
-    private CinemaType type;
+    private final CinemaType type;
 
     /**
      * Cinema
@@ -25,6 +25,12 @@ public class Cinema {
                 this.seats[i][j] = new Seat(j+1,(char) ('A' + i) );
             }
         }
+    }
+
+    public Cinema(Cinema cinema) {
+        this.name = cinema.getName();
+        this.type = getType();
+        this.seats = cinema.getSeats();
     }
 
     /**
@@ -56,5 +62,23 @@ public class Cinema {
             }
             System.out.println();
         }
+    }
+
+    public CinemaType getType() {
+        return type;
+    }
+
+    public Seat[][] getSeats() {
+        Seat[][] copy = new Seat[this.seats.length][this.seats[0].length];
+        for (int i = 0; i < this.seats.length; i++){
+            for(int j = 0; j < this.seats[0].length; j++){
+                copy[i][j] = new Seat(j+1,(char) ('A' + i) );
+            }
+        }
+        return copy;
+    }
+
+    public boolean bookSeat(char row, int seat){
+        return this.seats[row-'A'][seat-1].mark();
     }
 }
