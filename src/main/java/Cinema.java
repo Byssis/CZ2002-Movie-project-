@@ -18,6 +18,8 @@ public class Cinema {
         this.name = name;
         this.type = type;
         this.seats = new Seat[numOfRows][numOfSeats];
+
+        // Create all seats
         for (int i = 0; i < numOfRows; i++){
             for(int j = 0; j < numOfSeats; j++){
                 this.seats[i][j] = new Seat(j+1,(char) ('A' + i) );
@@ -39,17 +41,17 @@ public class Cinema {
      */
     public void displaySeats(){
         System.out.print("\t");
-        for (int i = 0; i < seats[0].length; i++){
+        for (int i = 0; i < seats[0].length; i++){          // Print seat number
             System.out.print(" " + (i+1) + " ");
-            if(i == seats[i].length/2 -1 )
+            if(i == seats[i].length/2 -1 )                  // For middle aisle
                 System.out.print("\t");
         }
         System.out.println();
-        for (int i = 0; i < seats.length; i++){
-            System.out.print((char) ('A' + i) + "\t");
-            for(int j = 0; j < seats[i].length; j++){
-                System.out.print(this.seats[i][j]);
-                if(j == seats[i].length/2 - 1)
+        for (int i = 0; i < seats.length; i++){             // Loop trough rows
+            System.out.print((char) ('A' + i) + "\t");      // Print row name
+            for(int j = 0; j < seats[i].length; j++){       // Loop trough row seats
+                System.out.print(this.seats[i][j]);         // Print state of seats
+                if(j == seats[i].length/2 - 1)              // For middle aisle
                     System.out.print("\t");
             }
             System.out.println();
