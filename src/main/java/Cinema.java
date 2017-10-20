@@ -6,7 +6,8 @@ public class Cinema {
     private Seat[][] seats;
     private final CinemaType type;
 
-    /**
+    
+    /** hi
      * Cinema
      * @param name  Name of cinema
      * @param type  Type of cinema
