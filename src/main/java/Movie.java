@@ -15,6 +15,7 @@ public class Movie {
     final private Date endDate;
 
     private List<Rating> ratings;
+    private List<MovieListing> movieListings;
 
     /**
      * Create a new movie instance
@@ -38,6 +39,7 @@ public class Movie {
             this.cast[i] = cast[i];
         }
         ratings = new ArrayList<Rating>();
+        movieListings = new ArrayList<MovieListing>();
     }
 
     /**
@@ -93,5 +95,30 @@ public class Movie {
         for(Rating r : this.ratings)                            // Go trough all ratings
             sum += r.getRating();                               // Add rating
         return sum / this.ratings.size();                       // divide with num of ratings to get average
+    }
+
+
+    /**
+     * @return      get movie title
+     */
+    public String getTitle(){
+        return this.title;
+    }
+
+    public void showMovieListings(){
+        for(int i = 0; i < movieListings.size(); i++){
+            System.out.println((i+1)+ ": " + movieListings.get(i));
+        }
+    }
+
+    public MovieListing getMovieListing(int index){
+        return movieListings.get(index-1);
+    }
+
+    /**
+     * @return Type of movie
+     */
+    public Type getType(){
+        return this.type;
     }
 }
