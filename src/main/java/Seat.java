@@ -34,4 +34,8 @@ public class Seat {
         this.booked = true;
         return true;
     }
+
+    public boolean isBooked(){
+        return this.booked;
+    }
 }
