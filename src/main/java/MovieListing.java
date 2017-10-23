@@ -45,6 +45,13 @@ public class MovieListing {
 
     public String toString(){
         StringBuilder sb = new StringBuilder();
+        //sb.append("Movie: ");
+        //sb.append(this.movie.getTitle());
+        sb.append("\n\tCineplex:\t");
+        sb.append(this.cineplex.getName());
+        sb.append("\n\tCinema:\t\t");
+        sb.append(this.cinema.getName());
+        sb.append("\n\tTime:\t\t");
         sb.append(this.showing);
 
         return sb.toString();

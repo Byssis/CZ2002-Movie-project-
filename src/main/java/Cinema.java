@@ -59,7 +59,7 @@ public class Cinema {
             for(int j = 0; j < seats[i].length; j++){       // Loop trough row seats
                 System.out.print(this.seats[i][j]);         // Print state of seats
                 if(j == seats[i].length/2 - 1)              // For middle aisle
-                    System.out.print("\t");
+                    System.out.print("   ");
             }
             System.out.println();
         }

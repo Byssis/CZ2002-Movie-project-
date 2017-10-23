@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -93,8 +94,12 @@ public class Movie {
     }
 
     public void showReviews(){
-        for(Review r : reviews)
+        if (reviews.size() == 0)
+            System.out.println("No reviews available for movie...");
+        for(Review r : reviews) {
             System.out.println(r);
+            UIFunctions.divder();
+        }
     }
 
     /**
@@ -116,8 +121,8 @@ public class Movie {
         return this.title;
     }
 
-    public void addMovieListing(MovieListing movieListing){
-        this.movieListings.add(movieListing);
+    public void addMovieListing(Cineplex cineplex, Cinema cinema, Date showing){
+        this.movieListings.add(new MovieListing(this, cineplex, cinema, showing));
     }
 
     public void showMovieListings(){
