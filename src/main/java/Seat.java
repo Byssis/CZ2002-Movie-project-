@@ -29,13 +29,21 @@ public class Seat {
             return "[ ]";
     }
 
-    public boolean mark() {
-        if(this.booked) return false;
+    public Seat mark() {
+        if(this.booked) return null;
         this.booked = true;
-        return true;
+        return this;
     }
 
     public boolean isBooked(){
         return this.booked;
+    }
+
+    public int getSeatNr() {
+        return seatNr;
+    }
+
+    public char getRow() {
+        return row;
     }
 }

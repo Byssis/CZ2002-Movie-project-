@@ -79,7 +79,7 @@ public class Cinema {
         return copy;
     }
 
-    public boolean bookSeat(char row, int seat){
+    public Seat bookSeat(char row, int seat){
         return this.seats[row-'A'][seat-1].mark();
     }
 
@@ -87,11 +87,11 @@ public class Cinema {
         int r = row - 'A';
         int s = seatNr - 1;
 
-        if(r > 0 && r < this.seats.length){
-            if(s > 0 && s < this.seats[r].length){
-                return this.seats[r][s].isBooked();
+        if(r >= 0 && r < this.seats.length){
+            if(s >= 0 && s < this.seats[r].length){
+                return !this.seats[r][s].isBooked();
             }
         }
-        return true;
+        return false;
     }
 }

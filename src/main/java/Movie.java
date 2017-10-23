@@ -15,6 +15,7 @@ public class Movie {
     final private Date endDate;
 
     private List<Rating> ratings;
+    private List<Review> reviews;
     private List<MovieListing> movieListings;
 
     /**
@@ -39,6 +40,7 @@ public class Movie {
             this.cast[i] = cast[i];
         }
         ratings = new ArrayList<Rating>();
+        reviews = new ArrayList<Review>();
         movieListings = new ArrayList<MovieListing>();
     }
 
@@ -86,6 +88,15 @@ public class Movie {
         this.ratings.add(rating);                               // Not safe
     }
 
+    public void addReview(Review review){
+        this.reviews.add(review);                               // Not safe
+    }
+
+    public void showReviews(){
+        for(Review r : reviews)
+            System.out.println(r);
+    }
+
     /**
      * Calculate average rating
      * @return      Average of all rating for movie
@@ -103,6 +114,10 @@ public class Movie {
      */
     public String getTitle(){
         return this.title;
+    }
+
+    public void addMovieListing(MovieListing movieListing){
+        this.movieListings.add(movieListing);
     }
 
     public void showMovieListings(){
