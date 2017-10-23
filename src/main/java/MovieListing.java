@@ -57,7 +57,6 @@ public class MovieListing {
         return sb.toString();
     }
 
-
     /**
      * @param row       Row of seats
      * @param seatNr    Seat number in row

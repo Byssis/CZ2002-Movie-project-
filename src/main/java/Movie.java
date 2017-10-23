@@ -51,14 +51,15 @@ public class Movie {
      */
     public String toString(){
         StringBuilder out = new StringBuilder();                // Stringbuilder to build out string
-        out.append("Tittle: " + this.title + "\n");             // Append tittle
-        out.append("Director: " + this.director + "\n");        // Append Director
-        out.append("Duration: " + this.duration + "\n");        // Append Duration of movie
-        out.append("Cast: ");
+        out.append("Tittle:\t\t" + this.title + "\n");          // Append tittle
+        out.append("Rating:\t\t" + this.averageRating() + "\n");
+        out.append("Director:\t" + this.director + "\n");       // Append Director
+        out.append("Duration:\t" + this.duration + "\n");       // Append Duration of movie
+        out.append("Cast:");
         for (String c : this.cast){                             // Go through all cast names
-            out.append(c + " ");                                // Append cast
+            out.append("\n\t\t\t" + c);                         // Append cast
         }
-        out.append("\nType: ");                                 // Append type of movie
+        out.append("\nType:\t\t");                              // Append type of movie
         switch (type){
             case TREED:
                 out.append("3D");
@@ -107,6 +108,7 @@ public class Movie {
      * @return      Average of all rating for movie
      */
     public double averageRating(){
+        if(this.ratings.size() == 0) return 0;
         double sum = 0.0;                                       // Variable to store sum
         for(Rating r : this.ratings)                            // Go trough all ratings
             sum += r.getRating();                               // Add rating
