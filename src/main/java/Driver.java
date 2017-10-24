@@ -11,7 +11,7 @@ public class Driver {
     
     	Scanner sc = new Scanner(System.in);
     	
-    	/*String[] users = {"user123", "123"}; 		//will be implemented with file IO
+    	String[] users = {"user123", "123"}; 		//will be implemented with file IO
     	String user,password;
     	while(true){
     	System.out.println("Enter username");
@@ -45,12 +45,6 @@ public class Driver {
     		}
     	
     	}
-    	*/
-    	Date now = new Date();
-		 SimpleDateFormat dateFormatter = new SimpleDateFormat("MMMM d");
-		String date = dateFormatter.format(now);
-		System.out.println(date);
- 
     
 }
 
