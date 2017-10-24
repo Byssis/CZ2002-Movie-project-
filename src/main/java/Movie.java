@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -99,7 +98,7 @@ public class Movie {
             System.out.println("No reviews available for movie...");
         for(Review r : reviews) {
             System.out.println(r);
-            UIFunctions.divder();
+            UIFunctions.divider();
         }
     }
 

@@ -33,7 +33,7 @@ public class UIFunctions {
         }
     }
 
-    public static void divder() {
+    public static void divider() {
         System.out.println("========================================");
     }
 

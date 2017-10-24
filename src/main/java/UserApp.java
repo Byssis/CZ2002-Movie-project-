@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.util.*;
 
 /**
@@ -25,13 +24,13 @@ public class UserApp {
 
         do{
             System.out.println("User Menu: ");
-            UIFunctions.divder();
+            UIFunctions.divider();
             System.out.println("1: List all movies");
             System.out.println("2. Search movie");
             System.out.println("3. List top 5 movies");
             System.out.println("4. Booking history");
             System.out.println("5: Quit");
-            UIFunctions.divder();
+            UIFunctions.divider();
             System.out.print("Enter option: ");
             option = sc.nextInt();
             UIFunctions.clear();
@@ -65,13 +64,13 @@ public class UserApp {
 
     private static boolean listMovies() {
         while (true) {
-            UIFunctions.divder();
+            UIFunctions.divider();
             Scanner sc = new Scanner(System.in);
             int i = 1;
             for (Movie m : movies)
                 System.out.println((i++) + ": " + m.getTitle());
             System.out.println(i + ": Main menu: ");
-            UIFunctions.divder();
+            UIFunctions.divider();
             System.out.print("Enter option: ");
             int c = sc.nextInt();
             if (c > 0 && c < movies.size()) {
@@ -99,16 +98,16 @@ public class UserApp {
         Scanner sc = new Scanner(System.in);
         int c = 0;
         do{
-            UIFunctions.divder();
+            UIFunctions.divider();
             System.out.println(movie);
-            UIFunctions.divder();
+            UIFunctions.divider();
             System.out.println("1. Show movie listings");
             System.out.println("2. Show reviews");
             System.out.println("3. Review Movie");
             System.out.println("4. Rate Movie");
             System.out.println("5. Go back");
             System.out.println("6. Main Menu");
-            UIFunctions.divder();
+            UIFunctions.divider();
             c = sc.nextInt();
             UIFunctions.clear();
             switch (c){
@@ -203,7 +202,7 @@ public class UserApp {
             movieListing.displayCinema();
 
             Scanner sc = new Scanner(System.in);
-            UIFunctions.divder();
+            UIFunctions.divider();
             System.out.println("1. Choose seats");
             System.out.println("2. Back");
             System.out.println("3. Go to menu");
