@@ -21,7 +21,7 @@ public class Booking {
         StringBuilder sb = new StringBuilder();
         sb.append("Name:" + this.movieGoer.getName());
         sb.append(", Movie:" + this.movieListing.getMovieTitle());
-        sb.append(", Date:" + this.movieListing);
+        sb.append(this.movieListing + "\n");
         for (Seat s: seats){
             sb.append(" " + s.getRow() + "," + s.getSeatNr());
         }

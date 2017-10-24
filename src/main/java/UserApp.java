@@ -5,14 +5,15 @@ import java.util.*;
  */
 public class UserApp {
      static List<Movie> movies = new ArrayList<Movie>();
-
-
+     static List<MovieGoer> moviegoers = new ArrayList<MovieGoer>();
 
     public static void main(String [] args){
         String [] cast = {"Albin", "Robert", "Lars"};
         movies.add(new Movie("Die Hard", "Some director", 90, cast, Type.BLOCKBUSTER, new Date(), new Date()));
         movies.add(new Movie("Finding Nemo", "Some director", 90, cast, Type.BLOCKBUSTER, new Date(), new Date()));
         movies.add(new Movie("Planet of the apes", "Some director", 90, cast, Type.BLOCKBUSTER, new Date(), new Date()));
+        movies.add(new Movie("Spiderman", "Some director", 90, cast, Type.BLOCKBUSTER, new Date(), new Date()));
+        movies.add(new Movie("Superman", "Some director", 90, cast, Type.BLOCKBUSTER, new Date(), new Date()));
         MovieListing ml = new MovieListing(movies.get(1), new Cineplex("Kista SF"), new Cinema("Imax 1", CinemaType.NORMAL, 10, 10), new Date() );
         movies.get(1).addMovieListing(new Cineplex("Kista SF"), new Cinema("Imax 1", CinemaType.NORMAL, 10, 10), new Date());
         movies.get(1).addMovieListing(new Cineplex("Kista SF"), new Cinema("Imax 2", CinemaType.NORMAL, 10, 10), new Date());
@@ -36,18 +37,18 @@ public class UserApp {
             UIFunctions.clear();
             switch (option){
                 case 1:         // List movies
-                    listMovies(movies);
+                    listMovies(movies,true);
                     break;
 
                 case 2:
-
+                    searchMovies();
                     break;
 
                 case 3:
-
+                    listTop5Movies();
                     break;
                 case 4:
-
+                    showBookingHistory();
                     break;
                 case 5:
 
@@ -62,13 +63,14 @@ public class UserApp {
         } while (option < 5);
     }
 
-    private static boolean listMovies(List<Movie> movies) {
+    private static boolean listMovies(List<Movie> movies, boolean rating) {
         while (true) {
             UIFunctions.divider();
             Scanner sc = new Scanner(System.in);
             int i = 1;
+            System.out.println("Title, " + ((rating)? "Rating" : "Ticket Sales"));
             for (Movie m : movies)
-                System.out.println((i++) + ": " + m.getTitle());
+                System.out.println((i++) + ": " + m.getTitle() + ", " + ((rating)? m.averageRating() : m.getTicketSales()));
             System.out.println(i + ": Main menu: ");
             UIFunctions.divider();
             System.out.print("Enter option: ");
@@ -85,6 +87,38 @@ public class UserApp {
             }
         }
     }
+
+    private static void searchMovies(){
+        /*
+        ask user for search terms
+        iterate through the array
+        present the matched results
+        user should be able to pick the options 
+        go back to menu
+        */
+        UIFunctions.divider();
+        System.out.print("Enter search term: ");
+        
+        Scanner sc = new Scanner(System.in);
+        String searchterm = sc.next();
+        
+        List<Movie> searchresults = new ArrayList<Movie>();
+
+        for (Movie m : movies)
+            if(m.getTitle().toLowerCase().contains(searchterm.toLowerCase()))
+                searchresults.add(m);
+
+        if (searchresults.size() == 0)
+            {
+                System.out.println("Your search didn't return any results.");
+                UIFunctions.waitForUser();
+            }
+        else{
+            System.out.println("Results:");
+            listMovies(searchresults,true);
+        }
+            
+        } 
 
     private static boolean movieMenu(Movie movie) {
         /*
@@ -275,13 +309,113 @@ public class UserApp {
     }
 
     private static MovieGoer findMovieGoer(String name, String phoneNumber) {
-        return new MovieGoer(name, phoneNumber);
+        
+        for(MovieGoer mg : moviegoers){
+            if (name.equals(mg.getName()) && (phoneNumber.equals(mg.getPhone()))){
+                return mg;
+            }
+        }
+        
+        MovieGoer m = new MovieGoer(name, phoneNumber);
+        moviegoers.add(m);
+
+        return m;
     }
 
-    private static void saveMovieGoer(MovieGoer goer) {
+    private static void listTop5Movies(){
+        UIFunctions.divider();
+        System.out.println("Show top 5 based on: ");
+        System.out.println("1. Overall reviewers' rating");
+        System.out.println("2. Ticket Sales: ");
+        System.out.println("3. Main menu: ");
+
+        Scanner sc = new Scanner(System.in);
+        int c = sc.nextInt();
+
+        if (c == 1){
+            listTop5MoviesRating();
+        } else if (c == 2) {
+            listTop5TicketSales();
+        } else {
+            return;
+        }
+    }
+
+    private static void listTop5MoviesRating(){
+        // iterate through movies list and save the top 5 movies into a list 
+
+        List<Movie> top5moviesratings = new ArrayList<Movie>();
+
+        for(int i = 0; i < 5; i++){
+            Movie m = movies.get(0);
+            
+            for (Movie candidatemovie : movies){
+                
+                boolean inTop5 = false;
+
+                if (candidatemovie.averageRating() >= m.averageRating()){
+                    for (Movie top5movie : top5moviesratings){
+                        if (candidatemovie.equals(top5movie))
+                            inTop5 = true;
+                    }
+                    if (inTop5 == false)
+                        m = candidatemovie;
+                }
+                    
+            }
+            top5moviesratings.add(m);
+        }
+
+        listMovies(top5moviesratings,true);
 
     }
 
+    private static void listTop5TicketSales(){
+        // iterate through movies list and save the top 5 movies into a list 
 
+        List<Movie> top5moviesticketsales = new ArrayList<Movie>();
+
+        for(int i = 0; i < 5; i++){
+            Movie m = movies.get(0);
+            
+            for (Movie candidatemovie : movies){
+                
+                boolean inTop5 = false;
+
+                if (candidatemovie.getTicketSales() >= m.getTicketSales()){
+                    for (Movie top5movie : top5moviesticketsales){
+                        if (candidatemovie.equals(top5movie))
+                            inTop5 = true;
+                    }
+                    if (inTop5 == false)
+                        m = candidatemovie;
+                }
+                    
+            }
+            top5moviesticketsales.add(m);
+        }
+
+        listMovies(top5moviesticketsales,false);
+
+    }
+
+    private static void showBookingHistory(){
+        System.out.println("Enter your name: ");
+        Scanner sc = new Scanner(System.in);
+        String name = sc.next();
+        
+        System.out.println("Enter your phone number: ");
+        String phone = sc.next();
+
+        for(MovieGoer mg : moviegoers){
+            if (name.equals(mg.getName()) && phone.equals(mg.getPhone())){
+                mg.showBookingHistory();
+                UIFunctions.waitForUser();
+                return;
+            }
+        }
+        System.out.println("No booking history for " + name);
+        UIFunctions.waitForUser();
+    }
 
 }

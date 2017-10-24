@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -13,6 +14,7 @@ public class Movie {
     final private Type type;
     final private Date startDate;
     final private Date endDate;
+    private int ticketSales;
 
     private List<Rating> ratings;
     private List<Review> reviews;
@@ -36,6 +38,7 @@ public class Movie {
         this.startDate = startDate;                             // Not safe
         this.endDate = endDate;                                 // Not safe
         this.cast = new String[cast.length];
+        this.ticketSales = 0;
         for(int i = 0; i< cast.length; i++){
             this.cast[i] = cast[i];
         }
@@ -50,7 +53,7 @@ public class Movie {
      */
     public String toString(){
         StringBuilder out = new StringBuilder();                // Stringbuilder to build out string
-        out.append("Tittle:\t\t" + this.title + "\n");          // Append tittle
+        out.append("Title:\t\t" + this.title + "\n");          // Append tittle
         out.append("Rating:\t\t" + this.averageRating() + "\n");
         out.append("Director:\t" + this.director + "\n");       // Append Director
         out.append("Duration:\t" + this.duration + "\n");       // Append Duration of movie
@@ -141,5 +144,13 @@ public class Movie {
      */
     public Type getType(){
         return this.type;
+    }
+
+    public void addTicketSales(){
+        ticketSales++;
+    }
+
+    public int getTicketSales(){
+        return this.ticketSales;
     }
 }

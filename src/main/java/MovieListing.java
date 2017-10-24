@@ -40,6 +40,7 @@ public class MovieListing {
      * @return  Return true if seat where booked
      */
     public Seat bookSeats(char startRow, int startSeat){
+        this.movie.addTicketSales();
         return this.cinema.bookSeat(startRow, startSeat);
     }
 
