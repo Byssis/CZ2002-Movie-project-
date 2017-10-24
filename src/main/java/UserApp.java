@@ -278,6 +278,10 @@ public class UserApp {
         return new MovieGoer(name, phoneNumber);
     }
 
+    private static void saveMovieGoer(MovieGoer goer) {
+
+    }
+
 
 
 }

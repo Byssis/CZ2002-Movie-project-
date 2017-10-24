@@ -51,7 +51,7 @@ public class Cinema {
         for (int i = 0; i < seats[0].length; i++){          // Print seat number
             System.out.print(" " + (i+1) + " ");
             if(i == seats[i].length/2 -1 )                  // For middle aisle
-                System.out.print("\t");
+                System.out.print("   ");
         }
         System.out.println();
         for (int i = 0; i < seats.length; i++){             // Loop trough rows
