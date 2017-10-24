@@ -36,7 +36,7 @@ public class UserApp {
             UIFunctions.clear();
             switch (option){
                 case 1:         // List movies
-                    listMovies();
+                    listMovies(movies);
                     break;
 
                 case 2:
@@ -62,7 +62,7 @@ public class UserApp {
         } while (option < 5);
     }
 
-    private static boolean listMovies() {
+    private static boolean listMovies(List<Movie> movies) {
         while (true) {
             UIFunctions.divider();
             Scanner sc = new Scanner(System.in);
