@@ -4,6 +4,10 @@ import java.io.IOException;
  * Created by Albin on 2017-10-23.
  */
 public class UIFunctions {
+    
+    /**
+     * Clears the console
+     */
     public static void clear() {
         try
         {

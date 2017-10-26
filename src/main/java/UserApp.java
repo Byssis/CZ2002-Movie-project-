@@ -66,6 +66,14 @@ public class UserApp {
         } while (option < 5);
     }
 
+    /**
+     * List out all the movies
+     * @param movies
+     * @param rating
+     * @see Movie
+     * @see UIFunctions
+     * @return true sends user back to mainmenu, false sends user up to the previous menu (which is the main menu too)
+     */
     private static boolean listMovies(List<Movie> movies, boolean rating) {
         while (true) {
             UIFunctions.divider();
@@ -91,14 +99,14 @@ public class UserApp {
         }
     }
 
+    /**
+     * Checks whether search term exists in the Movies.dat file
+     * If there are any, they will be listed down and user can directly proceed to select movie listing 
+     * @see Movie
+     * @see Storage
+     * @see UIFunctions
+     */
     private static void searchMovies(){
-        /*
-        ask user for search terms
-        iterate through the array
-        present the matched results
-        user should be able to pick the options 
-        go back to menu
-        */
 
         List<Movie> movies = Storage.getMovieList();
         UIFunctions.divider();
@@ -127,15 +135,13 @@ public class UserApp {
             
         } 
 
+    /**
+     * Shows menu of possible options and prompt user to choose, calls the chosen function
+     * @param movie
+     * @see Movie
+     * @return true sends user back to mainmenu, false sends user up to the previous menu
+     */
     private static boolean movieMenu(Movie movie) {
-        /*
-        Display movie info
-        Ask user to show listing
-            Show listing
-        Review/Rating
-        Go back
-         */
-
         Scanner sc = new Scanner(System.in);
         int c = 0;
         do{
@@ -179,6 +185,12 @@ public class UserApp {
         return false;
     }
 
+    /**
+     * Prompts user to enter name and rating given for movie, calls addRating() in Movie class to add  
+     * @param movie
+     * @see Movie
+     * @return false sends user up to the previous menu once rating added
+     */
     private static boolean rateMovie(Movie movie) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter your username(Press enter to finish):");
@@ -196,6 +208,12 @@ public class UserApp {
         return false;
     }
 
+    /**
+     * Prompts user to enter name and review for movie, calls addReview() in movie class to add it in 
+     * @param movie
+     * @see Movie
+     * @return sends user up to the previous menu once review added
+     */
     private static boolean reviewMovie(Movie movie) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter your username(Press enter to finish):");
@@ -211,12 +229,24 @@ public class UserApp {
         return false;
     }
 
+    /**
+     * Calls the showReviews() function in Movie class
+     * @param movie
+     * @see UIFunctions
+     * @return Sends user up to the previous menu
+     */
     private static boolean showReviews(Movie movie) {
         movie.showReviews();
         UIFunctions.waitForUser();
         return false;
     }
 
+    /**
+     * Prompts user to choose movie listing (i.e. cineplex/cinema/datetime combination)
+     * @param movie
+     * @see Movie
+     * @return true sends user back to mainmenu, false sends user up to the previous menu
+     */
     private static boolean showListing(Movie movie) {
         movie.showMovieListings();
         Scanner sc = new Scanner(System.in);
@@ -227,16 +257,14 @@ public class UserApp {
         return false;
     }
 
+     /**
+     * Shows user the cinema layout for seat selection 
+     * @param movie
+     * @param movieListing
+     * @see MovieGoer
+     * @return true sends user back to mainmenu, false sends user up to the previous menu
+     */
     private static boolean booking(Movie movie,MovieListing movieListing) {
-        /*
-        Show movie
-        Show movie listing
-        Show available seats
-        1. give the user option to pick seat
-        or
-        2. go back or go to main menu
-         */
-
         while (true) {
             System.out.println(movie);
             System.out.println(movieListing);
@@ -282,7 +310,6 @@ public class UserApp {
                     payment(rows, setNrs, movieListing);
                     return true;
                 }
-
             } else if (c == 2) {
                 return false;
             } else if (c == 3) {
@@ -294,7 +321,15 @@ public class UserApp {
         }
     }
 
-
+    /**
+     * Gets user info to initiate payment process
+     * @param rows
+     * @param setNrs
+     * @param movieListing
+     * @see MovieGoer
+     * @see Seat
+     * @see UIFunctions
+     */
     private static void payment(List<Character> rows, List<Integer> setNrs, MovieListing movieListing) {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter your name: ");
@@ -315,6 +350,15 @@ public class UserApp {
         UIFunctions.waitForUser();
     }
 
+    /**
+     * Searches for user based on name and phone. 
+     * If found, returns the object that was found, else we add a new moviegoer.
+     * @param name
+     * @param movieGoers
+     * @param phoneNumber
+     * @see MovieGoer
+     * @return MovieGoer object
+     */
     private static MovieGoer findMovieGoer(String name, List<MovieGoer> movieGoers,String phoneNumber) {
         for(MovieGoer mg : movieGoers){
             if (name.equals(mg.getName()) && (phoneNumber.equals(mg.getPhone()))){
@@ -326,6 +370,10 @@ public class UserApp {
         return m;
     }
 
+    /**
+     * Prompts user to choose between sorting by rating or by sales
+     * @see UIFunctions
+     */
     private static void listTop5Movies() {
         UIFunctions.divider();
         System.out.println("Show top 5 based on: ");
@@ -345,6 +393,13 @@ public class UserApp {
         }
     }
 
+    /**
+     * Lists the top 5 movies by user rating. 
+     * Does so by iterating through MovieList 5 times to find the largest (and excluding them in subsequent iterations)
+     * Complexity: 5n vs nlogn by Java's default sorting function (mergesort/quicksort)
+     * @see Storage
+     * @see Movie
+     */
     private static void listTop5MoviesRating(){
         // iterate through movies list and save the top 5 movies into a list 
         List<Movie> movies = new ArrayList<Movie>();
@@ -375,8 +430,15 @@ public class UserApp {
 
     }
 
+    /**
+     * Lists the top 5 movies by ticket sales. 
+     * Does so by iterating through MovieList 5 times to find the largest (and excluding them in subsequent iterations)
+     * Complexity: 5n vs nlogn by Java's default sorting function (mergesort/quicksort)
+     * @see Storage
+     * @see Movie
+     */
+
     private static void listTop5TicketSales() {
-        // iterate through movies list and save the top 5 movies into a list 
         List<Movie> movies = Storage.getMovieList();
         List<Movie> top5moviesticketsales = new ArrayList<Movie>();
 
@@ -405,6 +467,13 @@ public class UserApp {
 
     }
 
+    /**
+     * Shows user's booking history, retrieved from users.dat
+     * @see MovieGoer
+     * @see Storage
+     * @see UIFunctions
+     */
+
     private static void showBookingHistory() {
         System.out.println("Enter your name: ");
         Scanner sc = new Scanner(System.in);
@@ -423,5 +492,4 @@ public class UserApp {
         System.out.println("No booking history for " + name);
         UIFunctions.waitForUser();
     }
-
 }
