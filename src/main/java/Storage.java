@@ -84,7 +84,6 @@ public class Storage {
         /*
             For test
          */
-
         List<Movie> movies = new ArrayList();
         String [] cast = {"Albin", "Robert", "Lars"};
         movies.add(new Movie("Die Hard", "Some director", 90, cast, Type.BLOCKBUSTER, new Date(), new Date()));
