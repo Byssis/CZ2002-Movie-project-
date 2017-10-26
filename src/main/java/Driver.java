@@ -1,7 +1,4 @@
-/**
- * Created by Albin on 2017-10-12.
-*/
-/**
+/*
  * Created by Albin on 2017-10-12.
 */
 import java.text.SimpleDateFormat;
@@ -13,7 +10,21 @@ static List<Movie> movies = new ArrayList<Movie>();
     
 public static void main(String args[]){
     
-		String title;
+		int childprice=0;
+		int adultprice=0;
+		int seniorprice=0;
+		try{
+			PrintWriter newprice = new PrintWriter("/Users/Public/test.txt");
+			newprice.println("7");
+			newprice.println("9");
+			newprice.println("8");
+			newprice.close();		//default ticket prices
+		}
+		catch(Exception e){
+			System.out.println("Error!");
+		}
+		
+	    String title;
 	    String director;
 	    int duration;
 	    int castno;
@@ -54,6 +65,42 @@ public static void main(String args[]){
     		case 1: 
     		{	System.out.println("1 - Change Ticket Prices");
     			System.out.println("2 - Add/Remove Holidays");
+    			if(sc.nextInt()==1){
+    				
+    				try{
+    					File price = new File("/Users/Public/test.txt");
+    					BufferedReader getInfo = new BufferedReader(new FileReader(price));
+    					String p = getInfo.readLine();
+    					childprice = Integer.parseInt(p);
+    					String q = getInfo.readLine();
+    					adultprice = Integer.parseInt(q);
+    					String r = getInfo.readLine();
+    					seniorprice = Integer.parseInt(r);
+    				}
+    				catch(Exception e){
+    						System.out.println("File not Found!");
+    				}
+    				
+    				System.out.println("Current prices are Child: " + childprice + " Adult: " + adultprice + " Senior: " + seniorprice);
+    				System.out.println("Enter the new ticket prices in the format \"child price <space> adult price <space> senior price\" e.g. 7 9 8");
+    				childprice = sc.nextInt();
+    				adultprice = sc.nextInt();
+    				seniorprice = sc.nextInt();
+    				try{
+    					PrintWriter newprice = new PrintWriter("/Users/Public/test.txt");
+    					newprice.println(childprice);
+    					newprice.println(adultprice);
+    					newprice.println(seniorprice);
+    					newprice.close();
+    				}
+    				catch(Exception e){
+    					System.out.println("Error!");
+    				}    				
+    				System.out.println("Ticket prices successfully updated");
+    			}else{
+    				//edit holidays
+    			}
+    				
     			break;}				//Change ticket price 
     		case 2:	{
     			System.out.println("Enter Movie Title: ");
@@ -77,7 +124,7 @@ public static void main(String args[]){
     			if(option==1){
     				type = Type.TREED;
     			}else{
-    				type = Type.DIGITAL;
+    				type = Type.NORMAL;
     			}
     			System.out.println("Enter the start date in the format DD MM YYYY");
     			date = sc.nextInt();
@@ -93,7 +140,7 @@ public static void main(String args[]){
     			System.out.println(test.toString());
     			break;}		//enter movie
     		case 3: break;				//update the details of the movies or remove the movie
-    		case 4:	break;				//by sales or rating
+    		case 4:	break;				//order by sales or rating
     		case 5: break;				//quit
     	}
     		if(choice==5){
@@ -103,11 +150,16 @@ public static void main(String args[]){
     	}
   
     	
+	    
+}
+
+
     	
 }
 
 	
     
     	
-    }
+    
+
 
