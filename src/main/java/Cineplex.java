@@ -1,10 +1,11 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Albin on 2017-10-19.
  */
-public class Cineplex {
+public class Cineplex implements Serializable {
     private List<Cinema> cinemas;
     final private String name;
 

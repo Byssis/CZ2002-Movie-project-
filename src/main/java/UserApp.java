@@ -1,14 +1,15 @@
+import java.io.IOException;
 import java.util.*;
 
 /**
  * Created by Albin on 2017-10-20.
  */
 public class UserApp {
-     static List<Movie> movies = new ArrayList<Movie>();
+     //static List<Movie> movies = new ArrayList<Movie>();
      static List<MovieGoer> moviegoers = new ArrayList<MovieGoer>();
 
-    public static void main(String [] args){
-        String [] cast = {"Albin", "Robert", "Lars"};
+    public static void main(String [] args) throws IOException {
+       /* String [] cast = {"Albin", "Robert", "Lars"};
         movies.add(new Movie("Die Hard", "Some director", 90, cast, Type.BLOCKBUSTER, new Date(), new Date()));
         movies.add(new Movie("Finding Nemo", "Some director", 90, cast, Type.BLOCKBUSTER, new Date(), new Date()));
         movies.add(new Movie("Planet of the apes", "Some director", 90, cast, Type.BLOCKBUSTER, new Date(), new Date()));
@@ -19,7 +20,7 @@ public class UserApp {
         movies.get(1).addMovieListing(new Cineplex("Kista SF"), new Cinema("Imax 2", CinemaType.NORMAL, 10, 10), new Date());
         movies.get(1).addMovieListing(new Cineplex("Kista SF"), new Cinema("Imax 3", CinemaType.NORMAL, 10, 10), new Date());
         movies.get(1).addMovieListing(new Cineplex("Kista SF"), new Cinema("Imax 4", CinemaType.NORMAL, 10, 10), new Date());
-
+*/
         int option;
         Scanner sc = new Scanner(System.in);
 
@@ -37,7 +38,9 @@ public class UserApp {
             UIFunctions.clear();
             switch (option){
                 case 1:         // List movies
+                    List<Movie> movies = Storage.getMovieList();
                     listMovies(movies,true);
+                    Storage.writeMovieList(movies);
                     break;
 
                 case 2:
@@ -88,7 +91,7 @@ public class UserApp {
         }
     }
 
-    private static void searchMovies(){
+    private static void searchMovies() throws IOException {
         /*
         ask user for search terms
         iterate through the array
@@ -96,6 +99,8 @@ public class UserApp {
         user should be able to pick the options 
         go back to menu
         */
+
+        List<Movie> movies = Storage.getMovieList();
         UIFunctions.divider();
         System.out.print("Enter search term: ");
         
@@ -117,6 +122,8 @@ public class UserApp {
             System.out.println("Results:");
             listMovies(searchresults,true);
         }
+
+        Storage.writeMovieList(movies);
             
         } 
 
@@ -322,7 +329,7 @@ public class UserApp {
         return m;
     }
 
-    private static void listTop5Movies(){
+    private static void listTop5Movies() throws IOException {
         UIFunctions.divider();
         System.out.println("Show top 5 based on: ");
         System.out.println("1. Overall reviewers' rating");
@@ -343,7 +350,7 @@ public class UserApp {
 
     private static void listTop5MoviesRating(){
         // iterate through movies list and save the top 5 movies into a list 
-
+        List<Movie> movies = new ArrayList<Movie>();
         List<Movie> top5moviesratings = new ArrayList<Movie>();
 
         for(int i = 0; i < 5; i++){
@@ -367,12 +374,13 @@ public class UserApp {
         }
 
         listMovies(top5moviesratings,true);
+        Storage.writeMovieList(movies);
 
     }
 
-    private static void listTop5TicketSales(){
+    private static void listTop5TicketSales() throws IOException {
         // iterate through movies list and save the top 5 movies into a list 
-
+        List<Movie> movies = Storage.getMovieList();
         List<Movie> top5moviesticketsales = new ArrayList<Movie>();
 
         for(int i = 0; i < 5; i++){
@@ -396,6 +404,7 @@ public class UserApp {
         }
 
         listMovies(top5moviesticketsales,false);
+        Storage.writeMovieList(movies);
 
     }
 

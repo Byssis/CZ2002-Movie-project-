@@ -1,7 +1,9 @@
+import java.io.Serializable;
+
 /**
  * Created by Albin on 2017-10-19.
  */
-public class Cinema {
+public class Cinema implements Serializable {
     private final String name;
     private Seat[][] seats;
     private final CinemaType type;

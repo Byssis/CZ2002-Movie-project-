@@ -1,10 +1,11 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Albin on 2017-10-19.
  */
-public class MovieGoer {
+public class MovieGoer implements Serializable {
     private final String name;
     private final String phone;
     private List<Booking> bookingHistory;

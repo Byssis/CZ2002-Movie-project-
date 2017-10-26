@@ -1,7 +1,9 @@
+import java.io.Serializable;
+
 /**
  * Created by Albin on 2017-10-19.
  */
-public class Booking {
+public class Booking implements Serializable {
     private final MovieGoer movieGoer;
     private final MovieListing movieListing;
     private final Seat[] seats;

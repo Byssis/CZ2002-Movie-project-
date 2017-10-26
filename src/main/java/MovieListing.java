@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -5,7 +6,7 @@ import java.util.List;
 /**
  * Created by Albin on 2017-10-19.
  */
-public class MovieListing {
+public class MovieListing implements Serializable {
     final private Movie movie;
     final private Cineplex cineplex;
     final private Cinema cinema;

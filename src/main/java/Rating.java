@@ -1,7 +1,9 @@
+import java.io.Serializable;
+
 /**
  * Created by Albin on 2017-10-17.
  */
-public class Rating {
+public class Rating implements Serializable {
     final private String userName;
     final private int rating;
 

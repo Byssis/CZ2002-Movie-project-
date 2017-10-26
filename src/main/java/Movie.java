@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
@@ -6,7 +7,7 @@ import java.util.List;
 /**
  * Created by Albin on 2017-10-17.
  */
-public class Movie {
+public class Movie implements Serializable {
     final private String title;
     final private String director;
     final private int duration;

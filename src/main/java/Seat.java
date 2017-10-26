@@ -1,7 +1,9 @@
+import java.io.Serializable;
+
 /**
  * Created by Albin on 2017-10-19.
  */
-public class Seat {
+public class Seat implements Serializable {
     private final int seatNr;
     private final char row;
     private boolean booked;                 // Not sure of this should be here or in a other class
