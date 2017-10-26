@@ -6,7 +6,6 @@ import java.text.*;
 
 public class TicketPrice 
 {
-	int baseprice = 5;
 	private double price;
 	private int customerAge;
 	private String date;
@@ -28,6 +27,7 @@ public class TicketPrice
 	adultprice = Integer.parseInt(q);
 	String r = getInfo.readLine();
 	seniorprice = Integer.parseInt(r);
+	getInfo.close();
 	}catch(Exception e){
 		System.out.println("Error!");
 	}}
@@ -53,14 +53,26 @@ public class TicketPrice
 	private boolean isPublicHol(){
 		Date now = new Date();
 		 SimpleDateFormat dateFormatter = new SimpleDateFormat("EEEE, MMMM d");
-		date = dateFormatter.format(now);
-		String[] holidays = {"January 1" , "April 14" , "August 9"};		//change to IO because admin can change holidays
-		for(int x=0;x<holidays.length;x++){
-			if(date.equals(holidays[x])){
-				return true;
+		date = dateFormatter.format(now);	
+		ArrayList<String> hols = new ArrayList<String>();						//read in public holidays
+		try{
+			File pubhol = new File("/Users/Public/pubhol.txt");
+			BufferedReader getInfo = new BufferedReader(new FileReader(pubhol));
+			String temp = getInfo.readLine();
+			while(temp!=null){
+				hols.add(temp);
+				temp = getInfo.readLine();
 			}
+			getInfo.close();
 		}
-		return false;
+		catch(Exception e){
+			System.out.println("File not found!");
+		}
+		if(hols.contains(date)){
+			return true;
+		}else{
+			return false;
+		}
 	}
 		
 	
