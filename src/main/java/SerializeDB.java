@@ -16,10 +16,8 @@ public class SerializeDB {
             in = new ObjectInputStream(fis);
             pDetails = (ArrayList) in.readObject();
             in.close();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
+        } catch (Exception ex) {
+            throw new IOException();
         }
         // print out the size
         //System.out.println(" Details Size: " + pDetails.size());
@@ -37,7 +35,7 @@ public class SerializeDB {
             out.close();
             //	System.out.println("Object Persisted");
         } catch (IOException ex) {
-            ex.printStackTrace();
+
         }
     }
 }

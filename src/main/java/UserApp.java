@@ -6,9 +6,9 @@ import java.util.*;
  */
 public class UserApp {
      //static List<Movie> movies = new ArrayList<Movie>();
-     static List<MovieGoer> moviegoers = new ArrayList<MovieGoer>();
+     //static List<MovieGoer> moviegoers = new ArrayList<MovieGoer>();
 
-    public static void main(String [] args) throws IOException {
+    public static void main(String [] args) {
        /* String [] cast = {"Albin", "Robert", "Lars"};
         movies.add(new Movie("Die Hard", "Some director", 90, cast, Type.BLOCKBUSTER, new Date(), new Date()));
         movies.add(new Movie("Finding Nemo", "Some director", 90, cast, Type.BLOCKBUSTER, new Date(), new Date()));
@@ -91,7 +91,7 @@ public class UserApp {
         }
     }
 
-    private static void searchMovies() throws IOException {
+    private static void searchMovies(){
         /*
         ask user for search terms
         iterate through the array
@@ -301,8 +301,8 @@ public class UserApp {
         String name = sc.next();
         System.out.print("Enter your phone: ");
         String phoneNumber = sc.next();
-
-        MovieGoer user = findMovieGoer(name, phoneNumber);
+        List<MovieGoer> movieGoers = Storage.getUserList();
+        MovieGoer user = findMovieGoer(name, movieGoers,phoneNumber);
         Seat[] seats = new Seat[rows.size()];
         for(int i = 0; i < rows.size(); i++){
             seats[i] = movieListing.bookSeats(rows.get(i), setNrs.get(i));
@@ -310,26 +310,23 @@ public class UserApp {
         Booking booking = new Booking(user, movieListing, seats);
 
         user.addBooking(booking);
-
+        Storage.writeUserList(movieGoers);
         System.out.println("Payments done! Press enter to continue...");
         UIFunctions.waitForUser();
     }
 
-    private static MovieGoer findMovieGoer(String name, String phoneNumber) {
-        
-        for(MovieGoer mg : moviegoers){
+    private static MovieGoer findMovieGoer(String name, List<MovieGoer> movieGoers,String phoneNumber) {
+        for(MovieGoer mg : movieGoers){
             if (name.equals(mg.getName()) && (phoneNumber.equals(mg.getPhone()))){
                 return mg;
             }
         }
-        
         MovieGoer m = new MovieGoer(name, phoneNumber);
-        moviegoers.add(m);
-
+        movieGoers.add(m);
         return m;
     }
 
-    private static void listTop5Movies() throws IOException {
+    private static void listTop5Movies() {
         UIFunctions.divider();
         System.out.println("Show top 5 based on: ");
         System.out.println("1. Overall reviewers' rating");
@@ -378,7 +375,7 @@ public class UserApp {
 
     }
 
-    private static void listTop5TicketSales() throws IOException {
+    private static void listTop5TicketSales() {
         // iterate through movies list and save the top 5 movies into a list 
         List<Movie> movies = Storage.getMovieList();
         List<Movie> top5moviesticketsales = new ArrayList<Movie>();
@@ -408,7 +405,7 @@ public class UserApp {
 
     }
 
-    private static void showBookingHistory(){
+    private static void showBookingHistory() {
         System.out.println("Enter your name: ");
         Scanner sc = new Scanner(System.in);
         String name = sc.next();
@@ -416,7 +413,7 @@ public class UserApp {
         System.out.println("Enter your phone number: ");
         String phone = sc.next();
 
-        for(MovieGoer mg : moviegoers){
+        for(MovieGoer mg : Storage.getUserList()){
             if (name.equals(mg.getName()) && phone.equals(mg.getPhone())){
                 mg.showBookingHistory();
                 UIFunctions.waitForUser();

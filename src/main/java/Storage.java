@@ -22,28 +22,40 @@ public class Storage {
         }
     }
 
-    public static List<Movie> getMovieList() throws IOException {
-        return (ArrayList)SerializeDB.readSerializedObject(MOVIE_LIST_FILENAME);
+    public static List<Movie> getMovieList()  {
+        try {
+            return (ArrayList)SerializeDB.readSerializedObject(MOVIE_LIST_FILENAME);
+        } catch (IOException e) {
+            return new ArrayList<Movie>();
+        }
     }
 
     public static void writeMovieList(List movies){
         SerializeDB.writeSerializedObject(MOVIE_LIST_FILENAME, movies);
     }
 
-    public static List<MovieGoer> getUserList() throws IOException {
-        return (ArrayList)SerializeDB.readSerializedObject(USER_LIST_FILENAME);
+    public static List<MovieGoer> getUserList() {
+        try {
+            return (ArrayList)SerializeDB.readSerializedObject(USER_LIST_FILENAME);
+        } catch (IOException e) {
+            return new ArrayList<MovieGoer>();
+        }
     }
 
     public static void writeUserList(List users){
-        SerializeDB.writeSerializedObject(MOVIE_LIST_FILENAME, users);
+        SerializeDB.writeSerializedObject(USER_LIST_FILENAME, users);
     }
 
-    public static List<Cineplex> getCineplexList() throws IOException {
-        return (ArrayList)SerializeDB.readSerializedObject(CINEPLEX_LIST_FILENAME);
+    public static List<Cineplex> getCineplexList() {
+        try {
+            return (ArrayList)SerializeDB.readSerializedObject(CINEPLEX_LIST_FILENAME);
+        } catch (IOException e) {
+            return new ArrayList<Cineplex>();
+        }
     }
 
     public static void writeCineplexList(List cineplex){
-        SerializeDB.writeSerializedObject(MOVIE_LIST_FILENAME, cineplex);
+        SerializeDB.writeSerializedObject(CINEPLEX_LIST_FILENAME, cineplex);
     }
 
     public static void main(String[] args){
