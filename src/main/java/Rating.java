@@ -4,11 +4,17 @@ import java.io.Serializable;
  * Created by Albin on 2017-10-17.
  */
 public class Rating implements Serializable {
+    /*
+        Name of user who created rating
+     */
     final private String userName;
+    /*
+        Rating, number between 0-5
+     */
     final private int rating;
 
     /**
-     *
+     * Create new Rating for movie
      * @param userName  Name of user who rated movie
      * @param rating    Rating score of movie
      * @see Movie

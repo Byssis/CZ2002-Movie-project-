@@ -1,3 +1,7 @@
+/*
+    Class from ntu learn, course CZ2002
+    26/20/2017
+ */
 import java.io.IOException;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

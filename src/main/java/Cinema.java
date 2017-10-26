@@ -4,12 +4,21 @@ import java.io.Serializable;
  * Created by Albin on 2017-10-19.
  */
 public class Cinema implements Serializable {
+    /*
+        Name of cinema
+     */
     private final String name;
+    /*
+        All seats in cinema
+     */
     private Seat[][] seats;
+    /*
+        Type of cinema
+     */
     private final CinemaType type;
 
     
-    /** hi
+    /**
      * Cinema
      * @param name  Name of cinema
      * @param type  Type of cinema
@@ -30,6 +39,10 @@ public class Cinema implements Serializable {
         }
     }
 
+    /**
+     * Create copy of cinema
+     * @param cinema    Cinema to copy
+     */
     public Cinema(Cinema cinema) {
         this.name = cinema.getName();
         this.type = getType();
@@ -67,10 +80,19 @@ public class Cinema implements Serializable {
         }
     }
 
+    /**
+     * Get type of cinema
+     * @return  Type of cinema
+     * @see CinemaType
+     */
     public CinemaType getType() {
         return type;
     }
 
+    /**
+     * Get all seats in cinema
+     * @return Seats in cinema
+     */
     public Seat[][] getSeats() {
         Seat[][] copy = new Seat[this.seats.length][this.seats[0].length];
         for (int i = 0; i < this.seats.length; i++){
@@ -81,10 +103,23 @@ public class Cinema implements Serializable {
         return copy;
     }
 
+    /**
+     * Book one seat in cinema
+     * @param row   Row of seat to book
+     * @param seat  Number of seat in row to book
+     * @return  booked seat
+     * @see Seat
+     */
     public Seat bookSeat(char row, int seat){
         return this.seats[row-'A'][seat-1].mark();
     }
 
+    /**
+     * Check if seat is booked or exist
+     * @param row   Row of seat to check
+     * @param seatNr Number of seat in row to check
+     * @return
+     */
     public boolean isBooked(char row, int seatNr) {
         int r = row - 'A';
         int s = seatNr - 1;

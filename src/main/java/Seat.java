@@ -4,9 +4,19 @@ import java.io.Serializable;
  * Created by Albin on 2017-10-19.
  */
 public class Seat implements Serializable {
+
+    /*
+        Seat number for seat
+     */
     private final int seatNr;
+    /*
+        Row letter for seat
+     */
     private final char row;
-    private boolean booked;                 // Not sure of this should be here or in a other class
+    /*
+        If seat is booked
+     */
+    private boolean booked;
 
     /**
      * Cinema seat
@@ -31,20 +41,36 @@ public class Seat implements Serializable {
             return "[ ]";
     }
 
+    /**
+     * Mark seat booked
+     * @return  booked seat
+     */
     public Seat mark() {
         if(this.booked) return null;
         this.booked = true;
         return this;
     }
 
+    /**
+     * Check if seat ia booked
+     * @return  if seat is booked
+     */
     public boolean isBooked(){
         return this.booked;
     }
 
+    /**
+     * Get seat number of seat
+     * @return  Seat number
+     */
     public int getSeatNr() {
         return seatNr;
     }
 
+    /**
+     * Get row letter
+     * @return Row letter
+     */
     public char getRow() {
         return row;
     }

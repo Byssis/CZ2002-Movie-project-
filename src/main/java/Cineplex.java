@@ -6,7 +6,13 @@ import java.util.List;
  * Created by Albin on 2017-10-19.
  */
 public class Cineplex implements Serializable {
+    /*
+        List of cinemas in cineplex
+     */
     private List<Cinema> cinemas;
+    /*
+        Name of cineplex
+     */
     final private String name;
 
     /**

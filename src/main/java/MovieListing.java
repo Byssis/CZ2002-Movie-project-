@@ -7,10 +7,25 @@ import java.util.List;
  * Created by Albin on 2017-10-19.
  */
 public class MovieListing implements Serializable {
+    /*
+        Listed movie
+     */
     final private Movie movie;
+    /*
+        Cineplex for listing
+     */
     final private Cineplex cineplex;
+    /*
+        Cinema for listing
+     */
     final private Cinema cinema;
+    /*
+        Showing date for movie
+     */
     final private Date showing;
+    /*
+        List of bookings for movie
+     */
     private List<Booking> bookings;
 
     /**
@@ -45,6 +60,10 @@ public class MovieListing implements Serializable {
         return this.cinema.bookSeat(startRow, startSeat);
     }
 
+    /**
+     * String representation for movie
+     * @return  String representation for movie
+     */
     public String toString(){
         StringBuilder sb = new StringBuilder();
         //sb.append("Movie: ");

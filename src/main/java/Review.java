@@ -2,7 +2,13 @@
  * Created by Albin on 2017-10-20.
  */
 public class Review {
+    /*
+        Name of user who wrote review
+     */
     private final String name;
+    /*
+        Review of movie
+     */
     private final String review;
 
     /**
@@ -23,6 +29,10 @@ public class Review {
         this.review = review;
     }
 
+    /**
+     * String representation of review
+     * @return
+     */
     public String toString(){
         return this.name + ": \n" + this.review;
     }
