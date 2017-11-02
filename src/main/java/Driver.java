@@ -1,5 +1,4 @@
-/**
- * Created by Albin on 2017-10-12.
+ /* Created by Albin on 2017-10-12.
 */
 import java.text.SimpleDateFormat;
 import java.io.*;
@@ -49,15 +48,13 @@ public static void main(String args[]){
 	    String director;
 	    int duration;
 	    int castno;
-	    String[] cast;
+	    ArrayList<String> cast;
 	    int option;
-	    Type type;
-	    Date startDate;
-	    Date endDate;
-	    int year;
-	    int month; 
-	    int date;			//for new movie insertion
+	    Type type = null;
+	    String startDate;
+	    String endDate;
 	    String a;
+	    
 	    
     	Scanner sc = new Scanner(System.in);
     	
@@ -95,14 +92,17 @@ public static void main(String args[]){
     	}
     
     	int choice;
+    	/* Need to initialize here for Case 3 - Find movie in movie array */
+    	int j = 0;
     	
     	while(true){	
     	System.out.println("What would you like to do?");
     	System.out.println("1 - Configure System Settings");
     	System.out.println("2 - Enter New Movie");
     	System.out.println("3 - Update Movie Details");
-    	System.out.println("4 - List Top 5 Ranking Movies");
-    	System.out.println("5 - Quit");
+    	System.out.println("4 - Remove Movie");
+    	System.out.println("5 - List Top 5 Ranking Movies");
+    	System.out.println("6 - Quit");
     	choice = sc.nextInt();
     	switch(choice){
     		case 1: 
@@ -220,21 +220,37 @@ public static void main(String args[]){
     			}	break;
 					}	//Change ticket price 
     		case 2:	{
+    			/* Input movie title */
     			System.out.println("Enter Movie Title: ");
+    			/* Dummy scanner */
     			a = sc.nextLine();
     			title = sc.nextLine();
+    			
+    			/* Input director name and movie duration */
     			System.out.println("Enter Director Name: ");
     			director = sc.nextLine();
     			System.out.println("Enter Movie Duration (in minutes): ");
     			duration = sc.nextInt();
+    			
+    			/* dummy scanner */
+    			a = sc.nextLine();
+    			
+    			/* Input number of cast members */
     			System.out.println("Enter the number of cast members ");
     			castno = sc.nextInt();
-    			cast = new String[castno];
-    			System.out.println("Enter cast name");
-    			a = sc.nextLine();
-    			for(int x=0;x<castno;x++){
-    				cast[x] = sc.nextLine();
+    			
+    			/* dummy scanner */
+    			a = sc.nextLine();   		
+    			/* Creating a array list of strings to store the casts' name */
+    			cast = new ArrayList<String>();
+    			System.out.println("Enter cast name");  			
+    			String string1 = new String();
+    			for(int y=0;y<castno;y++) 
+    			{
+    			    string1 = sc.nextLine();
+    				cast.add(string1);
       			}
+    			/* Deciding the type of movie */
     			System.out.println("Enter Movie Type");
     			System.out.println("1 - 3D\n2 - Normal\n3 - Blockbuster");
     			option = sc.nextInt();
@@ -242,31 +258,202 @@ public static void main(String args[]){
     				type = Type.TREED;
     			}else if(option==2){
     				type = Type.NORMAL;
-    			}else{
+    			}else if (option ==3)
     				type = Type.BLOCKBUSTER;
     			}
-    			System.out.println("Enter the start date in the format DD MM YYYY");
-    			date = sc.nextInt();
-    			month = sc.nextInt();
-    			year = sc.nextInt();
-    			startDate = new Date(year,month,date);
-    			System.out.println("Enter the end date in the format DD MM YYYY");
-    			date = sc.nextInt();
-    			month = sc.nextInt();
-    			year = sc.nextInt();
-    			endDate = new Date(year,month,date);
-    			Movie test = new Movie(title,director,duration,cast,type,startDate,endDate);    			
-    			List<Movie> movies = new ArrayList();
+    			/* dummy scanner */
+				a = sc.nextLine();
+    			/* Input the start and end date of the movie */
+    			System.out.println("Enter the start date in the format YYYY MM DD");
+    			startDate = sc.nextLine();
+    			System.out.println("Enter the end date in the format YYYY MM DD");
+    			endDate = sc.nextLine();
+    			
+    			/* Instantiating the movie object */
+    			Movie newmovie = new Movie(title,director,duration,cast,type,startDate,endDate);    			
+    			List<Movie> movies = new ArrayList<Movie>(); 
     			movies = Storage.getMovieList();
     			movies.add(newmovie);
+    			/* Adding it into movie's dataset */
     			Storage.writeMovieList(movies);
     			System.out.println(movies);
-    			break;}		//enter movie
+    			System.out.println();
+    			break;
 
-    		case 3: break; //update the details of the movies or remove the movie
-    		case 4:	break;				//order by sales or rating
+    		case 3: {
+    			/* dummy scanner */
+    			a = sc.nextLine();
+    			String updatemovie = new String();
+    			ArrayList<Movie> movies1 = new ArrayList<Movie>(); 
+    			movies1 = Storage.getMovieList();
+    			System.out.println(movies1);
+    			boolean key = true;
+    			while (true) 
+    			{
+    				while(key)
+    				{
+    				System.out.println(" Which movie would u like to update? Key in the movie's title");
+    				updatemovie = sc.nextLine();
+    				/* to get the index of the object in the Movie's array */
+    				for (j=0 ; j< movies1.size() ; j++)
+    				{
+    					if (movies1.get(j).getTitle().equals(updatemovie)) {
+    						key = false;
+    						break;
+    					}
+    					
+    				}
+    				if (key == true)
+    					System.out.println("Movie entered is invalid! Please try again!");
+    				}
+
+    			System.out.println("Movie found! What would u like to update for this movie? ");
+    			System.out.println(" 1 : Movie's Title  ");
+    			System.out.println(" 2 : Director's Name");
+    			System.out.println(" 3 : Movie's Duration");
+    			System.out.println(" 4 : Movie's Type");
+    			System.out.println(" 5 : Movie's start date");
+    			System.out.println(" 6 : Movie's end date");
+    			System.out.println(" 7 : Movie's casts");
+    			System.out.println(" 8 : Quit ");
+    			
+    			int editchoice;
+    			
+    			editchoice = sc.nextInt();
+    			
+    			switch(editchoice)
+    			{
+    				case 1 : {
+    				System.out.println("Please input the new movie title :  ");
+    				String newtitle;
+    				/* dummy scanner */
+        			a = sc.nextLine();
+    				newtitle = sc.nextLine();    				
+    				movies1.get(j).setTitle(newtitle);
+    				Storage.writeMovieList(movies1);
+    				System.out.println("Movie's title has been successfully updated ");	
+    				break;
+    				}
+    				case 2 : {
+    				System.out.println("Please input the new Director's :  ");
+    				String directname = new String();
+    				/* dummy scanner */
+    				a = sc.nextLine();
+    				directname = sc.nextLine();
+    				movies1.get(j).setDirectorname(directname);
+    				Storage.writeMovieList(movies1);
+    				System.out.println("Director's name has been successfully updated ");
+    				break;
+    	   			}
+    				case 3 : {
+    				System.out.println("Please input the new Movie's duration : ");
+    				int newDuration = 0;
+    				/* dummy scanner */
+    				a = sc.nextLine();
+    				newDuration = sc.nextInt();
+    				movies1.get(j).setDuration(newDuration);
+    				Storage.writeMovieList(movies1);
+    				System.out.println("Movie's duration has been successfully updated");
+    				break;
+    				}
+    				case 4 : {
+    				System.out.println("Please input the new Movie's Type : ");
+    				System.out.println("1 : TREED");
+    				System.out.println("2 : NORMAL");
+    				System.out.println("3 : BLOCKBUSTER");
+    				int typenumber = 0;
+    				/* dummy scanner */
+    				a = sc.nextLine();
+    				typenumber = sc.nextInt();
+    				movies1.get(j).setType(typenumber);
+    				Storage.writeMovieList(movies1);
+    				System.out.println("Movie's Type has been successfully changed");
+    				break;
+    				}
+    				case 5 : {
+    				System.out.println("Please input the Movie's new start date : ");
+    				String newstartDate = new String();
+    				/* dummy scanner */
+    				a = sc.nextLine();
+    				newstartDate = sc.nextLine();
+    				movies1.get(j).setStartDate(newstartDate);
+    				Storage.writeMovieList(movies1);
+    				System.out.println("Movie's start date has been successfully updated");
+    				break;
+    				}
+    				case 6 : {
+    				System.out.println("Please input the Movie's new end date : ");
+    				String newendDate = new String();
+    				/* dummy scanner */
+    				a = sc.nextLine();
+    				newendDate = sc.nextLine();
+    				movies1.get(j).setEndDate(newendDate);
+    				Storage.writeMovieList(movies1);
+    				System.out.println("Movie's end date has been successfully updated");
+    				break;
+    				}
+    				case 7 : {
+    				System.out.println("Please enter the cast name that you would like to update");
+    				int k,p ;
+    				/* dummy scanner */
+    				a = sc.nextLine();
+    				String oldcastname = new String();
+    				oldcastname = sc.nextLine();
+    				/* j is already the index of the movie in the movie arraylist */
+    				/* Use k to iterate in the cast list inside movie */
+    				for (k = 1; k<movies1.get(j).getCast().size();k++)
+    				{
+    					if (movies1.get(j).getCast().get(k).equals(oldcastname))
+    						break;
+    					System.out.println(movies1.get(j).getCast().size());
+    				}
+    				System.out.println("Please enter the new name that you would like to change it to ");
+    				String newcastname = new String();
+    				newcastname = sc.nextLine();
+    				movies1.get(j).setCast(newcastname,k);
+    				Storage.writeMovieList(movies1);
+    				System.out.println("Cast's name has been updated successfully");
+    				break;
+    				}
+    				case 8 :
+    					break;
+    			}
+    			break;
+    		}
+    			break;
+    		}
+    		case 4 : {
+    			/* dummy scanner */
+				a = sc.nextLine();
+    			ArrayList<Movie> movies2 = new ArrayList<Movie>(); 
+    			movies2 = Storage.getMovieList();
+    			System.out.println(movies2);
+    			System.out.println("Please enter the movie that you would like to remove : ");
+    			String delmovie = new String();
+    			delmovie = sc.nextLine();
+    			int q = 0;
+    			boolean key1 = true;
+    			/* to get the index of the object in the Movie's array */
+    			while (key1) {
+				for (q=0 ; q< movies2.size() ; q++)
+				{
+					if (movies2.get(q).getTitle().equals(delmovie)) {
+						key1 = false;
+						break;
+					}
+				}
+				if (key1==true)
+					System.out.println("Invalid movie entered, Please try again! ");
+    			}
+    			movies2.remove(q);
+    			Storage.writeMovieList(movies2);
+    			System.out.println("Movie has been successfully removed");
+    			break;
+    		}
     		case 5:{ 
-    			System.out.println("Goodbye!");
+    			//order by sales or rating
+    			System.out.println("1 : By Sales ");
+    			System.out.println("2 : By Rating ");
     			break;}				//quit
     		default: {
     			System.out.println("Invalid option!");
@@ -282,6 +469,7 @@ public static void main(String args[]){
 }
 
 	
+  
     
     	
     
