@@ -18,7 +18,7 @@ public class Storage {
      * @return  Return saved list of movies
      * @see Movie
      */
-    public static List<Movie> getMovieList()  {
+    public static ArrayList<Movie> getMovieList()  {
         try {
             return (ArrayList)SerializeDB.readSerializedObject(MOVIE_LIST_FILENAME);
         } catch (IOException e) {
@@ -84,13 +84,17 @@ public class Storage {
         /*
             For test
          */
-        List<Movie> movies = new ArrayList();
-        String [] cast = {"Albin", "Robert", "Lars"};
-        movies.add(new Movie("Die Hard", "Some director", 90, cast, Type.BLOCKBUSTER, new Date(), new Date()));
-        movies.add(new Movie("Finding Nemo", "Some director", 90, cast, Type.BLOCKBUSTER, new Date(), new Date()));
-        movies.add(new Movie("Planet of the apes", "Some director", 90, cast, Type.BLOCKBUSTER, new Date(), new Date()));
-        movies.add(new Movie("Spiderman", "Some director", 90, cast, Type.BLOCKBUSTER, new Date(), new Date()));
-        movies.add(new Movie("Superman", "Some director", 90, cast, Type.BLOCKBUSTER, new Date(), new Date()));
+        ArrayList<Movie> movies = new ArrayList<Movie>();
+        ArrayList<String> cast = new ArrayList<String>();
+        cast.add("Albin");
+        cast.add("Andrew");
+        cast.add("Darien");
+        cast.add("Yihao");
+        movies.add(new Movie("Die Hard", "A director", 90, cast, Type.BLOCKBUSTER, "2017 05 12", "2017 06 20"));
+        movies.add(new Movie("Finding Nemo", "B director", 100, cast, Type.BLOCKBUSTER, "2017 10 10", "2017 11 20"));
+        movies.add(new Movie("Planet of the apes", "C director", 120, cast, Type.BLOCKBUSTER, "2017 04 10", "2017 05 20"));
+        movies.add(new Movie("Spiderman", "D director", 130, cast, Type.BLOCKBUSTER, "2017 02 02", "2017 03 03"));
+        movies.add(new Movie("Superman", "E director", 140, cast, Type.BLOCKBUSTER, "2017 01 01", "2017 02 02"));
         MovieListing ml = new MovieListing(movies.get(1), new Cineplex("Kista SF"), new Cinema("Imax 1", CinemaType.NORMAL, 10, 10), new Date() );
         movies.get(1).addMovieListing(new Cineplex("Kista SF"), new Cinema("Imax 1", CinemaType.NORMAL, 10, 10), new Date());
         movies.get(1).addMovieListing(new Cineplex("Kista SF"), new Cinema("Imax 2", CinemaType.NORMAL, 10, 10), new Date());
