@@ -12,25 +12,34 @@ public class TicketPrice
 	private Movie movie;
 	private Type type;
 	private CinemaType ctype;
-	private int childprice;
-	private int adultprice;
-	private int seniorprice;
-	
+	private double childprice;
+	private double adultprice;
+	private double seniorprice;
+	private double threeD;
+	private double platinum;
+	private double wkendhol;
 	
 	{
-	try{
-	File tprice = new File("/Users/Public/test.txt");
-	BufferedReader getInfo = new BufferedReader(new FileReader(tprice));
-	String p = getInfo.readLine();
-	childprice = Integer.parseInt(p);
-	String q = getInfo.readLine();
-	adultprice = Integer.parseInt(q);
-	String r = getInfo.readLine();
-	seniorprice = Integer.parseInt(r);
-	getInfo.close();
-	}catch(Exception e){
-		System.out.println("Error!");
-	}}
+		try{
+			File price = new File("/Users/Public/prices.txt");						//read in ticket prices
+			BufferedReader getInfo = new BufferedReader(new FileReader(price));
+			String s = getInfo.readLine();
+			childprice = Double.parseDouble(s);
+			String t = getInfo.readLine();
+			adultprice = Double.parseDouble(t);
+			String q = getInfo.readLine();
+			seniorprice = Double.parseDouble(q);
+			String r = getInfo.readLine();
+			threeD = Double.parseDouble(r);
+			String y = getInfo.readLine();
+			platinum = Double.parseDouble(y);
+			String z = getInfo.readLine();
+			wkendhol = Double.parseDouble(z);
+			getInfo.close();
+		}
+		catch(Exception e){
+				System.out.println("File not Found!");
+		}}
 	public TicketPrice(int age,Movie movie,CinemaType ctype){
 		customerAge = age;
 		this.movie = movie;
@@ -85,13 +94,13 @@ public class TicketPrice
 			price = adultprice;
 		}
 		if(isWeekend()||isPublicHol()){
-			price += 2;
+			price += wkendhol;
 		}
 		if(movie.getType()==Type.TREED){
-			price += 2;
+			price += threeD;
 		}
 		if(ctype==CinemaType.PLATINUM){
-			price += 2;
+			price += platinum;
 		}
 		return price;
 	}

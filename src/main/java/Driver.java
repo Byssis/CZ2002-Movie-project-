@@ -1,4 +1,10 @@
+
+/*
+ /**
+ * Created by Albin on 2017-10-12.
+=======
  /* Created by Albin on 2017-10-12.
+>>>>>>> eda0e94e0847b6515986261b0c52494f58f03e6c
 */
 import java.text.SimpleDateFormat;
 import java.io.*;
@@ -8,7 +14,7 @@ import java.text.*;
 public class Driver {
 	static List<Movie> movies = new ArrayList<Movie>();
 	public static String PATH = "";
-	public static String USER_ACC_FILE =  PATH + "useracc.txt";
+	public static String USER_ACC_FILE = PATH + "useracc.txt";
 	public static String HOLIDAYS_FILE = PATH + "pubhol.txt";
 
 
@@ -30,7 +36,7 @@ public class Driver {
 		ArrayList<String> hols = new ArrayList<String>();                        //read in public holidays
 		try {
 			File pubhol = new File(HOLIDAYS_FILE);
-			if(!pubhol.exists()) createNewFile(HOLIDAYS_FILE);
+			//if (!pubhol.exists()) createNewFile(HOLIDAYS_FILE);
 			BufferedReader getInfo = new BufferedReader(new FileReader(pubhol));
 			String temp = getInfo.readLine();
 			while (temp != null) {
@@ -41,13 +47,15 @@ public class Driver {
 		} catch (Exception e) {
 			System.out.println("File not found!");
 		}
-
-
-		int childprice = 0;
-		int adultprice = 0;
-		int seniorprice = 0;
-
 		String title;
+		double childprice = 0;
+		double adultprice = 0;
+		double seniorprice = 0;
+		double threeD = 0;
+		double platinum = 0;
+		double wkendhol = 0;
+
+
 		String director;
 		int duration;
 		int castno;
@@ -64,7 +72,8 @@ public class Driver {
 		ArrayList<String> useracc = new ArrayList<String>();
 
 		try {
-			File acc = new File("/Users/Public/useracc.txt");                            //read in account info
+			File acc = new File("/Users/Public/useracc.txt");//read in account info
+
 			BufferedReader getInfo = new BufferedReader(new FileReader(acc));
 			String temp = getInfo.readLine();
 			while (temp != null) {
@@ -76,7 +85,7 @@ public class Driver {
 			System.out.println("File not Found!");
 		}
 
-		String user, password;
+		/*String user, password;
 		while (true) {
 			System.out.println("Enter username");
 			user = sc.next();
@@ -90,7 +99,7 @@ public class Driver {
 			} else {
 				System.out.println("Incorrect username or password! Please try again");
 			}
-		}
+		}*/
 
 		int choice;
     	/* Need to initialize here for Case 3 - Find movie in movie array */
@@ -112,34 +121,83 @@ public class Driver {
 					if (sc.nextInt() == 1) {
 
 						try {
-							File price = new File("/Users/Public/test.txt");                        //read in ticket prices
+							File price = new File("/Users/Public/prices.txt");                        //read in ticket prices
+
 							BufferedReader getInfo = new BufferedReader(new FileReader(price));
-							String p = getInfo.readLine();
-							childprice = Integer.parseInt(p);
+							String s = getInfo.readLine();
+							childprice = Double.parseDouble(s);
+							String t = getInfo.readLine();
+							adultprice = Double.parseDouble(t);
 							String q = getInfo.readLine();
-							adultprice = Integer.parseInt(q);
+							seniorprice = Double.parseDouble(q);
 							String r = getInfo.readLine();
+
 							seniorprice = Integer.parseInt(r);
+
+							threeD = Double.parseDouble(r);
+							String y = getInfo.readLine();
+							platinum = Double.parseDouble(y);
+							String z = getInfo.readLine();
+							wkendhol = Double.parseDouble(z);
 							getInfo.close();
 						} catch (Exception e) {
 							System.out.println("File not Found!");
 						}
 
-						System.out.println("Current prices are Child: " + childprice + " Adult: " + adultprice + " Senior: " + seniorprice);
-						System.out.println("Enter the new ticket prices in the format \"child price <space> adult price <space> senior price\" e.g. 7 9 8");
-						childprice = sc.nextInt();
-						adultprice = sc.nextInt();
-						seniorprice = sc.nextInt();
-						try {
-							PrintWriter newprice = new PrintWriter("/Users/Public/test.txt");
-							newprice.println(childprice);
-							newprice.println(adultprice);
-							newprice.println(seniorprice);
-							newprice.close();
-						} catch (Exception e) {
-							System.out.println("Error!");
+						System.out.printf("Current prices:\nChild: $%.2f\nAdult: $%.2f\nSenior: $%.2f\n3D Movie add-on: $%.2f\nPlatinum Suite add-on: $%.2f\nWeekend/Holiday add-on: $%.2f\n", childprice, adultprice, seniorprice, threeD, platinum, wkendhol);
+
+						int opt;
+
+						System.out.println("");
+						while (true) {
+							System.out.println("Which price would you like to change?");
+							System.out.println("1 - Child ticket price");
+							System.out.println("2 - Adult ticket price");
+							System.out.println("3 - Senior ticket price");
+							System.out.println("4 - 3D Movie add-on");
+							System.out.println("5 - Platinum Suit add-on");
+							System.out.println("6 - Weekend/Holiday add-on");
+							System.out.println("7 - Back");
+							opt = sc.nextInt();
+							if (opt == 1) {
+								System.out.println("Enter the new Child ticket price");
+								childprice = sc.nextDouble();
+							} else if (opt == 2) {
+								System.out.println("Enter the new Adult ticket price");
+								adultprice = sc.nextDouble();
+							} else if (opt == 3) {
+								System.out.println("Enter the new Senior ticket price");
+								seniorprice = sc.nextDouble();
+							} else if (opt == 4) {
+								System.out.println("Enter the new 3D Movie add-on price");
+								threeD = sc.nextDouble();
+							} else if (opt == 5) {
+								System.out.println("Enter the new Platinum Suite add-on price");
+								platinum = sc.nextDouble();
+							} else if (opt == 6) {
+								System.out.println("Enter the new Weekend/Holiday add-on price");
+								wkendhol = sc.nextDouble();
+							} else if (opt == 7) {
+								break;
+							} else {
+								System.out.println("Invalid option! Try again!");
+							}
+							try {
+								PrintWriter newprice = new PrintWriter("/Users/Public/prices.txt");
+								newprice.println(childprice);
+								newprice.println(adultprice);
+								newprice.println(seniorprice);
+								newprice.println(threeD);
+								newprice.println(platinum);
+								newprice.println(wkendhol);
+								newprice.close();
+							} catch (Exception e) {
+								System.out.println("Error!");
+							}
+							System.out.println("Ticket prices successfully updated");
+
 						}
-						System.out.println("Ticket prices successfully updated");
+
 
 					} else {
 
@@ -166,57 +224,101 @@ public class Driver {
 										break;
 									}
 								}
-								hols.remove(holtodelete);
+
+								System.out.println("Current prices are Child: " + childprice + " Adult: " + adultprice + " Senior: " + seniorprice);
+								System.out.println("Enter the new ticket prices in the format \"child price <space> adult price <space> senior price\" e.g. 7 9 8");
+								childprice = sc.nextInt();
+								adultprice = sc.nextInt();
+								seniorprice = sc.nextInt();
 								try {
-									PrintWriter newhols = new PrintWriter("/Users/Public/pubhol.txt");
-									for (int x = 0; x < hols.size(); x++) {
-										newhols.println(hols.get(x));
-									}
-									newhols.close();
-									System.out.println("Holiday successfully removed!");
+									PrintWriter newprice = new PrintWriter("/Users/Public/test.txt");
+									newprice.println(childprice);
+									newprice.println(adultprice);
+									newprice.println(seniorprice);
+									newprice.close();
 								} catch (Exception e) {
 									System.out.println("Error!");
 								}
+								System.out.println("Ticket prices successfully updated");
 
-							} else if (opt == 2) {
-								a = sc.nextLine();
-								String newhol;
-								while (true) {
-									System.out.println("Enter the new holiday in the format Day of Week, Month Day. eg. Monday, May 1");
-									newhol = sc.nextLine();
-									if (hols.contains(newhol)) {
-										System.out.println("Holiday alreadys exists! Try again!");
-									} else {
-										if (isValidDate(newhol)) {
-											break;
-										} else {
-											System.out.println("Not a valid date! Try again!");
-										}
-									}
-								}
-								hols.add(newhol);
-								try {
-									PrintWriter newhols = new PrintWriter("/Users/Public/pubhol.txt");
-									for (int x = 0; x < hols.size(); x++) {
-										newhols.println(hols.get(x));
-									}
-									newhols.close();
-									System.out.println("Holiday successfully added!");
-								} catch (Exception e) {
-									System.out.println("Error!");
-								}
-
-
-							} else if (opt == 3) {
-								break;
 							} else {
-								System.out.println("Invalid option!");
-							}
-						}
 
+								System.out.println("Here are the current holidays:");
+								for (int x = 0; x < hols.size(); x++) {
+									System.out.println(hols.get(x));
+								}
+								//int opt;
+								while (true) {
+									System.out.println("What would you like to do?");
+									System.out.println("1 - Remove Holiday");
+									System.out.println("2 - Add Holiday");
+									System.out.println("3 - Back to Main Menu");
+									opt = sc.nextInt();
+									if (opt == 1) {//remove holiday
+										a = sc.nextLine();
+										String holtodelete;
+										while (true) {
+											System.out.println("Enter the new holiday in the format Day of Week, Month Day. eg. Monday, May 1");
+											holtodelete = sc.nextLine();
+											if (!hols.contains(holtodelete)) {
+												System.out.println("Holiday does not exist! Try again!");
+											} else {
+												break;
+											}
+										}
+										hols.remove(holtodelete);
+										try {
+											PrintWriter newhols = new PrintWriter("/Users/Public/pubhol.txt");
+											for (int x = 0; x < hols.size(); x++) {
+												newhols.println(hols.get(x));
+											}
+											newhols.close();
+											System.out.println("Holiday successfully removed!");
+										} catch (Exception e) {
+											System.out.println("Error!");
+										}
+
+									} else if (opt == 2) {
+										a = sc.nextLine();
+										String newhol;
+										while (true) {
+											System.out.println("Enter the new holiday in the format Day of Week, Month Day. eg. Monday, May 1");
+											newhol = sc.nextLine();
+											if (hols.contains(newhol)) {
+												System.out.println("Holiday alreadys exists! Try again!");
+											} else {
+												if (isValidDate(newhol)) {
+													break;
+												} else {
+													System.out.println("Not a valid date! Try again!");
+												}
+											}
+										}
+										hols.add(newhol);
+										try {
+											PrintWriter newhols = new PrintWriter("/Users/Public/pubhol.txt");
+											for (int x = 0; x < hols.size(); x++) {
+												newhols.println(hols.get(x));
+											}
+											newhols.close();
+											System.out.println("Holiday successfully added!");
+										} catch (Exception e) {
+											System.out.println("Error!");
+										}
+
+
+									} else if (opt == 3) {
+										break;
+									} else {
+										System.out.println("Invalid option!");
+									}
+								}
+
+							}
+							break;
+						}    //Change ticket price
 					}
-					break;
-				}    //Change ticket price
+				}
 				case 2: {
     			/* Input movie title */
 					System.out.println("Enter Movie Title: ");
@@ -459,15 +561,5 @@ public class Driver {
 		}
 	}
 
-	private static void createNewFile(String holidaysFile) {
-
-
-	}
 }
-
-	
-  
-    
-    	
-    
 
