@@ -39,10 +39,13 @@ public static void main(String args[]){
 			System.out.println("File not found!");
 		}
 		
-		
-		int childprice=0;
-		int adultprice=0;
-		int seniorprice=0;
+		double childprice=0;
+		double adultprice=0;
+		double seniorprice=0;
+		double threeD = 0;
+		double platinum = 0;
+		double wkendhol = 0;
+	
 		
 		String title;
 	    String director;
@@ -498,15 +501,16 @@ public static void main(String args[]){
     			//order by sales or rating
     			System.out.println("1 : By Sales ");
     			System.out.println("2 : By Rating ");
-    			break;}				//quit
-    		default: {
-    			System.out.println("Invalid option!");
-    			break;
-    		}
+    			break;}
+    		case 6:{
+    			System.out.println("Bye!");
+    			
+    		} //quit
     	}
-    		if(choice==5){
-    			break;			//Quit program
-    		}
+    
+		if(choice==6){
+			break;			//Quit program
+		}
     	
     	}	    
 }
