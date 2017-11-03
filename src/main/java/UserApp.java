@@ -402,32 +402,9 @@ public class UserApp {
      */
     private static void listTop5MoviesRating(){
         // iterate through movies list and save the top 5 movies into a list 
-        List<Movie> movies = new ArrayList<Movie>();
-        List<Movie> top5moviesratings = new ArrayList<Movie>();
-
-        for(int i = 0; i < 5; i++){
-            Movie m = movies.get(0);
-            
-            for (Movie candidatemovie : movies){
-                
-                boolean inTop5 = false;
-
-                if (candidatemovie.averageRating() >= m.averageRating()){
-                    for (Movie top5movie : top5moviesratings){
-                        if (candidatemovie.equals(top5movie))
-                            inTop5 = true;
-                    }
-                    if (inTop5 == false)
-                        m = candidatemovie;
-                }
-                    
-            }
-            top5moviesratings.add(m);
-        }
-
-        listMovies(top5moviesratings,true);
+        List<Movie> movies = Storage.getMovieList();
+        listMovies(top5Movies(movies,ratings), false);
         Storage.writeMovieList(movies);
-
     }
 
     /**
@@ -437,34 +414,10 @@ public class UserApp {
      * @see Storage
      * @see Movie
      */
-
     private static void listTop5TicketSales() {
         List<Movie> movies = Storage.getMovieList();
-        List<Movie> top5moviesticketsales = new ArrayList<Movie>();
-
-        for(int i = 0; i < 5; i++){
-            Movie m = movies.get(0);
-            
-            for (Movie candidatemovie : movies){
-                
-                boolean inTop5 = false;
-
-                if (candidatemovie.getTicketSales() >= m.getTicketSales()){
-                    for (Movie top5movie : top5moviesticketsales){
-                        if (candidatemovie.equals(top5movie))
-                            inTop5 = true;
-                    }
-                    if (inTop5 == false)
-                        m = candidatemovie;
-                }
-                    
-            }
-            top5moviesticketsales.add(m);
-        }
-
-        listMovies(top5moviesticketsales,false);
+        listMovies(top5Movies(movies,tickets), false);
         Storage.writeMovieList(movies);
-
     }
 
     /**
@@ -492,4 +445,37 @@ public class UserApp {
         System.out.println("No booking history for " + name);
         UIFunctions.waitForUser();
     }
+
+
+    public static List<Movie> top5Movies(List<Movie> movies, Comparator<Movie> comparator){
+        List<Movie> top5Movies = new ArrayList<Movie>();
+        for(int i = 0; i < 5; i++){
+            Movie m = movies.get(0);
+            for (Movie candidatemovie : movies){
+                boolean inTop5 = false;
+                if (comparator.compare(candidatemovie, m) >= 0){
+                    for (Movie top5movie : top5Movies){
+                        if (candidatemovie.equals(top5movie))
+                            inTop5 = true;
+                    }
+                    if (inTop5 == false)
+                        m = candidatemovie;
+                }
+            }
+            top5Movies.add(m);
+        }
+        return top5Movies;
+    }
+    
+    private static Comparator<Movie> tickets = new Comparator<Movie>() {
+        public int compare(Movie o1, Movie o2) {
+            return o1.getTicketSales() - o2.getTicketSales();
+        }
+    };
+
+    private static Comparator<Movie> ratings = new Comparator<Movie>(){
+        public int compare(Movie o1, Movie o2) {
+            return Double.compare(o1.averageRating(), o2.averageRating());
+        }
+    };
 }
