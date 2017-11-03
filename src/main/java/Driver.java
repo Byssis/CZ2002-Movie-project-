@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 /*
  /**
  * Created by Albin on 2017-10-12.
@@ -43,16 +43,8 @@ public static void main(String args[]){
 		}
 		catch(Exception e){
 			System.out.println("File not found!");
-		}
-		
-		
-<<<<<<< HEAD
-		int childprice=0;
-		int adultprice=0;
-		int seniorprice=0;
-		
+		}		
 		String title;
-=======
 		double childprice=0;
 		double adultprice=0;
 		double seniorprice=0;
@@ -62,7 +54,6 @@ public static void main(String args[]){
 		
 		
 	    String title;
->>>>>>> eda0e94e0847b6515986261b0c52494f58f03e6c
 	    String director;
 	    int duration;
 	    int castno;
@@ -79,7 +70,7 @@ public static void main(String args[]){
     	ArrayList<String> useracc = new ArrayList<String>();
     	
     	try{
-			File acc = new File("/Users/Public/useracc.txt");							//read in account info
+			File acc = new File("/Users/Public/useracc.txt");//read in account info
 			BufferedReader getInfo = new BufferedReader(new FileReader(acc));
 			String temp = getInfo.readLine();
 			while(temp!=null){
@@ -129,11 +120,11 @@ public static void main(String args[]){
     			if(sc.nextInt()==1){
     				
     				try{
-<<<<<<< HEAD
+
     					File price = new File("/Users/Public/test.txt");						//read in ticket prices
 =======
     					File price = new File("/Users/Public/prices.txt");						//read in ticket prices
->>>>>>> eda0e94e0847b6515986261b0c52494f58f03e6c
+
     					BufferedReader getInfo = new BufferedReader(new FileReader(price));
     					String s = getInfo.readLine();
     					childprice = Double.parseDouble(s);
@@ -142,15 +133,14 @@ public static void main(String args[]){
     					String q = getInfo.readLine();
     					seniorprice = Double.parseDouble(q);
     					String r = getInfo.readLine();
-<<<<<<< HEAD
+
     					seniorprice = Integer.parseInt(r);
-=======
+
     					threeD = Double.parseDouble(r);
     					String y = getInfo.readLine();
     					platinum = Double.parseDouble(y);
     					String z = getInfo.readLine();
     					wkendhol = Double.parseDouble(z);
->>>>>>> eda0e94e0847b6515986261b0c52494f58f03e6c
     					getInfo.close();
     				}
     				catch(Exception e){
@@ -208,14 +198,13 @@ public static void main(String args[]){
     				}
     				catch(Exception e){
     					System.out.println("Error!");
-<<<<<<< HEAD
     				}    				
     				System.out.println("Ticket prices successfully updated");
-=======
+
     				}  
     				
     				}
->>>>>>> eda0e94e0847b6515986261b0c52494f58f03e6c
+
     				
     			}else{
     				
@@ -492,7 +481,34 @@ public static void main(String args[]){
     				}
     				case 8 :
     					break;
-<<<<<<< HEAD
+    			}
+    			break;
+    		}
+    			break;
+    		}
+    		case 4 : {
+    			/* dummy scanner */
+				a = sc.nextLine();
+    			ArrayList<Movie> movies2 = new ArrayList<Movie>(); 
+    			movies2 = Storage.getMovieList();
+    			System.out.println(movies2);
+    			System.out.println("Please enter the movie that you would like to remove : ");
+    			String delmovie = new String();
+    			delmovie = sc.nextLine();
+    			int q = 0;
+    			boolean key1 = true;
+    			/* to get the index of the object in the Movie's array */
+    			while (key1) {
+				for (q=0 ; q< movies2.size() ; q++)
+				{
+					if (movies2.get(q).getTitle().equals(delmovie)) {
+						key1 = false;
+						break;
+					}
+				}
+				if (key1==true)
+					System.out.println("Invalid movie entered, Please try again! ");
+			}
     			}
     			break;
     		}
@@ -521,36 +537,6 @@ public static void main(String args[]){
 				if (key1==true)
 					System.out.println("Invalid movie entered, Please try again! ");
     			}
-=======
-    			}
-    			break;
-    		}
-    			break;
-    		}
-    		case 4 : {
-    			/* dummy scanner */
-				a = sc.nextLine();
-    			ArrayList<Movie> movies2 = new ArrayList<Movie>(); 
-    			movies2 = Storage.getMovieList();
-    			System.out.println(movies2);
-    			System.out.println("Please enter the movie that you would like to remove : ");
-    			String delmovie = new String();
-    			delmovie = sc.nextLine();
-    			int q = 0;
-    			boolean key1 = true;
-    			/* to get the index of the object in the Movie's array */
-    			while (key1) {
-				for (q=0 ; q< movies2.size() ; q++)
-				{
-					if (movies2.get(q).getTitle().equals(delmovie)) {
-						key1 = false;
-						break;
-					}
-				}
-				if (key1==true)
-					System.out.println("Invalid movie entered, Please try again! ");
-    			}
->>>>>>> eda0e94e0847b6515986261b0c52494f58f03e6c
     			movies2.remove(q);
     			Storage.writeMovieList(movies2);
     			System.out.println("Movie has been successfully removed");
@@ -574,13 +560,3 @@ public static void main(String args[]){
 }
 }
 
-<<<<<<< HEAD
-	
-=======
-	
-  
-    
-    	
-    
-
->>>>>>> eda0e94e0847b6515986261b0c52494f58f03e6c
