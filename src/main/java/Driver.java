@@ -111,36 +111,80 @@ public static void main(String args[]){
     			if(sc.nextInt()==1){
     				
     				try{
-    					File price = new File("/Users/Public/test.txt");						//read in ticket prices
+    					File price = new File("/Users/Public/prices.txt");						//read in ticket prices
     					BufferedReader getInfo = new BufferedReader(new FileReader(price));
-    					String p = getInfo.readLine();
-    					childprice = Integer.parseInt(p);
+    					String s = getInfo.readLine();
+    					childprice = Double.parseDouble(s);
+    					String t = getInfo.readLine();
+    					adultprice = Double.parseDouble(t);
     					String q = getInfo.readLine();
-    					adultprice = Integer.parseInt(q);
+    					seniorprice = Double.parseDouble(q);
     					String r = getInfo.readLine();
-    					seniorprice = Integer.parseInt(r);
+    					threeD = Double.parseDouble(r);
+    					String y = getInfo.readLine();
+    					platinum = Double.parseDouble(y);
+    					String z = getInfo.readLine();
+    					wkendhol = Double.parseDouble(z);
     					getInfo.close();
     				}
     				catch(Exception e){
     						System.out.println("File not Found!");
     				}
     				
-    				System.out.println("Current prices are Child: " + childprice + " Adult: " + adultprice + " Senior: " + seniorprice);
-    				System.out.println("Enter the new ticket prices in the format \"child price <space> adult price <space> senior price\" e.g. 7 9 8");
-    				childprice = sc.nextInt();
-    				adultprice = sc.nextInt();
-    				seniorprice = sc.nextInt();
+    				System.out.printf("Current prices:\nChild: $%.2f\nAdult: $%.2f\nSenior: $%.2f\n3D Movie add-on: $%.2f\nPlatinum Suite add-on: $%.2f\nWeekend/Holiday add-on: $%.2f\n",childprice,adultprice,seniorprice,threeD,platinum,wkendhol);
+    				
+    				int opt;
+    				
+    				System.out.println("");
+    				while(true){
+    				System.out.println("Which price would you like to change?");
+    				System.out.println("1 - Child ticket price");
+    				System.out.println("2 - Adult ticket price");
+    				System.out.println("3 - Senior ticket price");
+    				System.out.println("4 - 3D Movie add-on");
+    				System.out.println("5 - Platinum Suit add-on");
+    				System.out.println("6 - Weekend/Holiday add-on");
+    				System.out.println("7 - Back");
+    				opt = sc.nextInt();
+    				if(opt==1){
+    					System.out.println("Enter the new Child ticket price");
+    					childprice = sc.nextDouble();
+    				}else if(opt==2){
+    					System.out.println("Enter the new Adult ticket price");
+    					adultprice = sc.nextDouble();
+    				}else if(opt==3){
+    					System.out.println("Enter the new Senior ticket price");
+    					seniorprice = sc.nextDouble();
+    				}else if(opt==4){
+    					System.out.println("Enter the new 3D Movie add-on price");
+    					threeD = sc.nextDouble();
+    				}else if(opt==5){
+    					System.out.println("Enter the new Platinum Suite add-on price");
+    					platinum = sc.nextDouble();
+    				}else if(opt==6){
+    					System.out.println("Enter the new Weekend/Holiday add-on price");
+    					wkendhol = sc.nextDouble();
+    				}else if(opt==7){
+    					break;
+    				}
+    				else{
+    					System.out.println("Invalid option! Try again!");
+    				}    				
     				try{
-    					PrintWriter newprice = new PrintWriter("/Users/Public/test.txt");
+    					PrintWriter newprice = new PrintWriter("/Users/Public/prices.txt");
     					newprice.println(childprice);
     					newprice.println(adultprice);
     					newprice.println(seniorprice);
+    					newprice.println(threeD);
+    					newprice.println(platinum);
+    					newprice.println(wkendhol);
     					newprice.close();
     				}
     				catch(Exception e){
     					System.out.println("Error!");
-    				}    				
-    				System.out.println("Ticket prices successfully updated");
+    				}  
+    				
+    				}
     				
     			}else{
     				
