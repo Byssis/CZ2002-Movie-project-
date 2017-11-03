@@ -120,9 +120,6 @@ public static void main(String args[]){
     			if(sc.nextInt()==1){
     				
     				try{
-
-    					File price = new File("/Users/Public/test.txt");						//read in ticket prices
-=======
     					File price = new File("/Users/Public/prices.txt");						//read in ticket prices
 
     					BufferedReader getInfo = new BufferedReader(new FileReader(price));
