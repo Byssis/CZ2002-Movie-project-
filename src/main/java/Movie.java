@@ -1,9 +1,10 @@
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Date;
+import java.util.*;
 import java.util.List;
-
+import java.text.SimpleDateFormat;
+import java.text.*;
 /**
  * Created by Albin on 2017-10-17.
  */
@@ -11,31 +12,31 @@ public class Movie implements Serializable {
     /*
         Title of movie
      */
-    final private String title;
+    private String title;
     /*
         Name of director for movie
      */
-    final private String director;
+    private String director;
     /*
         Length of movie in minutes
      */
-    final private int duration;
+    private int duration;
     /*
         List of cast in movie
      */
-    final private String[] cast;
+    private ArrayList<String> cast;
     /*
         Type of movie
      */
-    final private Type type;
+    private Type type;
     /*
         Start showing date for movie
      */
-    final private Date startDate;
+    private String startDate;
     /*
         End showing date for movie
      */
-    final private Date endDate;
+    private String endDate;
     /*
         Number of tickets sold for movie
      */
@@ -64,17 +65,18 @@ public class Movie implements Serializable {
      * @param startDate First day of showing
      * @param endDate   Last day of showing
      */
-    public Movie(String title, String director, int duration, String[] cast, Type type, Date startDate, Date endDate) {
+    public Movie(String title, String director, int duration, ArrayList<String> cast, Type type, String startDate, String endDate) {
         this.title = title;
         this.director = director;
         this.duration = duration;
         this.type = type;
         this.startDate = startDate;                             // Not safe
         this.endDate = endDate;                                 // Not safe
-        this.cast = new String[cast.length];
+        this.cast = new ArrayList<String>();
         this.ticketSales = 0;
-        for (int i = 0; i < cast.length; i++) {
-            this.cast[i] = cast[i];
+        for (int i = 0; i < cast.size(); i++) 
+        {
+            this.cast.add(cast.get(i));       
         }
         ratings = new ArrayList<Rating>();
         reviews = new ArrayList<Review>();
@@ -88,13 +90,16 @@ public class Movie implements Serializable {
      */
     public String toString() {
         StringBuilder out = new StringBuilder();                // Stringbuilder to build out string
-        out.append("Title:\t\t" + this.title + "\n");          // Append tittle
+        System.out.println();
+        out.append("\nTitle:\t\t" + this.title + "\n");          // Append tittle
         out.append("Rating:\t\t" + this.averageRating() + "\n");
         out.append("Director:\t" + this.director + "\n");       // Append Director
-        out.append("Duration:\t" + this.duration + "\n");       // Append Duration of movie
-        out.append("Cast:");
+        out.append("Duration:\t" + this.duration + "\n");  // Append Duration of movie
+        out.append("Start Date : \t" + this.startDate);
+        out.append("\nEnd Date : \t" + this.endDate);
+        out.append("\nCast:");
         for (String c : this.cast) {                             // Go through all cast names
-            out.append("\n\t\t\t" + c);                         // Append cast
+            out.append("\t\t" + c);                         // Append cast
         }
         out.append("\nType:\t\t");                              // Append type of movie
         switch (type) {
@@ -163,7 +168,87 @@ public class Movie implements Serializable {
     public String getTitle() {
         return this.title;
     }
-
+    
+    /* Set Title Name*/
+    
+    public void setTitle(String newtitle) {
+    	this.title =newtitle;
+    }
+    
+    /* Set Director Name*/
+    
+    public void setDirectorname(String directorname) {
+    	director = directorname;
+    }
+    
+    /* Set Duration */
+    
+    public void setDuration(int minutes) {
+    	duration = minutes;
+    }
+    /* update cast member - doing for one cast only */
+    /* since we will not update a whole list of cast */
+    public void setCast(String casts, int k) {
+    	cast.set(k,casts);
+    }
+    
+    /* Add cast members in */
+    public void addCast(String casts) {
+    	int i;
+    	for (i=0;i<cast.size();i++) {
+    		cast.add(casts);
+    	}
+    }
+    /* Remove cast members in */
+    public void removeCast(String casts) {
+    	if (cast.contains(casts))
+    		cast.remove(casts);
+    	else
+    		System.out.println("Cast entered is invalid");
+    }
+    
+    /* Return the array of casts' names */
+    public ArrayList<String> getCast() {
+    	return this.cast;
+    }
+    
+    /* Return the type of the movie */
+    public Type getType() {
+        return this.type;
+    }
+    
+    /* Set the type of the movie */
+    
+    public void setType(int option) {
+    	if(option==1)
+			type = Type.TREED;
+    	else if (option == 2)
+			type = Type.NORMAL;
+    	else if (option == 3)
+    		type = Type.BLOCKBUSTER;
+    	else
+    		System.out.println("Invalid value entered");
+    }
+    
+    /* Set the start date of the movie */
+    public void setStartDate(String startdate) {
+    	if(isValidDate(startdate))
+    	{
+    		startDate = startdate;
+    	}
+    	else 
+    		System.out.println("Invalid date or date format entered");
+    }
+    
+    /* Set the end date of the movie */
+    public void setEndDate(String enddate) {
+    	if(isValidDate(enddate))
+    	{
+    		endDate = enddate;
+    	}
+    	else
+    		System.out.println("Invalid date or date format entered");
+    }
     /**
      * Add movieListing for movie
      *
@@ -195,16 +280,6 @@ public class Movie implements Serializable {
     public MovieListing getMovieListing(int index) {
         return movieListings.get(index - 1);
     }
-
-    /**
-     * Get type of movie
-     *
-     * @return Type of movie
-     */
-    public Type getType() {
-        return this.type;
-    }
-
     /**
      * Add one ticket sale to movie
      */
@@ -220,4 +295,17 @@ public class Movie implements Serializable {
     public int getTicketSales() {
         return this.ticketSales;
     }
+    
+    
+    
+    public static boolean isValidDate(String inDate) {						//check if the date passed in is a valid one
+    	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    	dateFormat.setLenient(false);
+    	try {
+    			dateFormat.parse(inDate.trim());
+    	} catch (ParseException pe) {
+    		return false;
+    	}
+    	return true;
+    	}
 }
