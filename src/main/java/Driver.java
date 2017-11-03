@@ -549,7 +549,7 @@ public static void main(String args[]){
     			break;
     		}
     	}
-    		if(choice==5){
+    		if(choice==6){
     			break;			//Quit program
     		}
     	
