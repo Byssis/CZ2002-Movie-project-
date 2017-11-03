@@ -24,20 +24,7 @@ public class Driver {
 	public static void main(String args[]){
 
 
-		ArrayList<String> hols = new ArrayList<String>();						//read in public holidays
-		try{
-			File pubhol = new File("/Users/Public/pubhol.txt");
-			BufferedReader getInfo = new BufferedReader(new FileReader(pubhol));
-			String temp = getInfo.readLine();
-			while(temp!=null){
-				hols.add(temp);
-				temp = getInfo.readLine();
-			}
-			getInfo.close();
-		}
-		catch(Exception e){
-			System.out.println("File not found!");
-		}
+		//ArrayList<String> hols = Storage.getHolidays();						//read in public holidays
 
 		double childprice=0;
 		double adultprice=0;
@@ -58,24 +45,9 @@ public class Driver {
 		String endDate;
 		String a;
 
-
 		Scanner sc = new Scanner(System.in);
 
-		ArrayList<String> useracc = new ArrayList<String>();
-
-		try{
-			File acc = new File("/Users/Public/useracc.txt");							//read in account info
-			BufferedReader getInfo = new BufferedReader(new FileReader(acc));
-			String temp = getInfo.readLine();
-			while(temp!=null){
-				useracc.add(temp);
-				temp = getInfo.readLine();
-			}
-			getInfo.close();
-		}
-		catch(Exception e){
-			System.out.println("File not Found!");
-		}
+		ArrayList<String> useracc = Storage.getAdmins();
 
 		String user,password;
 		while(true){
@@ -190,7 +162,7 @@ public class Driver {
 						}
 
 					}else{
-
+						ArrayList<String> hols = Storage.getHolidays();
 						System.out.println("Here are the current holidays:");
 						for(int x=0;x<hols.size();x++){
 							System.out.println(hols.get(x));
@@ -215,17 +187,7 @@ public class Driver {
 									}
 								}
 								hols.remove(holtodelete);
-								try{
-									PrintWriter newhols = new PrintWriter("/Users/Public/pubhol.txt");
-									for(int x=0;x<hols.size();x++){
-										newhols.println(hols.get(x));
-									}
-									newhols.close();
-									System.out.println("Holiday successfully removed!");
-								}
-								catch(Exception e){
-									System.out.println("Error!");
-								}
+								System.out.println("Holiday successfully removed!");
 
 							}
 							else if(opt==2){
@@ -244,26 +206,13 @@ public class Driver {
 									}
 								}
 								hols.add(newhol);
-								try{
-									PrintWriter newhols = new PrintWriter("/Users/Public/pubhol.txt");
-									for(int x=0;x<hols.size();x++){
-										newhols.println(hols.get(x));
-									}
-									newhols.close();
-									System.out.println("Holiday successfully added!");
-								}
-								catch(Exception e){
-									System.out.println("Error!");
-								}
-
-
 							}else if(opt==3){
 								break;
 							}else{
 								System.out.println("Invalid option!");
 							}
 						}
-
+						Storage.writeHolidays(hols);
 					}	break;
 				}	//Change ticket price
 				case 2:	{

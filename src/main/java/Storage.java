@@ -12,7 +12,41 @@ public class Storage {
     private final static String MOVIE_LIST_FILENAME = FILE_PATH + "movies.dat";
     private final static String USER_LIST_FILENAME = FILE_PATH + "users.dat";
     private final static String CINEPLEX_LIST_FILENAME = FILE_PATH + "cineplex.dat";
+    public static String USER_ACC_FILENAME =  FILE_PATH + "useracc.dat";
+    public static String HOLIDAYS_FILENAME = FILE_PATH + "pubhol.dat";
 
+
+
+    public static ArrayList<String> getHolidays(){
+        try {
+            return (ArrayList)SerializeDB.readSerializedObject(HOLIDAYS_FILENAME);
+        } catch (IOException e) {
+            return new ArrayList<String>();
+        }
+    }
+
+    public static void writeHolidays(List holidays){
+        SerializeDB.writeSerializedObject(HOLIDAYS_FILENAME, holidays);
+    }
+
+    public static ArrayList<String> getAdmins(){
+        try {
+            return (ArrayList)SerializeDB.readSerializedObject(USER_ACC_FILENAME);
+        } catch (IOException e) {
+            ArrayList<String> defaults = new ArrayList<String>();
+            defaults.add("user123");
+            defaults.add("password123");
+            return defaults;
+        }
+    }
+
+    /**
+     * @param admins
+     */
+    public static void writeAdmins(List admins){
+        SerializeDB.writeSerializedObject(USER_ACC_FILENAME, admins);
+    }
+    
     /**
      * Get list of movies from memory
      * @return  Return saved list of movies
