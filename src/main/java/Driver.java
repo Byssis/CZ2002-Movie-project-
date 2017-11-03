@@ -44,7 +44,7 @@ public static void main(String args[]){
 		catch(Exception e){
 			System.out.println("File not found!");
 		}		
-		String title;
+	
 		double childprice=0;
 		double adultprice=0;
 		double seniorprice=0;
