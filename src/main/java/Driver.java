@@ -40,11 +40,15 @@ public static void main(String args[]){
 		}
 		
 		
-		int childprice=0;
-		int adultprice=0;
-		int seniorprice=0;
+		double childprice=0;
+		double adultprice=0;
+		double seniorprice=0;
+		double threeD = 0;
+		double platinum = 0;
+		double wkendhol = 0;
 		
-		String title;
+		
+	    String title;
 	    String director;
 	    int duration;
 	    int castno;
