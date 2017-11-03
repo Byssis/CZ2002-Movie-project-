@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 /*
  /**
  * Created by Albin on 2017-10-12.
+=======
+ /* Created by Albin on 2017-10-12.
+>>>>>>> eda0e94e0847b6515986261b0c52494f58f03e6c
 */
 import java.text.SimpleDateFormat;
 import java.io.*;
@@ -42,11 +46,23 @@ public static void main(String args[]){
 		}
 		
 		
+<<<<<<< HEAD
 		int childprice=0;
 		int adultprice=0;
 		int seniorprice=0;
 		
 		String title;
+=======
+		double childprice=0;
+		double adultprice=0;
+		double seniorprice=0;
+		double threeD = 0;
+		double platinum = 0;
+		double wkendhol = 0;
+		
+		
+	    String title;
+>>>>>>> eda0e94e0847b6515986261b0c52494f58f03e6c
 	    String director;
 	    int duration;
 	    int castno;
@@ -113,36 +129,93 @@ public static void main(String args[]){
     			if(sc.nextInt()==1){
     				
     				try{
+<<<<<<< HEAD
     					File price = new File("/Users/Public/test.txt");						//read in ticket prices
+=======
+    					File price = new File("/Users/Public/prices.txt");						//read in ticket prices
+>>>>>>> eda0e94e0847b6515986261b0c52494f58f03e6c
     					BufferedReader getInfo = new BufferedReader(new FileReader(price));
-    					String p = getInfo.readLine();
-    					childprice = Integer.parseInt(p);
+    					String s = getInfo.readLine();
+    					childprice = Double.parseDouble(s);
+    					String t = getInfo.readLine();
+    					adultprice = Double.parseDouble(t);
     					String q = getInfo.readLine();
-    					adultprice = Integer.parseInt(q);
+    					seniorprice = Double.parseDouble(q);
     					String r = getInfo.readLine();
+<<<<<<< HEAD
     					seniorprice = Integer.parseInt(r);
+=======
+    					threeD = Double.parseDouble(r);
+    					String y = getInfo.readLine();
+    					platinum = Double.parseDouble(y);
+    					String z = getInfo.readLine();
+    					wkendhol = Double.parseDouble(z);
+>>>>>>> eda0e94e0847b6515986261b0c52494f58f03e6c
     					getInfo.close();
     				}
     				catch(Exception e){
     						System.out.println("File not Found!");
     				}
     				
-    				System.out.println("Current prices are Child: " + childprice + " Adult: " + adultprice + " Senior: " + seniorprice);
-    				System.out.println("Enter the new ticket prices in the format \"child price <space> adult price <space> senior price\" e.g. 7 9 8");
-    				childprice = sc.nextInt();
-    				adultprice = sc.nextInt();
-    				seniorprice = sc.nextInt();
+    				System.out.printf("Current prices:\nChild: $%.2f\nAdult: $%.2f\nSenior: $%.2f\n3D Movie add-on: $%.2f\nPlatinum Suite add-on: $%.2f\nWeekend/Holiday add-on: $%.2f\n",childprice,adultprice,seniorprice,threeD,platinum,wkendhol);
+    				
+    				int opt;
+    				
+    				System.out.println("");
+    				while(true){
+    				System.out.println("Which price would you like to change?");
+    				System.out.println("1 - Child ticket price");
+    				System.out.println("2 - Adult ticket price");
+    				System.out.println("3 - Senior ticket price");
+    				System.out.println("4 - 3D Movie add-on");
+    				System.out.println("5 - Platinum Suit add-on");
+    				System.out.println("6 - Weekend/Holiday add-on");
+    				System.out.println("7 - Back");
+    				opt = sc.nextInt();
+    				if(opt==1){
+    					System.out.println("Enter the new Child ticket price");
+    					childprice = sc.nextDouble();
+    				}else if(opt==2){
+    					System.out.println("Enter the new Adult ticket price");
+    					adultprice = sc.nextDouble();
+    				}else if(opt==3){
+    					System.out.println("Enter the new Senior ticket price");
+    					seniorprice = sc.nextDouble();
+    				}else if(opt==4){
+    					System.out.println("Enter the new 3D Movie add-on price");
+    					threeD = sc.nextDouble();
+    				}else if(opt==5){
+    					System.out.println("Enter the new Platinum Suite add-on price");
+    					platinum = sc.nextDouble();
+    				}else if(opt==6){
+    					System.out.println("Enter the new Weekend/Holiday add-on price");
+    					wkendhol = sc.nextDouble();
+    				}else if(opt==7){
+    					break;
+    				}
+    				else{
+    					System.out.println("Invalid option! Try again!");
+    				}    				
     				try{
-    					PrintWriter newprice = new PrintWriter("/Users/Public/test.txt");
+    					PrintWriter newprice = new PrintWriter("/Users/Public/prices.txt");
     					newprice.println(childprice);
     					newprice.println(adultprice);
     					newprice.println(seniorprice);
+    					newprice.println(threeD);
+    					newprice.println(platinum);
+    					newprice.println(wkendhol);
     					newprice.close();
     				}
     				catch(Exception e){
     					System.out.println("Error!");
+<<<<<<< HEAD
     				}    				
     				System.out.println("Ticket prices successfully updated");
+=======
+    				}  
+    				
+    				}
+>>>>>>> eda0e94e0847b6515986261b0c52494f58f03e6c
     				
     			}else{
     				
@@ -419,6 +492,7 @@ public static void main(String args[]){
     				}
     				case 8 :
     					break;
+<<<<<<< HEAD
     			}
     			break;
     		}
@@ -447,6 +521,36 @@ public static void main(String args[]){
 				if (key1==true)
 					System.out.println("Invalid movie entered, Please try again! ");
     			}
+=======
+    			}
+    			break;
+    		}
+    			break;
+    		}
+    		case 4 : {
+    			/* dummy scanner */
+				a = sc.nextLine();
+    			ArrayList<Movie> movies2 = new ArrayList<Movie>(); 
+    			movies2 = Storage.getMovieList();
+    			System.out.println(movies2);
+    			System.out.println("Please enter the movie that you would like to remove : ");
+    			String delmovie = new String();
+    			delmovie = sc.nextLine();
+    			int q = 0;
+    			boolean key1 = true;
+    			/* to get the index of the object in the Movie's array */
+    			while (key1) {
+				for (q=0 ; q< movies2.size() ; q++)
+				{
+					if (movies2.get(q).getTitle().equals(delmovie)) {
+						key1 = false;
+						break;
+					}
+				}
+				if (key1==true)
+					System.out.println("Invalid movie entered, Please try again! ");
+    			}
+>>>>>>> eda0e94e0847b6515986261b0c52494f58f03e6c
     			movies2.remove(q);
     			Storage.writeMovieList(movies2);
     			System.out.println("Movie has been successfully removed");
@@ -470,4 +574,13 @@ public static void main(String args[]){
 }
 }
 
+<<<<<<< HEAD
 	
+=======
+	
+  
+    
+    	
+    
+
+>>>>>>> eda0e94e0847b6515986261b0c52494f58f03e6c

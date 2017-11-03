@@ -6,31 +6,40 @@ import java.text.*;
 
 public class TicketPrice 
 {
-	int baseprice = 5;
 	private double price;
 	private int customerAge;
 	private String date;
 	private Movie movie;
 	private Type type;
 	private CinemaType ctype;
-	private int childprice;
-	private int adultprice;
-	private int seniorprice;
-	
+	private double childprice;
+	private double adultprice;
+	private double seniorprice;
+	private double threeD;
+	private double platinum;
+	private double wkendhol;
 	
 	{
-	try{
-	File tprice = new File("/Users/Public/test.txt");
-	BufferedReader getInfo = new BufferedReader(new FileReader(tprice));
-	String p = getInfo.readLine();
-	childprice = Integer.parseInt(p);
-	String q = getInfo.readLine();
-	adultprice = Integer.parseInt(q);
-	String r = getInfo.readLine();
-	seniorprice = Integer.parseInt(r);
-	}catch(Exception e){
-		System.out.println("Error!");
-	}}
+		try{
+			File price = new File("/Users/Public/prices.txt");						//read in ticket prices
+			BufferedReader getInfo = new BufferedReader(new FileReader(price));
+			String s = getInfo.readLine();
+			childprice = Double.parseDouble(s);
+			String t = getInfo.readLine();
+			adultprice = Double.parseDouble(t);
+			String q = getInfo.readLine();
+			seniorprice = Double.parseDouble(q);
+			String r = getInfo.readLine();
+			threeD = Double.parseDouble(r);
+			String y = getInfo.readLine();
+			platinum = Double.parseDouble(y);
+			String z = getInfo.readLine();
+			wkendhol = Double.parseDouble(z);
+			getInfo.close();
+		}
+		catch(Exception e){
+				System.out.println("File not Found!");
+		}}
 	public TicketPrice(int age,Movie movie,CinemaType ctype){
 		customerAge = age;
 		this.movie = movie;
@@ -53,14 +62,26 @@ public class TicketPrice
 	private boolean isPublicHol(){
 		Date now = new Date();
 		 SimpleDateFormat dateFormatter = new SimpleDateFormat("EEEE, MMMM d");
-		date = dateFormatter.format(now);
-		String[] holidays = {"January 1" , "April 14" , "August 9"};		//change to IO because admin can change holidays
-		for(int x=0;x<holidays.length;x++){
-			if(date.equals(holidays[x])){
-				return true;
+		date = dateFormatter.format(now);	
+		ArrayList<String> hols = new ArrayList<String>();						//read in public holidays
+		try{
+			File pubhol = new File("/Users/Public/pubhol.txt");
+			BufferedReader getInfo = new BufferedReader(new FileReader(pubhol));
+			String temp = getInfo.readLine();
+			while(temp!=null){
+				hols.add(temp);
+				temp = getInfo.readLine();
 			}
+			getInfo.close();
 		}
-		return false;
+		catch(Exception e){
+			System.out.println("File not found!");
+		}
+		if(hols.contains(date)){
+			return true;
+		}else{
+			return false;
+		}
 	}
 		
 	
@@ -73,13 +94,13 @@ public class TicketPrice
 			price = adultprice;
 		}
 		if(isWeekend()||isPublicHol()){
-			price += 2;
+			price += wkendhol;
 		}
 		if(movie.getType()==Type.TREED){
-			price += 2;
+			price += threeD;
 		}
 		if(ctype==CinemaType.PLATINUM){
-			price += 2;
+			price += platinum;
 		}
 		return price;
 	}
