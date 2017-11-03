@@ -7,6 +7,7 @@ import java.util.List;
  */
 public class MovieGoer implements Serializable {
     private final String name;
+    private final String email;
     private final String phone;
     private List<Booking> bookingHistory;
 
@@ -14,9 +15,10 @@ public class MovieGoer implements Serializable {
      * @param name  Name of movie goer
      * @param phone Phone number of movie goer
      */
-    public MovieGoer(String name, String phone){
+    public MovieGoer(String name, String phone, String email){
         this.name = name;
         this.phone = phone;
+        this.email = email;
         bookingHistory = new ArrayList<Booking>();
     }
 

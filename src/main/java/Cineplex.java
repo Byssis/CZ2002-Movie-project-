@@ -15,13 +15,16 @@ public class Cineplex implements Serializable {
      */
     final private String name;
 
+    final private String cineplexCode;
+
     /**
      * Cineplex
      * @param name Name of cineplex
      */
-    public Cineplex(String name){
+    public Cineplex(String name, String cineplexCode){
         this.name = name;
         this.cinemas = new ArrayList<Cinema>();
+        this.cineplexCode = cineplexCode;
     }
 
     /**
@@ -33,8 +36,8 @@ public class Cineplex implements Serializable {
      * @see Cinema
      * @see CinemaType
      */
-    public void addNewCinema(String name, CinemaType type,int numOfRows, int numOfSeats){
-        this.cinemas.add(new Cinema(name, type, numOfRows, numOfSeats));
+    public void addNewCinema(String name, CinemaType type,int numOfRows, int numOfSeats, String cinemaCode){
+        this.cinemas.add(new Cinema(name, type, numOfRows, numOfSeats, cinemaCode));
     }
 
     /**
@@ -43,6 +46,10 @@ public class Cineplex implements Serializable {
      */
     public String getName() {
         return name;
+    }
+
+    public String getCineplexCode() {
+        return cineplexCode;
     }
 }
 

@@ -17,6 +17,8 @@ public class Cinema implements Serializable {
      */
     private final CinemaType type;
 
+    private final String cinemaCode;
+
     
     /**
      * Cinema
@@ -26,11 +28,11 @@ public class Cinema implements Serializable {
      * @param numOfSeats    Number of seats in each row
      * @see CinemaType
      */
-    public Cinema(String name, CinemaType type, int numOfRows, int numOfSeats){
+    public Cinema(String name, CinemaType type, int numOfRows, int numOfSeats, String cinemaCode){
         this.name = name;
         this.type = type;
         this.seats = new Seat[numOfRows][numOfSeats];
-
+        this.cinemaCode = cinemaCode;
         // Create all seats
         for (int i = 0; i < numOfRows; i++){
             for(int j = 0; j < numOfSeats; j++){
@@ -47,6 +49,7 @@ public class Cinema implements Serializable {
         this.name = cinema.getName();
         this.type = getType();
         this.seats = cinema.getSeats();
+        this.cinemaCode = cinema.getCinemaCode();
     }
 
     /**
@@ -130,5 +133,9 @@ public class Cinema implements Serializable {
             }
         }
         return false;
+    }
+
+    public String getCinemaCode() {
+        return cinemaCode;
     }
 }

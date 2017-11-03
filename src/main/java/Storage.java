@@ -46,7 +46,7 @@ public class Storage {
     public static void writeAdmins(List admins){
         SerializeDB.writeSerializedObject(USER_ACC_FILENAME, admins);
     }
-    
+
     /**
      * Get list of movies from memory
      * @return  Return saved list of movies
@@ -129,11 +129,11 @@ public class Storage {
         movies.add(new Movie("Planet of the apes", "C director", 120, cast, Type.BLOCKBUSTER, "2017 04 10", "2017 05 20"));
         movies.add(new Movie("Spiderman", "D director", 130, cast, Type.BLOCKBUSTER, "2017 02 02", "2017 03 03"));
         movies.add(new Movie("Superman", "E director", 140, cast, Type.BLOCKBUSTER, "2017 01 01", "2017 02 02"));
-        MovieListing ml = new MovieListing(movies.get(1), new Cineplex("Kista SF"), new Cinema("Imax 1", CinemaType.NORMAL, 10, 10), new Date() );
-        movies.get(1).addMovieListing(new Cineplex("Kista SF"), new Cinema("Imax 1", CinemaType.NORMAL, 10, 10), new Date());
-        movies.get(1).addMovieListing(new Cineplex("Kista SF"), new Cinema("Imax 2", CinemaType.NORMAL, 10, 10), new Date());
-        movies.get(1).addMovieListing(new Cineplex("Kista SF"), new Cinema("Imax 3", CinemaType.NORMAL, 10, 10), new Date());
-        movies.get(1).addMovieListing(new Cineplex("Kista SF"), new Cinema("Imax 4", CinemaType.NORMAL, 10, 10), new Date());
+        //MovieListing ml = new MovieListing(movies.get(1), new Cineplex("Kista SF"), new Cinema("Imax 1", CinemaType.NORMAL, 10, 10), new Date() );
+        movies.get(1).addMovieListing(new Cineplex("Kista SF", "XX1"), new Cinema("Imax 1", CinemaType.NORMAL, 10, 10, "1"), new Date());
+        movies.get(1).addMovieListing(new Cineplex("Kista SF", "XX2"), new Cinema("Imax 2", CinemaType.NORMAL, 10, 10, "4"), new Date());
+        movies.get(1).addMovieListing(new Cineplex("Kista SF", "XX1"), new Cinema("Imax 3", CinemaType.NORMAL, 10, 10, "3"), new Date());
+        movies.get(1).addMovieListing(new Cineplex("Kista SF", "XX2"), new Cinema("Imax 4", CinemaType.NORMAL, 10, 10,"2"), new Date());
         writeMovieList(movies);
     }
 
