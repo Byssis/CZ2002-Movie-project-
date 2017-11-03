@@ -20,7 +20,7 @@ public class Movie implements Serializable {
     /*
         Length of movie in minutes
      */
-    private int duration;
+    private String duration;
     /*
         List of cast in movie
      */
@@ -38,6 +38,10 @@ public class Movie implements Serializable {
      */
     private String endDate;
     /*
+    	Abstract for movie
+     */
+    private String MovieAbstract;
+    /*
         Number of tickets sold for movie
      */
     private int ticketSales;
@@ -54,6 +58,7 @@ public class Movie implements Serializable {
      */
     private List<MovieListing> movieListings;
 
+    private MovieStatus moviestatus;
     /**
      * Create a new movie instance
      *
@@ -65,7 +70,7 @@ public class Movie implements Serializable {
      * @param startDate First day of showing
      * @param endDate   Last day of showing
      */
-    public Movie(String title, String director, int duration, ArrayList<String> cast, Type type, String startDate, String endDate) {
+    public Movie(String title, String director, String duration, ArrayList<String> cast, Type type, String startDate, String endDate, String MovieAbstract) {
         this.title = title;
         this.director = director;
         this.duration = duration;
@@ -81,6 +86,7 @@ public class Movie implements Serializable {
         ratings = new ArrayList<Rating>();
         reviews = new ArrayList<Review>();
         movieListings = new ArrayList<MovieListing>();
+        this.MovieAbstract = MovieAbstract;
     }
 
     /**
@@ -103,7 +109,7 @@ public class Movie implements Serializable {
         }
         out.append("\nType:\t\t");                              // Append type of movie
         switch (type) {
-            case TREED:
+            case ThreeD:
                 out.append("3D");
                 break;
             case BLOCKBUSTER:
@@ -183,7 +189,7 @@ public class Movie implements Serializable {
     
     /* Set Duration */
     
-    public void setDuration(int minutes) {
+    public void setDuration(String minutes) {
     	duration = minutes;
     }
     /* update cast member - doing for one cast only */
@@ -219,12 +225,12 @@ public class Movie implements Serializable {
     
     /* Set the type of the movie */
     
-    public void setType(int option) {
-    	if(option==1)
-			type = Type.TREED;
-    	else if (option == 2)
+    public void setType(String option) {
+    	if(option.equals("1"))
+			type = Type.ThreeD;
+    	else if (option.equals("2"))
 			type = Type.NORMAL;
-    	else if (option == 3)
+    	else if (option.equals("3"))
     		type = Type.BLOCKBUSTER;
     	else
     		System.out.println("Invalid value entered");
@@ -238,13 +244,14 @@ public class Movie implements Serializable {
     	}
     	else 
     		System.out.println("Invalid date or date format entered");
-    }
+    }   	
     
     /* Set the end date of the movie */
     public void setEndDate(String enddate) {
     	if(isValidDate(enddate))
     	{
-    		endDate = enddate;
+    		if (this.startDate.compareTo(enddate)<= 0)
+    			this.endDate = enddate;
     	}
     	else
     		System.out.println("Invalid date or date format entered");
@@ -257,7 +264,7 @@ public class Movie implements Serializable {
      * @param showing  Showing date
      * @see MovieListing
      */
-    public void addMovieListing(Cineplex cineplex, Cinema cinema, Date showing) {
+    public void addMovieListing(Cineplex cineplex, Cinema cinema, String showing) {
         this.movieListings.add(new MovieListing(this, cineplex, cinema, showing));
     }
 

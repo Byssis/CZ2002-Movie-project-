@@ -6,5 +6,5 @@
  * Different types of movies
  */
 public enum Type {
-    TREED, BLOCKBUSTER, NORMAL
+    ThreeD, BLOCKBUSTER, NORMAL
 }

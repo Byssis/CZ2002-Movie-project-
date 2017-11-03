@@ -467,13 +467,13 @@ public class UserApp {
         return top5Movies;
     }
     
-    private static Comparator<Movie> tickets = new Comparator<Movie>() {
+    public static Comparator<Movie> tickets = new Comparator<Movie>() {
         public int compare(Movie o1, Movie o2) {
             return o1.getTicketSales() - o2.getTicketSales();
         }
     };
 
-    private static Comparator<Movie> ratings = new Comparator<Movie>(){
+    public static Comparator<Movie> ratings = new Comparator<Movie>(){
         public int compare(Movie o1, Movie o2) {
             return Double.compare(o1.averageRating(), o2.averageRating());
         }

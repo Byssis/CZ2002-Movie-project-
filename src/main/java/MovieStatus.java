@@ -6,5 +6,5 @@
  * Movie status
  */
 public enum MovieStatus {
-    PREVIEW, SHOWING, COMING_SOON
+    PREVIEW, NOW_SHOWING, COMING_SOON , END_OF_SHOWING
 }

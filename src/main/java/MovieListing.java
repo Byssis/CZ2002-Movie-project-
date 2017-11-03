@@ -22,7 +22,7 @@ public class MovieListing implements Serializable {
     /*
         Showing date for movie
      */
-    final private Date showing;
+    final private String showing;
     /*
         List of bookings for movie
      */
@@ -34,7 +34,7 @@ public class MovieListing implements Serializable {
      * @param cinema    Cinema where movie is shown
      * @param showing   Start time for movie
      */
-    public MovieListing(Movie movie, Cineplex cineplex, Cinema cinema, Date showing){
+    public MovieListing(Movie movie, Cineplex cineplex, Cinema cinema, String showing){
         this.movie = movie;
         this.cineplex = cineplex;
         this.cinema = new Cinema(cinema);
