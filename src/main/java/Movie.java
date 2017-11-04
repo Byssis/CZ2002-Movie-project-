@@ -79,9 +79,8 @@ public class Movie implements Serializable {
         this.endDate = endDate;                                 // Not safe
         this.cast = new ArrayList<String>();
         this.ticketSales = 0;
-        for (int i = 0; i < cast.size(); i++) 
-        {
-            this.cast.add(cast.get(i));       
+        for (int i = 0; i < cast.size(); i++) {
+            this.cast.add(cast.get(i));
         }
         ratings = new ArrayList<Rating>();
         reviews = new ArrayList<Review>();
@@ -98,7 +97,7 @@ public class Movie implements Serializable {
         StringBuilder out = new StringBuilder();                // Stringbuilder to build out string
         System.out.println();
         out.append("\nTitle:\t\t" + this.title + "\n");          // Append tittle
-        out.append("Rating:\t\t" + this.averageRating() + "\n");
+        out.append("Rating:\t\t" + this.averageRatingStr() + "\n");
         out.append("Director:\t" + this.director + "\n");       // Append Director
         out.append("Duration:\t" + this.duration + "\n");  // Append Duration of movie
         out.append("Start Date : \t" + this.startDate);
@@ -176,18 +175,19 @@ public class Movie implements Serializable {
     }
     
     /* Set Title Name*/
-    
+
     public void setTitle(String newtitle) {
-    	this.title =newtitle;
+        this.title = newtitle;
     }
     
     /* Set Director Name*/
-    
+
     public void setDirectorname(String directorname) {
-    	director = directorname;
+        director = directorname;
     }
     
     /* Set Duration */
+
     
     public void setDuration(String minutes) {
     	duration = minutes;
@@ -195,29 +195,30 @@ public class Movie implements Serializable {
     /* update cast member - doing for one cast only */
     /* since we will not update a whole list of cast */
     public void setCast(String casts, int k) {
-    	cast.set(k,casts);
+        cast.set(k, casts);
     }
-    
+
     /* Add cast members in */
     public void addCast(String casts) {
-    	int i;
-    	for (i=0;i<cast.size();i++) {
-    		cast.add(casts);
-    	}
+        int i;
+        for (i = 0; i < cast.size(); i++) {
+            cast.add(casts);
+        }
     }
+
     /* Remove cast members in */
     public void removeCast(String casts) {
-    	if (cast.contains(casts))
-    		cast.remove(casts);
-    	else
-    		System.out.println("Cast entered is invalid");
+        if (cast.contains(casts))
+            cast.remove(casts);
+        else
+            System.out.println("Cast entered is invalid");
     }
-    
+
     /* Return the array of casts' names */
     public ArrayList<String> getCast() {
-    	return this.cast;
+        return this.cast;
     }
-    
+
     /* Return the type of the movie */
     public Type getType() {
         return this.type;
@@ -235,9 +236,10 @@ public class Movie implements Serializable {
     	else
     		System.out.println("Invalid value entered");
     }
-    
+
     /* Set the start date of the movie */
     public void setStartDate(String startdate) {
+
     	if(isValidDate(startdate))
     	{
     		startDate = startdate;
@@ -256,6 +258,7 @@ public class Movie implements Serializable {
     	else
     		System.out.println("Invalid date or date format entered");
     }
+
     /**
      * Add movieListing for movie
      *
@@ -287,6 +290,7 @@ public class Movie implements Serializable {
     public MovieListing getMovieListing(int index) {
         return movieListings.get(index - 1);
     }
+
     /**
      * Add one ticket sale to movie
      */
@@ -302,18 +306,23 @@ public class Movie implements Serializable {
     public int getTicketSales() {
         return this.ticketSales;
     }
-    
-    
-    
-    public static boolean isValidDate(String inDate) {						//check if the date passed in is a valid one
-    	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    	dateFormat.setLenient(false);
-    	try {
-    			dateFormat.parse(inDate.trim());
-    	} catch (ParseException pe) {
-    		return false;
-    	}
-    	return true;
-    	}
+
+
+    public static boolean isValidDate(String inDate) {                        //check if the date passed in is a valid one
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        dateFormat.setLenient(false);
+        try {
+            dateFormat.parse(inDate.trim());
+        } catch (ParseException pe) {
+            return false;
+        }
+        return true;
+    }
+
+    public String averageRatingStr() {
+        if(this.ratings.size() == 0)
+            return "NA";
+        return "" +this.averageRating();
+    }
 }
 

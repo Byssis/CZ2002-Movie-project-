@@ -6,6 +6,7 @@ import java.util.*;
 import java.text.*;
 
 public class Driver {
+<<<<<<< HEAD
 static List<Movie> movies = new ArrayList<Movie>();
     
 public static boolean isValidDate(String inDate) {						//check if the date passed in is a valid one
@@ -40,6 +41,28 @@ public static void main(String args[]){
 			System.out.println("File not found!");
 		}
 		
+=======
+	static List<Movie> movies = new ArrayList<Movie>();
+
+	public static boolean isValidDate(String inDate) {						//check if the date passed in is a valid one
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		dateFormat.setLenient(false);
+		try {
+			dateFormat.parse(inDate.trim());
+		} catch (ParseException pe) {
+			return false;
+		}
+		return true;
+	}
+
+
+
+	public static void main(String args[]){
+
+
+		//ArrayList<String> hols = Storage.getHolidays();						//read in public holidays
+
+>>>>>>> c9899251388bcb8002248e557d88defb88a1603d
 		double childprice=0;
 		double adultprice=0;
 		double seniorprice=0;
@@ -48,6 +71,7 @@ public static void main(String args[]){
 		double wkendhol = 0;
 		UserApp userapp;
 		String title;
+<<<<<<< HEAD
 	    String director;
 	    String duration;
 	    int castno;
@@ -80,7 +104,8 @@ public static void main(String args[]){
     	}
 		catch(Exception e){
 				System.out.println("File not Found!");
-		}
+=======
+		
     	
     	String user,password;
     	while(true){
@@ -221,6 +246,7 @@ public static void main(String args[]){
 								break;
 							}	
 						}
+<<<<<<< HEAD
 						hols.remove(holtodelete);
 						try{
 	    					PrintWriter newhols = new PrintWriter("/Users/Public/pubhol.txt");
@@ -229,6 +255,14 @@ public static void main(String args[]){
 	    					}
 	    					newhols.close();
 	    					System.out.println("Holiday successfully removed!");
+=======
+
+					}else{
+						ArrayList<String> hols = Storage.getHolidays();
+						System.out.println("Here are the current holidays:");
+						for(int x=0;x<hols.size();x++){
+							System.out.println(hols.get(x));
+>>>>>>> c9899251388bcb8002248e557d88defb88a1603d
 						}
 	    				catch(Exception e){
 	    					System.out.println("Error!");
@@ -239,10 +273,52 @@ public static void main(String args[]){
 						a = sc.nextLine();
 						String newhol;
 						while(true){
+<<<<<<< HEAD
 							System.out.println("Enter the new holiday in the format Day of Week, Month Day. eg. Monday, May 1");
 							newhol = sc.nextLine();
 							if(hols.contains(newhol)){
 								System.out.println("Holiday alreadys exists! Try again!");
+=======
+							System.out.println("What would you like to do?");
+							System.out.println("1 - Remove Holiday");
+							System.out.println("2 - Add Holiday");
+							System.out.println("3 - Back to Main Menu");
+							opt = sc.nextInt();
+							if(opt==1){//remove holiday
+								a = sc.nextLine();
+								String holtodelete;
+								while(true){
+									System.out.println("Enter the new holiday in the format Day of Week, Month Day. eg. Monday, May 1");
+									holtodelete = sc.nextLine();
+									if(!hols.contains(holtodelete)){
+										System.out.println("Holiday does not exist! Try again!");
+									}else{
+										break;
+									}
+								}
+								hols.remove(holtodelete);
+								System.out.println("Holiday successfully removed!");
+
+							}
+							else if(opt==2){
+								a = sc.nextLine();
+								String newhol;
+								while(true){
+									System.out.println("Enter the new holiday in the format Day of Week, Month Day. eg. Monday, May 1");
+									newhol = sc.nextLine();
+									if(hols.contains(newhol)){
+										System.out.println("Holiday alreadys exists! Try again!");
+									}else{
+										if(isValidDate(newhol)){
+											break;}else{
+											System.out.println("Not a valid date! Try again!");
+										}
+									}
+								}
+								hols.add(newhol);
+							}else if(opt==3){
+								break;
+>>>>>>> c9899251388bcb8002248e557d88defb88a1603d
 							}else{
 								if(isValidDate(newhol)){
 								break;}else{
@@ -259,6 +335,7 @@ public static void main(String args[]){
 	    					newhols.close();
 	    					System.out.println("Holiday successfully added!");
 						}
+<<<<<<< HEAD
 	    				catch(Exception e){
 	    					System.out.println("Error!");
 	    				}
@@ -278,6 +355,12 @@ public static void main(String args[]){
     			ArrayList<MovieListing> movielisting = new ArrayList<MovieListing>();
     			movies = Storage.getMovieList();
     			movielisting = Storage.getMovieListing();
+=======
+						Storage.writeHolidays(hols);
+					}	break;
+				}	//Change ticket price
+				case 2:	{
+>>>>>>> c9899251388bcb8002248e557d88defb88a1603d
     			/* Input movie title */
     			System.out.println(movielisting);
     			System.out.println("Enter Movie Title: ");

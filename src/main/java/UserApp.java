@@ -81,7 +81,7 @@ public class UserApp {
             int i = 1;
             System.out.println("Title, " + ((rating)? "Rating" : "Ticket Sales"));
             for (Movie m : movies)
-                System.out.println((i++) + ": " + m.getTitle() + ", " + ((rating)? m.averageRating() : m.getTicketSales()));
+                System.out.println((i++) + ": " + m.getTitle() + ", " + ((rating)? m.averageRatingStr() : m.getTicketSales()));
             System.out.println(i + ": Main menu: ");
             UIFunctions.divider();
             System.out.print("Enter option: ");
@@ -334,10 +334,12 @@ public class UserApp {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter your name: ");
         String name = sc.next();
+        System.out.println("Enter your email number: ");
+        String email = sc.next();
         System.out.print("Enter your phone: ");
         String phoneNumber = sc.next();
         List<MovieGoer> movieGoers = Storage.getUserList();
-        MovieGoer user = findMovieGoer(name, movieGoers,phoneNumber);
+        MovieGoer user = findMovieGoer(name, movieGoers,phoneNumber, email);
         Seat[] seats = new Seat[rows.size()];
         for(int i = 0; i < rows.size(); i++){
             seats[i] = movieListing.bookSeats(rows.get(i), setNrs.get(i));
@@ -346,7 +348,9 @@ public class UserApp {
 
         user.addBooking(booking);
         Storage.writeUserList(movieGoers);
-        System.out.println("Payments done! Press enter to continue...");
+        System.out.println("Payments done!");
+        System.out.println(booking);
+        System.out.println("Press enter to continue...");
         UIFunctions.waitForUser();
     }
 
@@ -359,13 +363,13 @@ public class UserApp {
      * @see MovieGoer
      * @return MovieGoer object
      */
-    private static MovieGoer findMovieGoer(String name, List<MovieGoer> movieGoers,String phoneNumber) {
+    private static MovieGoer findMovieGoer(String name, List<MovieGoer> movieGoers,String phoneNumber, String email) {
         for(MovieGoer mg : movieGoers){
             if (name.equals(mg.getName()) && (phoneNumber.equals(mg.getPhone()))){
                 return mg;
             }
         }
-        MovieGoer m = new MovieGoer(name, phoneNumber);
+        MovieGoer m = new MovieGoer(name, phoneNumber, email);
         movieGoers.add(m);
         return m;
     }
@@ -403,7 +407,7 @@ public class UserApp {
     private static void listTop5MoviesRating(){
         // iterate through movies list and save the top 5 movies into a list 
         List<Movie> movies = Storage.getMovieList();
-        listMovies(top5Movies(movies,ratings), false);
+        listMovies(top5Movies(movies,ratings), true);
         Storage.writeMovieList(movies);
     }
 
@@ -431,7 +435,6 @@ public class UserApp {
         System.out.println("Enter your name: ");
         Scanner sc = new Scanner(System.in);
         String name = sc.next();
-        
         System.out.println("Enter your phone number: ");
         String phone = sc.next();
 
@@ -466,8 +469,9 @@ public class UserApp {
         }
         return top5Movies;
     }
-    
-    public static Comparator<Movie> tickets = new Comparator<Movie>() {
+
+    private static Comparator<Movie> tickets = new Comparator<Movie>() {
+
         public int compare(Movie o1, Movie o2) {
             return o1.getTicketSales() - o2.getTicketSales();
         }

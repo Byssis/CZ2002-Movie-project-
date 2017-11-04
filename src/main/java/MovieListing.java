@@ -94,4 +94,8 @@ public class MovieListing implements Serializable {
     public String getMovieTitle(){
         return this.movie.getTitle();
     }
+
+    public String getCinemaCode() {
+        return this.cineplex.getCineplexCode() + this.cinema.getCinemaCode();
+    }
 }
