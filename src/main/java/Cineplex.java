@@ -9,7 +9,7 @@ public class Cineplex implements Serializable {
     /*
         List of cinemas in cineplex
      */
-    private List<Cinema> cinemas;
+    private ArrayList<Cinema> cinemas;
     /*
         Name of cineplex
      */

@@ -31,24 +31,24 @@ public class Driver {
 		double wkendhol = 0;
 		UserApp userapp;
 		String title;
-
 		String director;
 		String duration;
-		int castno;
-		ArrayList<String> cast;
 		String movieabstract;
 		String option;
-		Type type = null;
 		String startDate;
 		String endDate;
-		String a;
-		Cineplex cineplex;
+		String a; //dummy scanner
 		String cineplexname;
-		Cinema cinema;
 		String cinemaname;
+		int castno;
+		ArrayList<String> cast;
+		Type type = null;
+		Cineplex cineplex;
+		Cinema cinema;	
+		
 
 
-		Scanner sc = new Scanner(System.in);
+		Scanner sc = new Scanner(System.in);	
 
 
 		List<String> useracc = Storage.getAdmins();
@@ -268,13 +268,40 @@ public class Driver {
 				System.out.println("Enter a short movie abstract : ");
 				movieabstract = sc.nextLine();
 				
-				while(true) {
-				System.out.println("Enter the number of cineplexes that it will be shown at : ");
-				int noofCineplex = sc.nextInt();
-//////////////////////// Cineplexes / Cinema / Showtimes - Each movie actually has a arraylist of movielisting so can just add /////////////////		
-
-    			/* Instantiating the movie object */
+				/* Instantiating the movie object */
 				Movie newmovie = new Movie(title, director, duration, cast, type, startDate, endDate, movieabstract);
+				
+				while(true) {
+				System.out.println("Enter the number of movielistings : ");
+				int noofMovieListing = sc.nextInt();
+				
+				/* dummy scanner */
+				a= sc.nextLine();
+				
+				String newcineplex;
+				String newcinema;
+				
+				while (noofMovieListing>0)
+				{
+					System.out.println("Choose the cineplex : ");
+					System.out.println("1 : AMK Hub" );
+					System.out.println("2 : North Point");
+					System.out.println("3 : Jurong Point " );
+					
+					newcineplex = sc.nextLine();
+					
+					System.out.println("Choose the cinema :  ");
+					System.out.println("1: Golden Village ");
+					System.out.println("2 : Cathay  ");
+					System.out.println("3 : Eng Hwa " );
+					newcinema = sc.nextLine();
+					
+					System.out.println("Choose the cinema name : ");
+					
+					noofMovieListing++;			
+				}
+				
+    			
 				ArrayList<Movie> movies = new ArrayList<Movie>();
 				ArrayList<MovieListing> movielistings = new ArrayList<MovieListing>();
 				movies = Storage.getMovieList();
@@ -285,6 +312,7 @@ public class Driver {
 				System.out.println(movies);
 				System.out.println();
 				break;
+				}
 
 				case "3": {
 					String updatemovie = new String();
@@ -426,7 +454,7 @@ public class Driver {
 					}
 					break;
 				}
-				case 4: {
+				case "4": {
     			/* dummy scanner */
 					a = sc.nextLine();
 					ArrayList<Movie> movies2 = new ArrayList<Movie>();
@@ -453,19 +481,38 @@ public class Driver {
 					System.out.println("Movie has been successfully removed");
 					break;
 				}
-				case 5: {
+				case "5": {
 					//order by sales or rating
 					System.out.println("1 : By Sales ");
 					System.out.println("2 : By Rating ");
-					break;
+					break;//order by sales or rating
+	    			System.out.println("1 : By Sales ");
+	    			System.out.println("2 : By Rating ");
+	    			System.out.println("3 : Quit");
+	    			String option1;
+	    			ArrayList<Movie> movies3 = new ArrayList<Movie>(); 
+	    			movies3 = Storage.getMovieList();
+	    			option1 = sc.nextLine();
+	    			switch(option1) {
+	    			case "1" :{ 
+	    			System.out.println(UserApp.top5Movies(movies3,UserApp.tickets));
+	    			break;
+	    			}
+	    			case "2" : {
+	    			System.out.println(UserApp.top5Movies(movies3, UserApp.ratings));
+	    			break;
+	    			}
+	    			case "3" :
+	    			break;
+	    			}
 				}
-				case 6: {
+				case "6": {
 					System.out.println("Bye!");
 
 				} //quit
 			}
 
-			if (choice == 6) {
+			if (choice.equals("6")) {
 				break;            //Quit program
 			}
 		}
