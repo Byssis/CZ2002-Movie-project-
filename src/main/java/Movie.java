@@ -56,7 +56,7 @@ public class Movie implements Serializable {
     /*
         List of movieListings for movie
      */
-    private List<MovieListing> movieListings;
+    private ArrayList<MovieListing> movieListings;
 
     private MovieStatus moviestatus;
     /**
@@ -257,6 +257,11 @@ public class Movie implements Serializable {
     	}
     	else
     		System.out.println("Invalid date or date format entered");
+    }
+    /* Allows new movie abstract */
+    
+    public void setMovieAbstract(String movieabstract) {
+    	this.MovieAbstract = movieabstract;
     }
 
     /**

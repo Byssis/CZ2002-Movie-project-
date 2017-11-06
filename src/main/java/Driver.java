@@ -37,7 +37,7 @@ public class Driver {
 		int castno;
 		ArrayList<String> cast;
 		String movieabstract;
-		int option;
+		String option;
 		Type type = null;
 		String startDate;
 		String endDate;
@@ -50,8 +50,6 @@ public class Driver {
 
 		Scanner sc = new Scanner(System.in);
 
-		ArrayList<Movie> initialmovies = new ArrayList<Movie>();
-		initialmovies = Storage.getMovieList();
 
 		List<String> useracc = Storage.getAdmins();
 
@@ -71,11 +69,13 @@ public class Driver {
 			}
 		}
 
-		int choice;
+		String choice;
     	/* Need to initialize here for Case 3 - Find movie in movie array */
 		int j = 0;
-
-		a = sc.nextLine();
+		ArrayList<Movie> initialmovies = new ArrayList<Movie>();
+		initialmovies = Storage.getMovieList();
+		ArrayList<MovieListing> initialmovielisting = new ArrayList<MovieListing>();
+		initialmovielisting = Storage.getMovieListing();
 
 		while (true) {
 			System.out.println("What would you like to do?");
@@ -85,12 +85,12 @@ public class Driver {
 			System.out.println("4 - Remove Movie");
 			System.out.println("5 - List Top 5 Ranking Movies");
 			System.out.println("6 - Quit");
-			choice = sc.nextInt();
+			choice = sc.nextLine();
 			switch (choice) {
-				case 1: {
+				case "1": {
 					System.out.println("1 - Change Ticket Prices");
 					System.out.println("2 - Add/Remove Holidays");
-					if (sc.nextInt() == 1) {
+					if (sc.nextLine().equals("1")) {
 
 						try {
 							File price = new File("/Users/Public/prices.txt");                        //read in ticket prices
@@ -114,7 +114,7 @@ public class Driver {
 
 						System.out.printf("Current prices:\nChild: $%.2f\nAdult: $%.2f\nSenior: $%.2f\n3D Movie add-on: $%.2f\nPlatinum Suite add-on: $%.2f\nWeekend/Holiday add-on: $%.2f\n", childprice, adultprice, seniorprice, threeD, platinum, wkendhol);
 
-						int opt;
+						String opt;
 
 						System.out.println("");
 						while (true) {
@@ -126,26 +126,26 @@ public class Driver {
 							System.out.println("5 - Platinum Suit add-on");
 							System.out.println("6 - Weekend/Holiday add-on");
 							System.out.println("7 - Back");
-							opt = sc.nextInt();
-							if (opt == 1) {
+							opt = sc.nextLine();
+							if (opt.equals("1")) {
 								System.out.println("Enter the new Child ticket price");
 								childprice = sc.nextDouble();
-							} else if (opt == 2) {
+							} else if (opt.equals("2")) {
 								System.out.println("Enter the new Adult ticket price");
 								adultprice = sc.nextDouble();
-							} else if (opt == 3) {
+							} else if (opt.equals("3")) {
 								System.out.println("Enter the new Senior ticket price");
 								seniorprice = sc.nextDouble();
-							} else if (opt == 4) {
+							} else if (opt.equals("4")) {
 								System.out.println("Enter the new 3D Movie add-on price");
 								threeD = sc.nextDouble();
-							} else if (opt == 5) {
+							} else if (opt.equals("5")) {
 								System.out.println("Enter the new Platinum Suite add-on price");
 								platinum = sc.nextDouble();
-							} else if (opt == 6) {
+							} else if (opt.equals("6")) {
 								System.out.println("Enter the new Weekend/Holiday add-on price");
 								wkendhol = sc.nextDouble();
-							} else if (opt == 7) {
+							} else if (opt.equals("7")) {
 								break;
 							} else {
 								System.out.println("Invalid option! Try again!");
@@ -171,14 +171,14 @@ public class Driver {
 						for (int x = 0; x < hols.size(); x++) {
 							System.out.println(hols.get(x));
 						}
-						int opt;
+						String opt;
 						while (true) {
 							System.out.println("What would you like to do?");
 							System.out.println("1 - Remove Holiday");
 							System.out.println("2 - Add Holiday");
 							System.out.println("3 - Back to Main Menu");
-							opt = sc.nextInt();
-							if (opt == 1) {//remove holiday
+							opt = sc.nextLine();
+							if (opt.equals("1")) {//remove holiday
 								a = sc.nextLine();
 								String holtodelete;
 								while (true) {
@@ -193,8 +193,7 @@ public class Driver {
 								hols.remove(holtodelete);
 								System.out.println("Holiday successfully removed!");
 
-							} else if (opt == 2) {
-								a = sc.nextLine();
+							} else if (opt.equals("2")) {
 								String newhol;
 								while (true) {
 									System.out.println("Enter the new holiday in the format Day of Week, Month Day. eg. Monday, May 1");
@@ -210,7 +209,7 @@ public class Driver {
 									}
 								}
 								hols.add(newhol);
-							} else if (opt == 3) {
+							} else if (opt.equals("3")) {
 								break;
 							} else {
 								System.out.println("Invalid option!");
@@ -220,18 +219,17 @@ public class Driver {
 					}
 					break;
 				}    //Change ticket price
-				case 2: {
+				case "2": {
+					
     			/* Input movie title */
 					System.out.println("Enter Movie Title: ");
-    			/* Dummy scanner */
-					a = sc.nextLine();
 					title = sc.nextLine();
 
     			/* Input director name and movie duration */
 					System.out.println("Enter Director Name: ");
 					director = sc.nextLine();
 					System.out.println("Enter Movie Duration (in minutes): ");
-					duration = sc.next();
+					duration = sc.nextLine();
 
     			/* dummy scanner */
 					a = sc.nextLine();
@@ -253,26 +251,34 @@ public class Driver {
     			/* Deciding the type of movie */
 					System.out.println("Enter Movie Type");
 					System.out.println("1 - 3D\n2 - Normal\n3 - Blockbuster");
-					option = sc.nextInt();
-					if (option == 1) {
+					option = sc.nextLine();
+					if (option.equals("1")) {
 						type = Type.ThreeD;
-					} else if (option == 2) {
+					} else if (option.equals("2")) {
 						type = Type.NORMAL;
-					} else if (option == 3)
+					} else if (option.equals("3"))
 						type = Type.BLOCKBUSTER;
 				}
-    			/* dummy scanner */
-				a = sc.nextLine();
     			/* Input the start and end date of the movie */
 				System.out.println("Enter the start date in the format YYYY MM DD");
 				startDate = sc.nextLine();
 				System.out.println("Enter the end date in the format YYYY MM DD");
 				endDate = sc.nextLine();
+				
+				System.out.println("Enter a short movie abstract : ");
+				movieabstract = sc.nextLine();
+				
+				while(true) {
+				System.out.println("Enter the number of cineplexes that it will be shown at : ");
+				int noofCineplex = sc.nextInt();
+//////////////////////// Cineplexes / Cinema / Showtimes - Each movie actually has a arraylist of movielisting so can just add /////////////////		
 
     			/* Instantiating the movie object */
-				Movie newmovie = new Movie(title, director, duration, cast, type, startDate, endDate, "");
-				List<Movie> movies = new ArrayList<Movie>();
+				Movie newmovie = new Movie(title, director, duration, cast, type, startDate, endDate, movieabstract);
+				ArrayList<Movie> movies = new ArrayList<Movie>();
+				ArrayList<MovieListing> movielistings = new ArrayList<MovieListing>();
 				movies = Storage.getMovieList();
+				movielistings = Storage.getMovieListing();
 				movies.add(newmovie);
     			/* Adding it into movie's dataset */
 				Storage.writeMovieList(movies);
@@ -280,9 +286,7 @@ public class Driver {
 				System.out.println();
 				break;
 
-				case 3: {
-    			/* dummy scanner */
-					a = sc.nextLine();
+				case "3": {
 					String updatemovie = new String();
 					ArrayList<Movie> movies1 = new ArrayList<Movie>();
 					movies1 = Storage.getMovieList();
@@ -312,87 +316,75 @@ public class Driver {
 						System.out.println(" 5 : Movie's start date");
 						System.out.println(" 6 : Movie's end date");
 						System.out.println(" 7 : Movie's casts");
-						System.out.println(" 8 : Quit ");
+						System.out.println(" 8 : Movie's abstract ");
+						System.out.println(" 9 : Movielisting");
+						System.out.println("10 : Quit");
 
-						int editchoice;
+						String editchoice;
 
-						editchoice = sc.nextInt();
+						editchoice = sc.nextLine();
 
 						switch (editchoice) {
-							case 1: {
+							case "1": {
 								System.out.println("Please input the new movie title :  ");
 								String newtitle;
-    				/* dummy scanner */
-								a = sc.nextLine();
 								newtitle = sc.nextLine();
 								movies1.get(j).setTitle(newtitle);
 								Storage.writeMovieList(movies1);
 								System.out.println("Movie's title has been successfully updated ");
 								break;
 							}
-							case 2: {
+							case "2": {
 								System.out.println("Please input the new Director's :  ");
 								String directname = new String();
-    				/* dummy scanner */
-								a = sc.nextLine();
 								directname = sc.nextLine();
 								movies1.get(j).setDirectorname(directname);
 								Storage.writeMovieList(movies1);
 								System.out.println("Director's name has been successfully updated ");
 								break;
 							}
-							case 3: {
+							case "3": {
 								System.out.println("Please input the new Movie's duration : ");
 								String newDuration = "0";
-    				/* dummy scanner */
-								a = sc.nextLine();
 								newDuration = sc.next();
 								movies1.get(j).setDuration(newDuration);
 								Storage.writeMovieList(movies1);
 								System.out.println("Movie's duration has been successfully updated");
 								break;
 							}
-							case 4: {
+							case "4": {
 								System.out.println("Please input the new Movie's Type : ");
 								System.out.println("1 : TREED");
 								System.out.println("2 : NORMAL");
 								System.out.println("3 : BLOCKBUSTER");
 								String typenumber = "0";
-    				/* dummy scanner */
-								a = sc.nextLine();
 								typenumber = sc.next();
 								movies1.get(j).setType(typenumber);
 								Storage.writeMovieList(movies1);
 								System.out.println("Movie's Type has been successfully changed");
 								break;
 							}
-							case 5: {
+							case "5": {
 								System.out.println("Please input the Movie's new start date : ");
 								String newstartDate = new String();
-    				/* dummy scanner */
-								a = sc.nextLine();
 								newstartDate = sc.nextLine();
 								movies1.get(j).setStartDate(newstartDate);
 								Storage.writeMovieList(movies1);
 								System.out.println("Movie's start date has been successfully updated");
 								break;
 							}
-							case 6: {
+							case "6": {
 								System.out.println("Please input the Movie's new end date : ");
 								String newendDate = new String();
-    				/* dummy scanner */
-								a = sc.nextLine();
 								newendDate = sc.nextLine();
 								movies1.get(j).setEndDate(newendDate);
 								Storage.writeMovieList(movies1);
 								System.out.println("Movie's end date has been successfully updated");
 								break;
 							}
-							case 7: {
+							case "7": {
 								System.out.println("Please enter the cast name that you would like to update");
-								int k, p;
-    				/* dummy scanner */
-								a = sc.nextLine();
+								int k;
 								String oldcastname = new String();
 								oldcastname = sc.nextLine();
     				/* j is already the index of the movie in the movie arraylist */
@@ -410,8 +402,25 @@ public class Driver {
 								System.out.println("Cast's name has been updated successfully");
 								break;
 							}
-							case 8:
+							case "8":{
+								System.out.println("Please enter the new movie abstract : ");
+								String newmovieabstract;
+								newmovieabstract = sc.nextLine();
+								movies1.get(j).setMovieAbstract(newmovieabstract);
+								Storage.writeMovieList(movies1);
+								System.out.println("Movie abstract has been updated successfully");
 								break;
+							}
+							case "9":{
+								
+								
+							}
+							case "10":{
+								break;
+							}
+							
+								
+							
 						}
 						break;
 					}
