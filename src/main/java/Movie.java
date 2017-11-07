@@ -1,7 +1,5 @@
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.*;
 import java.util.List;
 import java.text.SimpleDateFormat;
 import java.text.*;
@@ -40,7 +38,7 @@ public class Movie implements Serializable {
     /*
     	Abstract for movie
      */
-    private String MovieAbstract;
+    private String movieAbstract;
     /*
         Number of tickets sold for movie
      */
@@ -70,7 +68,7 @@ public class Movie implements Serializable {
      * @param startDate First day of showing
      * @param endDate   Last day of showing
      */
-    public Movie(String title, String director, String duration, ArrayList<String> cast, Type type, String startDate, String endDate, String MovieAbstract) {
+    public Movie(String title, String director, String duration, ArrayList<String> cast, Type type, String startDate, String endDate, String movieAbstract) {
         this.title = title;
         this.director = director;
         this.duration = duration;
@@ -85,7 +83,7 @@ public class Movie implements Serializable {
         ratings = new ArrayList<Rating>();
         reviews = new ArrayList<Review>();
         movieListings = new ArrayList<MovieListing>();
-        this.MovieAbstract = MovieAbstract;
+        this.movieAbstract = movieAbstract;
     }
 
     /**
@@ -99,6 +97,7 @@ public class Movie implements Serializable {
         out.append("\nTitle:\t\t" + this.title + "\n");          // Append tittle
         out.append("Rating:\t\t" + this.averageRatingStr() + "\n");
         out.append("Director:\t" + this.director + "\n");       // Append Director
+        out.append("Abstract: \t" + this.movieAbstract + "\n" );
         out.append("Duration:\t" + this.duration + "\n");  // Append Duration of movie
         out.append("Start Date : \t" + this.startDate);
         out.append("\nEnd Date : \t" + this.endDate);
@@ -261,7 +260,7 @@ public class Movie implements Serializable {
     /* Allows new movie abstract */
     
     public void setMovieAbstract(String movieabstract) {
-    	this.MovieAbstract = movieabstract;
+    	this.movieAbstract = movieabstract;
     }
 
     /**
