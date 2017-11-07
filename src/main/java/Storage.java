@@ -61,14 +61,6 @@ public class Storage {
             return new ArrayList<Movie>();
         }
     }
-    
-    public static ArrayList<MovieListing> getMovieListing()  {
-        try {
-            return (ArrayList)SerializeDB.readSerializedObject(MOVIE_LIST_FILENAME);
-        } catch (IOException e) {
-            return new ArrayList<MovieListing>();
-        }
-    }
     /**
      * Save list of movies to memory
      * @param movies List of movies to save
@@ -131,7 +123,6 @@ public class Storage {
          */
         ArrayList<Movie> movies = new ArrayList<Movie>();
         ArrayList<String> cast = new ArrayList<String>();
-        ArrayList<MovieListing> movielisting = new ArrayList<MovieListing>();
         cast.add("Albin");
         cast.add("Andrew");
         cast.add("Darien");
@@ -153,16 +144,16 @@ public class Storage {
         movies.add(new Movie("Planet of the apes", "C director", "120", cast, Type.BLOCKBUSTER, "2017-20-11", "2017-05-20","Abstract 3"));
         movies.add(new Movie("Spiderman", "D director", "130", cast, Type.BLOCKBUSTER, "2017-17-11", "2017-03-03","Abstract 4"));
         movies.add(new Movie("Superman", "E director", "140", cast, Type.BLOCKBUSTER, "2017-01-01", "2017-02-02","Abstract 5"));
-        movies.get(0).addMovieListing(cineplex1, cinema1 ,  "2017-05-12");
-        movies.get(0).addMovieListing(cineplex1, cinema2 ,  "2017-05-12");
-        movies.get(0).addMovieListing(cineplex1, cinema3 ,  "2017-05-12");
-        movies.get(1).addMovieListing(cineplex2, cinema1,  "2017-10-10");
-        movies.get(1).addMovieListing(cineplex2, cinema2,  "2017-10-10");
-        movies.get(1).addMovieListing(cineplex2, cinema3,  "2017-10-10");
-        movies.get(2).addMovieListing(cineplex3, cinema1,  "2017-10-12");
-        movies.get(2).addMovieListing(cineplex3, cinema2,  "2017-10-12");
-        movies.get(2).addMovieListing(cineplex3, cinema3,  "2017-10-12");
-        movies.get(3).addMovieListing(cineplex1,cinema1,  "2017-17-11");
+        movies.get(0).addMovieListing(cineplex1, cinema1 ,  "2017-05-12 | 19:00");
+        movies.get(0).addMovieListing(cineplex1, cinema2 ,  "2017-05-12 | 19:00");
+        movies.get(0).addMovieListing(cineplex1, cinema3 ,  "2017-05-12 | 19:00");
+        movies.get(1).addMovieListing(cineplex2, cinema1,  "2017-10-10 | 18:00");
+        movies.get(1).addMovieListing(cineplex2, cinema2,  "2017-10-10 | 18:00");
+        movies.get(1).addMovieListing(cineplex2, cinema3,  "2017-10-10 | 18:00");
+        movies.get(2).addMovieListing(cineplex3, cinema1,  "2017-10-12 | 17:00");
+        movies.get(2).addMovieListing(cineplex3, cinema2,  "2017-10-12 | 17:30");
+        movies.get(2).addMovieListing(cineplex3, cinema3,  "2017-10-12 | 17:30");
+        movies.get(3).addMovieListing(cineplex1,cinema1,  "2017-17-11 | 16:00");
         movies.get(3).addMovieListing(cineplex2,cinema1,  "2017-17-11");
         movies.get(3).addMovieListing(cineplex3,cinema1,  "2017-17-11");
         movies.get(4).addMovieListing(cineplex1, cinema2,  "2017-10-10");

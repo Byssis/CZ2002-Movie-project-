@@ -74,8 +74,6 @@ public class Driver {
 		int j = 0;
 		ArrayList<Movie> initialmovies = new ArrayList<Movie>();
 		initialmovies = Storage.getMovieList();
-		ArrayList<MovieListing> initialmovielisting = new ArrayList<MovieListing>();
-		initialmovielisting = Storage.getMovieListing();
 
 		while (true) {
 			System.out.println("What would you like to do?");
@@ -230,10 +228,6 @@ public class Driver {
 					director = sc.nextLine();
 					System.out.println("Enter Movie Duration (in minutes): ");
 					duration = sc.nextLine();
-
-    			/* dummy scanner */
-					a = sc.nextLine();
-
     			/* Input number of cast members */
 					System.out.println("Enter the number of cast members ");
 					castno = sc.nextInt();
@@ -281,31 +275,42 @@ public class Driver {
 				String newcineplex;
 				String newcinema;
 				
-				while (noofMovieListing>0)
+				System.out.println("Choose the cineplex : ");
+				System.out.println("1 : Cineplex 1 " );
+				System.out.println("2 : Cineplex 2 ");
+				System.out.println("3 : Cineplex 3 " );
+					
+				newcineplex = sc.nextLine();
+					
+				if (newcineplex.equals("1")) 
 				{
-					System.out.println("Choose the cineplex : ");
-					System.out.println("1 : AMK Hub" );
-					System.out.println("2 : North Point");
-					System.out.println("3 : Jurong Point " );
-					
-					newcineplex = sc.nextLine();
-					
 					System.out.println("Choose the cinema :  ");
-					System.out.println("1: Golden Village ");
-					System.out.println("2 : Cathay  ");
-					System.out.println("3 : Eng Hwa " );
-					newcinema = sc.nextLine();
-					
-					System.out.println("Choose the cinema name : ");
-					
-					noofMovieListing++;			
+					System.out.println("1 : IMAX 1 ");
+					System.out.println("2 : IMAX 2  ");
+					System.out.println("3 : IMAX 3 " );
 				}
+				else if (newcineplex.equals("2")) 
+				{
+					System.out.println("Choose the cinema :  ");
+					System.out.println("4 : IMAX 4 ");
+					System.out.println("5 : IMAX 5  ");
+					System.out.println("6 : IMAX 6 " );
+				}
+				else if (newcineplex.equals("3")) 
+				{
+					System.out.println("Choose the cinema :  ");
+					System.out.println("7 : IMAX 7 ");
+					System.out.println("8 : IMAX 8  ");
+					System.out.println("9 : IMAX 9 " );
+				}
+				newcinema = sc.nextLine();
+				System.out.println("Please enter the showing time in this format : eg . YYYY-DD-MM | 20:00" );
+				
 				
     			
 				ArrayList<Movie> movies = new ArrayList<Movie>();
-				ArrayList<MovieListing> movielistings = new ArrayList<MovieListing>();
+				//MovieListing newmovielisting = new MovieListing(newmovie,);
 				movies = Storage.getMovieList();
-				movielistings = Storage.getMovieListing();
 				movies.add(newmovie);
     			/* Adding it into movie's dataset */
 				Storage.writeMovieList(movies);
@@ -440,7 +445,7 @@ public class Driver {
 								break;
 							}
 							case "9":{
-								
+								System.out.println("Please choose the ");
 								
 							}
 							case "10":{
@@ -483,9 +488,6 @@ public class Driver {
 				}
 				case "5": {
 					//order by sales or rating
-					System.out.println("1 : By Sales ");
-					System.out.println("2 : By Rating ");
-					break;//order by sales or rating
 	    			System.out.println("1 : By Sales ");
 	    			System.out.println("2 : By Rating ");
 	    			System.out.println("3 : Quit");
