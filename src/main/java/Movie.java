@@ -57,6 +57,8 @@ public class Movie implements Serializable {
     private ArrayList<MovieListing> movieListings;
 
     private MovieStatus moviestatus;
+    
+    private String movieclassification;
     /**
      * Create a new movie instance
      *
@@ -67,8 +69,9 @@ public class Movie implements Serializable {
      * @param type      Type of movie
      * @param startDate First day of showing
      * @param endDate   Last day of showing
+     * @para movieclassification PG/NC16/M18/R21
      */
-    public Movie(String title, String director, String duration, ArrayList<String> cast, Type type, String startDate, String endDate, String movieAbstract) {
+    public Movie(String title, String director, String duration, ArrayList<String> cast, Type type, String startDate, String endDate, String movieAbstract,String classification) {
         this.title = title;
         this.director = director;
         this.duration = duration;
@@ -80,6 +83,7 @@ public class Movie implements Serializable {
         for (int i = 0; i < cast.size(); i++) {
             this.cast.add(cast.get(i));
         }
+        this.movieclassification = classification;
         ratings = new ArrayList<Rating>();
         reviews = new ArrayList<Review>();
         movieListings = new ArrayList<MovieListing>();

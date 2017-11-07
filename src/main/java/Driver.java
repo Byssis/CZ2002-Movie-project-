@@ -40,6 +40,7 @@ public class Driver {
 		String a; //dummy scanner
 		String cineplexname;
 		String cinemaname;
+		String classification;
 		int castno;
 		ArrayList<String> cast;
 		Type type = null;
@@ -262,48 +263,49 @@ public class Driver {
 				System.out.println("Enter a short movie abstract : ");
 				movieabstract = sc.nextLine();
 				
+				System.out.println("Enter the movie classification (eg. PG/NC16/M18/R21) : ");
+				classification = sc.nextLine();
 				/* Instantiating the movie object */
-				Movie newmovie = new Movie(title, director, duration, cast, type, startDate, endDate, movieabstract);
+				Movie newmovie = new Movie(title, director, duration, cast, type, startDate, endDate, movieabstract,classification);
 				
-				while(true) {
-				System.out.println("Enter the number of movielistings : ");
-				int noofMovieListing = sc.nextInt();
 				
-				/* dummy scanner */
-				a= sc.nextLine();
 				
-				String newcineplex;
-				String newcinema;
-				
+				int newcineplex;
+				int newcinema;
+				do  
+				{
 				System.out.println("Choose the cineplex : ");
 				System.out.println("1 : Cineplex 1 " );
 				System.out.println("2 : Cineplex 2 ");
 				System.out.println("3 : Cineplex 3 " );
+				newcineplex = sc.nextInt();
+				} while (newcineplex >= 1 && newcineplex <= 3 );
+				
+				/* dummy scanner */
+				a= sc.nextLine();
 					
-				newcineplex = sc.nextLine();
-					
-				if (newcineplex.equals("1")) 
+				if (newcineplex==(1)) 
 				{
 					System.out.println("Choose the cinema :  ");
 					System.out.println("1 : IMAX 1 ");
 					System.out.println("2 : IMAX 2  ");
 					System.out.println("3 : IMAX 3 " );
 				}
-				else if (newcineplex.equals("2")) 
+				else if (newcineplex==2) 
 				{
 					System.out.println("Choose the cinema :  ");
 					System.out.println("4 : IMAX 4 ");
 					System.out.println("5 : IMAX 5  ");
 					System.out.println("6 : IMAX 6 " );
 				}
-				else if (newcineplex.equals("3")) 
+				else if (newcineplex==3) 
 				{
 					System.out.println("Choose the cinema :  ");
 					System.out.println("7 : IMAX 7 ");
 					System.out.println("8 : IMAX 8  ");
 					System.out.println("9 : IMAX 9 " );
 				}
-				newcinema = sc.nextLine();
+				newcinema = sc.nextInt();
 				System.out.println("Please enter the showing time in this format : eg . YYYY-DD-MM | 20:00" );
 				
 				
@@ -317,7 +319,7 @@ public class Driver {
 				System.out.println(movies);
 				System.out.println();
 				break;
-				}
+				
 
 				case "3": {
 					String updatemovie = new String();

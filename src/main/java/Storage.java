@@ -12,8 +12,6 @@ public class Storage {
     private final static String MOVIE_LIST_FILENAME = FILE_PATH + "movies.dat";
     private final static String USER_LIST_FILENAME = FILE_PATH + "users.dat";
     private final static String CINEPLEX_LIST_FILENAME = FILE_PATH + "cineplex.dat";
-    private final static String MOVIE_LISTING_FILENAME = FILE_PATH + "movielisting.dat";
-
     public final static String USER_ACC_FILENAME =  FILE_PATH + "useracc.dat";
     public final static String HOLIDAYS_FILENAME = FILE_PATH + "pubhol.dat";
 
@@ -56,7 +54,7 @@ public class Storage {
      */
     public static ArrayList<Movie> getMovieList()  {
         try {
-            return (ArrayList)SerializeDB.readSerializedObject(MOVIE_LISTING_FILENAME);
+            return (ArrayList)SerializeDB.readSerializedObject(MOVIE_LIST_FILENAME);
         } catch (IOException e) {
             return new ArrayList<Movie>();
         }
@@ -68,9 +66,6 @@ public class Storage {
      */
     public static void writeMovieList(List movies){
         SerializeDB.writeSerializedObject(MOVIE_LIST_FILENAME, movies);
-    }
-    public static void writeMovieListing(List movielisting){
-        SerializeDB.writeSerializedObject(MOVIE_LISTING_FILENAME, movielisting);
     }
     /**
      * Get list of users from memory
@@ -139,11 +134,11 @@ public class Storage {
         Cinema cinema7 = new Cinema("IMAX 7",CinemaType.PLATINUM, 10, 10, "XXX1");
         Cinema cinema8 = new Cinema ("IMAX 8",CinemaType.PLATINUM, 10, 10, "XXX2");
         Cinema cinema9 = new Cinema ("IMAX 8",CinemaType.NORMAL, 10, 10, "XXX3");
-        movies.add(new Movie("Die Hard", "A director", "90", cast, Type.BLOCKBUSTER, "2017-05-12", "2017-06-20","Abstract 1"));
-        movies.add(new Movie("Finding Nemo", "B director", "100", cast, Type.BLOCKBUSTER, "2017-10-10", "2017-11-20","Astract 2"));
-        movies.add(new Movie("Planet of the apes", "C director", "120", cast, Type.BLOCKBUSTER, "2017-20-11", "2017-05-20","Abstract 3"));
-        movies.add(new Movie("Spiderman", "D director", "130", cast, Type.BLOCKBUSTER, "2017-17-11", "2017-03-03","Abstract 4"));
-        movies.add(new Movie("Superman", "E director", "140", cast, Type.BLOCKBUSTER, "2017-01-01", "2017-02-02","Abstract 5"));
+        movies.add(new Movie("Die Hard", "A director", "90", cast, Type.BLOCKBUSTER, "2017-05-12", "2017-06-20","Abstract 1","PG"));
+        movies.add(new Movie("Finding Nemo", "B director", "100", cast, Type.BLOCKBUSTER, "2017-10-10", "2017-11-20","Astract 2","PG"));
+        movies.add(new Movie("Planet of the apes", "C director", "120", cast, Type.BLOCKBUSTER, "2017-20-11", "2017-05-20","Abstract 3","PG"));
+        movies.add(new Movie("Spiderman", "D director", "130", cast, Type.BLOCKBUSTER, "2017-17-11", "2017-03-03","Abstract 4","PG"));
+        movies.add(new Movie("Superman", "E director", "140", cast, Type.BLOCKBUSTER, "2017-01-01", "2017-02-02","Abstract 5","PG"));
         movies.get(0).addMovieListing(cineplex1, cinema1 ,  "2017-05-12 | 19:00");
         movies.get(0).addMovieListing(cineplex1, cinema2 ,  "2017-05-12 | 19:00");
         movies.get(0).addMovieListing(cineplex1, cinema3 ,  "2017-05-12 | 19:00");
