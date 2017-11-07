@@ -136,21 +136,39 @@ public class Storage {
         cast.add("Andrew");
         cast.add("Darien");
         cast.add("Yihao");
-
+        Cineplex cineplex1 = new Cineplex("Cathay","XX1");
+        Cineplex cineplex2 = new Cineplex("Golden Village","XX2");
+        Cineplex cineplex3 = new Cineplex("Eng Hwa","XX3");
+        Cinema cinema1 = new Cinema("IMAX 1",CinemaType.PLATINUM, 10, 10, "XXX1");
+        Cinema cinema2 = new Cinema ("IMAX 2",CinemaType.PLATINUM, 10, 10, "XXX2");
+        Cinema cinema3 = new Cinema ("IMAX 3",CinemaType.NORMAL, 10, 10, "XXX3");
+        Cinema cinema4 = new Cinema("IMAX 4",CinemaType.PLATINUM, 10, 10, "XXX1");
+        Cinema cinema5 = new Cinema ("IMAX 5",CinemaType.PLATINUM, 10, 10, "XXX2");
+        Cinema cinema6 = new Cinema ("IMAX 6",CinemaType.NORMAL, 10, 10, "XXX3");
+        Cinema cinema7 = new Cinema("IMAX 7",CinemaType.PLATINUM, 10, 10, "XXX1");
+        Cinema cinema8 = new Cinema ("IMAX 8",CinemaType.PLATINUM, 10, 10, "XXX2");
+        Cinema cinema9 = new Cinema ("IMAX 8",CinemaType.NORMAL, 10, 10, "XXX3");
         movies.add(new Movie("Die Hard", "A director", "90", cast, Type.BLOCKBUSTER, "2017-05-12", "2017-06-20","Abstract 1"));
         movies.add(new Movie("Finding Nemo", "B director", "100", cast, Type.BLOCKBUSTER, "2017-10-10", "2017-11-20","Astract 2"));
         movies.add(new Movie("Planet of the apes", "C director", "120", cast, Type.BLOCKBUSTER, "2017-20-11", "2017-05-20","Abstract 3"));
         movies.add(new Movie("Spiderman", "D director", "130", cast, Type.BLOCKBUSTER, "2017-17-11", "2017-03-03","Abstract 4"));
         movies.add(new Movie("Superman", "E director", "140", cast, Type.BLOCKBUSTER, "2017-01-01", "2017-02-02","Abstract 5"));
-        movies.get(0).addMovieListing(new Cineplex("Golden Village", "XX1"), cinema, showing);
-        movielisting.add(new MovieListing(movies.get(0),,new Cinema("Imax 1",CinemaType.NORMAL, 10, 10, "XXX1"), "2017-05-12"));
-        movielisting.add(new MovieListing(movies.get(1),new Cineplex("Golden Village", "XX2"),new Cinema("Imax 2",CinemaType.PLATINUM, 10, 10, "XXX2"), "2017-10-10"));
-        movielisting.add(new MovieListing(movies.get(2),new Cineplex("Cathay", "XX3"),new Cinema("Imax 3",CinemaType.NORMAL, 10, 10, "XXX3"), "2017-20-11"));
-        movielisting.add(new MovieListing(movies.get(3),new Cineplex("Cathay", "XX4"),new Cinema("Imax 4",CinemaType.NORMAL, 10, 10, "XXX4"), "2017-17-11"));
-        movielisting.add(new MovieListing(movies.get(4),new Cineplex("Xin Hua", "XX5"),new Cinema("Imax 5",CinemaType.PLATINUM, 10, 10, "XXX5"), "2017-10-10"));
-
+        movies.get(0).addMovieListing(cineplex1, cinema1 ,  "2017-05-12");
+        movies.get(0).addMovieListing(cineplex1, cinema2 ,  "2017-05-12");
+        movies.get(0).addMovieListing(cineplex1, cinema3 ,  "2017-05-12");
+        movies.get(1).addMovieListing(cineplex2, cinema1,  "2017-10-10");
+        movies.get(1).addMovieListing(cineplex2, cinema2,  "2017-10-10");
+        movies.get(1).addMovieListing(cineplex2, cinema3,  "2017-10-10");
+        movies.get(2).addMovieListing(cineplex3, cinema1,  "2017-10-12");
+        movies.get(2).addMovieListing(cineplex3, cinema2,  "2017-10-12");
+        movies.get(2).addMovieListing(cineplex3, cinema3,  "2017-10-12");
+        movies.get(3).addMovieListing(cineplex1,cinema1,  "2017-17-11");
+        movies.get(3).addMovieListing(cineplex2,cinema1,  "2017-17-11");
+        movies.get(3).addMovieListing(cineplex3,cinema1,  "2017-17-11");
+        movies.get(4).addMovieListing(cineplex1, cinema2,  "2017-10-10");
+        movies.get(4).addMovieListing(cineplex2, cinema2,  "2017-10-10");
+        movies.get(4).addMovieListing(cineplex3, cinema2,  "2017-10-10");
         writeMovieList(movies);
-        writeMovieListing(movielisting);
         
     }
 
