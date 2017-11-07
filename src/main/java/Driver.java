@@ -483,9 +483,6 @@ public class Driver {
 				}
 				case "5": {
 					//order by sales or rating
-					System.out.println("1 : By Sales ");
-					System.out.println("2 : By Rating ");
-					break;//order by sales or rating
 	    			System.out.println("1 : By Sales ");
 	    			System.out.println("2 : By Rating ");
 	    			System.out.println("3 : Quit");
