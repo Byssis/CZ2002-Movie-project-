@@ -337,6 +337,7 @@ public class UserApp {
         System.out.println("Enter your email number: ");
         String email = sc.next();
         System.out.print("Enter your phone: ");
+
         String phoneNumber = sc.next();
         List<MovieGoer> movieGoers = Storage.getUserList();
         MovieGoer user = findMovieGoer(name, movieGoers,phoneNumber, email);
@@ -344,7 +345,14 @@ public class UserApp {
         for(int i = 0; i < rows.size(); i++){
             seats[i] = movieListing.bookSeats(rows.get(i), setNrs.get(i));
         }
-        Booking booking = new Booking(user, movieListing, seats);
+        int [] age = new int[seats.length];
+        double price = 0;
+        for(int i = 0; i < seats.length; i++){
+            System.out.print("Enter age of movie goer " + (i+1) + " :");
+            price += new TicketPrice(sc.nextInt(), movieListing.getMovieType(), movieListing.getCinemaType()).getPrice();
+        }
+
+         Booking booking = new Booking(user, movieListing, seats, price);
 
         user.addBooking(booking);
         Storage.writeUserList(movieGoers);

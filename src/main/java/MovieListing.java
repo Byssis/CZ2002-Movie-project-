@@ -98,4 +98,12 @@ public class MovieListing implements Serializable {
     public String getCinemaCode() {
         return this.cineplex.getCineplexCode() + this.cinema.getCinemaCode();
     }
+
+    public Type getMovieType() {
+        return this.movie.getType();
+    }
+
+    public CinemaType getCinemaType() {
+        return this.cinema.getType();
+    }
 }

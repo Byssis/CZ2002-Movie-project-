@@ -19,17 +19,20 @@ public class Booking implements Serializable {
      */
     private final Seat[] seats;
 
-    private String transactionID;
+    private final String transactionID;
+
+    private final double price;
 
     /**
      * Create new booking
      * @param movieGoer Movie goer that booked ticket
      * @param movieListing  Booked movie listing
      * @param seats booked seats
+     * @param price
      * @see MovieGoer
      * @see MovieListing
      */
-    public Booking(MovieGoer movieGoer, MovieListing movieListing, Seat[] seats){
+    public Booking(MovieGoer movieGoer, MovieListing movieListing, Seat[] seats, double price){
         this.movieGoer = movieGoer;
         this.movieListing = movieListing;
         this.seats = seats;
@@ -43,6 +46,7 @@ public class Booking implements Serializable {
         sb.append(cal.get(Calendar.HOUR_OF_DAY));
         sb.append(cal.get(Calendar.MINUTE));
         this.transactionID = sb.toString();
+        this.price = price;
     }
 
     /**
@@ -58,6 +62,7 @@ public class Booking implements Serializable {
         for (Seat s: seats){
             sb.append(" " + s.getRow() + "," + s.getSeatNr());
         }
+        sb.append("\nPrice:" + this.price);
         return sb.toString();
     }
 
