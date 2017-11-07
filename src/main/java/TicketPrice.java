@@ -6,10 +6,11 @@ import java.text.*;
 
 public class TicketPrice 
 {
+	private static final double GST = 1.07;
 	private double price;
 	private int customerAge;
 	private String date;
-	private Movie movie;
+	//private MovieStatus movie;
 	private Type type;
 	private CinemaType ctype;
 	private double childprice;
@@ -40,10 +41,9 @@ public class TicketPrice
 		catch(Exception e){
 				System.out.println("File not Found!");
 		}}
-	public TicketPrice(int age,Movie movie,CinemaType ctype){
+	public TicketPrice(int age,Type movie,CinemaType ctype){
 		customerAge = age;
-		this.movie = movie;
-		type = movie.getType();
+		this.type = movie;
 		this.ctype = ctype;
 	}
 	
@@ -63,20 +63,7 @@ public class TicketPrice
 		Date now = new Date();
 		 SimpleDateFormat dateFormatter = new SimpleDateFormat("EEEE, MMMM d");
 		date = dateFormatter.format(now);	
-		ArrayList<String> hols = new ArrayList<String>();						//read in public holidays
-		try{
-			File pubhol = new File("/Users/Public/pubhol.txt");
-			BufferedReader getInfo = new BufferedReader(new FileReader(pubhol));
-			String temp = getInfo.readLine();
-			while(temp!=null){
-				hols.add(temp);
-				temp = getInfo.readLine();
-			}
-			getInfo.close();
-		}
-		catch(Exception e){
-			System.out.println("File not found!");
-		}
+		ArrayList<String> hols = Storage.getHolidays();						//read in public holidays
 		if(hols.contains(date)){
 			return true;
 		}else{
@@ -96,13 +83,13 @@ public class TicketPrice
 		if(isWeekend()||isPublicHol()){
 			price += wkendhol;
 		}
-		if(movie.getType()==Type.TREED){
+		if(type==Type.ThreeD){
 			price += threeD;
 		}
 		if(ctype==CinemaType.PLATINUM){
 			price += platinum;
 		}
-		return price;
+		return price * this.GST;
 	}
 	
 	
