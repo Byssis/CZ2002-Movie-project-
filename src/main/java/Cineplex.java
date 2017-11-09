@@ -39,6 +39,10 @@ public class Cineplex implements Serializable {
     public void addNewCinema(String name, CinemaType type,int numOfRows, int numOfSeats, String cinemaCode){
         this.cinemas.add(new Cinema(name, type, numOfRows, numOfSeats, cinemaCode));
     }
+    
+    public Cinema getCinema(int i) {
+    	return cinemas.get(i);
+    }
 
     /**
      * Get name of Cineplex

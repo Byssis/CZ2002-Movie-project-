@@ -13,19 +13,21 @@ public class MovieListing implements Serializable {
     /*
         Cineplex for listing
      */
-    final private Cineplex cineplex;
+    private Cineplex cineplex;
     /*
         Cinema for listing
      */
-    final private Cinema cinema;
+    private Cinema cinema;
     /*
         Showing date for movie
      */
-    final private String showing;
+    private String showing;
     /*
         List of bookings for movie
      */
     private List<Booking> bookings;
+    
+    private Storage storage;
 
     /**
      * @param movie     Listed movie
@@ -40,7 +42,36 @@ public class MovieListing implements Serializable {
         this.showing = showing;
         this.bookings = new ArrayList<Booking>();
     }
-
+    
+    public void setCineplex(String cineplex) 
+    {
+    	ArrayList<Cineplex> cineplexlist = new ArrayList<Cineplex>();
+    	cineplexlist = Storage.getCineplexList();
+    	int i;
+    	for (i=0; i<3 ;i++) {
+    		if (cineplexlist.get(i).equals(cineplex))
+    			this.cineplex = cineplexlist.get(i);
+    	}
+    	
+    }
+    
+    public void setCinema(String cinema) 
+    {
+    	ArrayList<Cineplex> cineplexlist = new ArrayList<Cineplex>();
+    	cineplexlist = Storage.getCineplexList();
+    	int i,k;
+    	for (i=0; i<3 ;i++) 
+    	{
+    		if (cineplexlist.get(0).getCinema(i).equals(cinema))
+    				this.cinema = cineplexlist.get(0).getCinema(i);
+    	}
+    	
+    }
+    public void setShowing(String showing) 
+    {
+    	this.showing = showing;
+    	
+    }
     /**
      * Display available seats
      */
@@ -97,7 +128,17 @@ public class MovieListing implements Serializable {
     public String getCinemaCode() {
         return this.cineplex.getCineplexCode() + this.cinema.getCinemaCode();
     }
-
+    
+    public String getCineplexName() {
+    	return this.cineplex.getName();
+    }
+    public String getCinemaName() {
+    	return this.cinema.getName();
+    }
+    public String getShowing() {
+    	return showing;
+    }
+    
     public Type getMovieType() {
         return this.movie.getType();
     }

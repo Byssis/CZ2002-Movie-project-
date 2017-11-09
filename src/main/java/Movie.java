@@ -54,7 +54,7 @@ public class Movie implements Serializable {
     /*
         List of movieListings for movie
      */
-    private ArrayList<MovieListing> movieListings;
+    private ArrayList<MovieListing> movielistings;
 
     private MovieStatus moviestatus;
     
@@ -86,7 +86,7 @@ public class Movie implements Serializable {
         this.movieclassification = classification;
         ratings = new ArrayList<Rating>();
         reviews = new ArrayList<Review>();
-        movieListings = new ArrayList<MovieListing>();
+        movielistings = new ArrayList<MovieListing>();
         this.movieAbstract = movieAbstract;
     }
 
@@ -103,6 +103,7 @@ public class Movie implements Serializable {
         out.append("Director:\t" + this.director + "\n");       // Append Director
         out.append("Abstract: \t" + this.movieAbstract + "\n" );
         out.append("Duration:\t" + this.duration + "\n");  // Append Duration of movie
+        out.append("Rating : \t" + this.movieclassification + "\n");
         out.append("Start Date : \t" + this.startDate);
         out.append("\nEnd Date : \t" + this.endDate);
         out.append("\nCast:");
@@ -276,15 +277,15 @@ public class Movie implements Serializable {
      * @see MovieListing
      */
     public void addMovieListing(Cineplex cineplex, Cinema cinema, String showing) {
-        this.movieListings.add(new MovieListing(this, cineplex, cinema, showing));
+        this.movielistings.add(new MovieListing(this, cineplex, cinema, showing));
     }
 
     /**
      * Show all movieListings in stdout
      */
     public void showMovieListings() {
-        for (int i = 0; i < movieListings.size(); i++) {
-            System.out.println((i + 1) + ": " + movieListings.get(i));
+        for (int i = 0; i < movielistings.size(); i++) {
+            System.out.println((i + 1) + ": " + movielistings.get(i));
         }
     }
 
@@ -296,7 +297,12 @@ public class Movie implements Serializable {
      * @see MovieListing
      */
     public MovieListing getMovieListing(int index) {
-        return movieListings.get(index - 1);
+        return movielistings.get(index - 1);
+    }
+    
+    public ArrayList<MovieListing> getAllMovieListing()
+    {
+    	return movielistings;
     }
 
     /**
