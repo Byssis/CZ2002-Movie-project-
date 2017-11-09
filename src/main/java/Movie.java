@@ -1,5 +1,7 @@
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.text.SimpleDateFormat;
 import java.text.*;
@@ -283,9 +285,34 @@ public class Movie implements Serializable {
      * Show all movieListings in stdout
      */
     public void showMovieListings() {
+        String now = getToDaysDateString();
+        int option = 1;
         for (int i = 0; i < movieListings.size(); i++) {
-            System.out.println((i + 1) + ": " + movieListings.get(i));
+            if (now.compareTo(movieListings.get(i).getShowing()) < 0)
+                System.out.println((option++) + ": " + movieListings.get(i));
         }
+    }
+
+    private static String getToDaysDateString() {
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        int hour = cal.get(Calendar.HOUR_OF_DAY);
+        int minutes = cal.get(Calendar.MINUTE);
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(year);
+        sb.append("-");
+        sb.append(((month < 10) ? "0" : "") + month);
+        sb.append("-");
+        sb.append(((day < 10) ? "0" : "") + day);
+        sb.append(" | ");
+        sb.append(((hour < 10) ? "0" : "") + hour);
+        sb.append(":");
+        sb.append(((minutes < 10) ? "0" : "") + hour);
+        System.out.println("DEBUG: " + sb.toString());
+        return sb.toString();
     }
 
     /**
@@ -296,7 +323,15 @@ public class Movie implements Serializable {
      * @see MovieListing
      */
     public MovieListing getMovieListing(int index) {
-        return movieListings.get(index - 1);
+        String now = getToDaysDateString();
+        int option = 0;
+        for (int i = 0; i < movieListings.size(); i++) {
+            if (now.compareTo(movieListings.get(i).getShowing()) < 0)
+                option ++;
+            if(index == option)
+                return movieListings.get(i);
+        }
+        return null;
     }
 
     /**

@@ -102,6 +102,10 @@ public class MovieListing implements Serializable {
         return this.movie.getType();
     }
 
+    public String getShowing(){
+        return this.showing;
+    }
+
     public CinemaType getCinemaType() {
         return this.cinema.getType();
     }
