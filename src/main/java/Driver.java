@@ -386,14 +386,14 @@ public class Driver {
 								System.out.println("2 : NORMAL");
 								System.out.println("3 : BLOCKBUSTER");
 								String typenumber = "0";
-								typenumber = sc.next();
+								typenumber = sc.nextLine();
 								movies1.get(j).setType(typenumber);
 								Storage.writeMovieList(movies1);
 								System.out.println("Movie's Type has been successfully changed");
 								break;
 							}
 							case "5": {
-								System.out.println("Please input the Movie's new start date : ");
+								System.out.println("Please input the Movie's new start date (in YYYY-MM-DD) : ");
 								String newstartDate = new String();
 								newstartDate = sc.nextLine();
 								movies1.get(j).setStartDate(newstartDate);
@@ -402,7 +402,7 @@ public class Driver {
 								break;
 							}
 							case "6": {
-								System.out.println("Please input the Movie's new end date : ");
+								System.out.println("Please input the Movie's new end date (in YYYY-MM-DD) : ");
 								String newendDate = new String();
 								newendDate = sc.nextLine();
 								movies1.get(j).setEndDate(newendDate);
@@ -413,6 +413,7 @@ public class Driver {
 							case "7": {
 								System.out.println("Please enter the cast name that you would like to update");
 								int k;
+								System.out.println(movies1.get(j).getCast());
 								String oldcastname = new String();
 								oldcastname = sc.nextLine();
     				/* j is already the index of the movie in the movie arraylist */
@@ -431,6 +432,7 @@ public class Driver {
 								break;
 							}
 							case "8":{
+								System.out.println(movies1.get(j).getMovieAbstract());
 								System.out.println("Please enter the new movie abstract : ");
 								String newmovieabstract;
 								newmovieabstract = sc.nextLine();
@@ -446,6 +448,7 @@ public class Driver {
 								int updatecineplex;
 								int updatecinema;
 								String updateshowing;
+								int z,y;
 								ArrayList<Cineplex> cineplexlist1 = new ArrayList<Cineplex>();
 								cineplexlist1 = Storage.getCineplexList();
 								movies1.get(j).showMovieListings();
@@ -461,7 +464,10 @@ public class Driver {
 										else 
 											System.out.println("Invalid value entered.Please try again!");
 									}	
-								
+									
+									/* dummy scanner */
+									a= sc.nextLine();
+									
 									while(true) {
 										System.out.println("Please choose the cinema that the movie is currently in : ");
 										System.out.println("1 : IMAX 1 " );
@@ -473,18 +479,23 @@ public class Driver {
 										else 
 										System.out.println("Invalid value entered.Please try again!");
 									}	
+									/* dummy scanner */
+									a= sc.nextLine();
 								
 									System.out.println("Please enter the movie showing time in this format : eg . YYYY-DD-MM | 20:00" );
 									oldshowing = sc.nextLine();
-									int z,y;
+									
 									int c = 0;
+									/* search through all movie listing */
 									for (z = 0; z< movies1.get(j).getAllMovieListing().size(); z++)
 									{
+										/* check for same cineplex name to enter inner for loop */
 										if (movies1.get(j).getMovieListing(z).getCineplexName().equals(cineplexlist1.get(oldcineplex-1)))
 										{
+											/* check which of the 3 cinemas */
 											for (y=0;y<3;y++) 
 											{
-												if (movies1.get(j).getMovieListing(z).getCinemaName().equals(cineplexlist1.get(oldcineplex-1).getCinema(oldcinema)))
+												if (movies1.get(j).getMovieListing(z).getCinemaName().equals(cineplexlist1.get(oldcineplex-1).getCinema(oldcinema-1)))
 													if (movies1.get(j).getMovieListing(z).getShowing().equals(oldshowing)) {
 														System.out.println("Movielisting found!");
 														c = 1;
@@ -493,42 +504,46 @@ public class Driver {
 															
 											}
 										}
-										if (c != 1)
-											System.out.println("Selected Movielisting do not exist! ");
 									}
+									if (c != 1)
+										System.out.println("Selected Movielisting do not exist! ");
+									else if (c == 1)
+										break;
+								}
 								
 								
-									while (true) {
-										System.out.println("Please choose the new cineplex : ");
-										System.out.println("1 : Cineplex 1 " );
-										System.out.println("2 : Cineplex 2 ");
-										System.out.println("3 : Cineplex 3 " );
-										updatecineplex = sc.nextInt();
-										if (updatecineplex == 1 || updatecineplex == 2|| updatecineplex==3)
-											break;
-										else 
-											System.out.println("Invalid value entered.Please try again!");
+								while (true) {
+									System.out.println("Please choose the new cineplex : ");
+									System.out.println("1 : Cineplex 1 " );
+									System.out.println("2 : Cineplex 2 ");
+									System.out.println("3 : Cineplex 3 " );
+									updatecineplex = sc.nextInt();
+									if (updatecineplex == 1 || updatecineplex == 2|| updatecineplex==3)
+										break;
+									else 
+										System.out.println("Invalid value entered.Please try again!");
+								}
+								while (true) {
+									System.out.println("Please choose the new cinema : ");
+									System.out.println("1 : IMAX 1 " );
+									System.out.println("2 : IMAX 2 ");
+									System.out.println("3 : IMAX 3 " );
+									updatecinema = sc.nextInt();
+									if (updatecinema == 1 || updatecinema == 2|| updatecinema ==3)
+										break;
+									else 
+										System.out.println("Invalid value entered.Please try again!");
 									}
-									while (true) {
-										System.out.println("Please choose the new cinema : ");
-										System.out.println("1 : IMAX 1 " );
-										System.out.println("2 : IMAX 2 ");
-										System.out.println("3 : IMAX 3 " );
-										updatecinema = sc.nextInt();
-										if (updatecinema == 1 || updatecinema == 2|| updatecinema ==3)
-											break;
-										else 
-											System.out.println("Invalid value entered.Please try again!");
-										}
-									System.out.println("Please enter the showing time in this format : eg . YYYY-DD-MM | 20:00" );
-									updateshowing = sc.nextLine();
-									movies1.get(j).getMovieListing(z).setCineplex(cineplexlist1.get(updatecinema-1).getName());;
-									movies1.get(j).getMovieListing(z).setCinema(cineplexlist1.get(updatecinema-1).getCinema(updatecinema-1).getName());;
-									movies1.get(j).getMovieListing(z).setShowing(updateshowing);
-									System.out.println("Movielisting has been successfully updated! ");
-									Storage.writeMovieList(movies1);
+								
+								System.out.println("Please enter the showing time in this format : eg . YYYY-DD-MM | 20:00" );
+								updateshowing = sc.nextLine();
+								movies1.get(j).getMovieListing(z).setCineplex(cineplexlist1.get(updatecinema-1).getName());;
+								movies1.get(j).getMovieListing(z).setCinema(cineplexlist1.get(updatecinema-1).getCinema(updatecinema-1).getName());;
+								movies1.get(j).getMovieListing(z).setShowing(updateshowing);
+								System.out.println("Movielisting has been successfully updated! ");
+								Storage.writeMovieList(movies1);
 									
-								}}
+								}
 							
 							case "10":{
 								break;

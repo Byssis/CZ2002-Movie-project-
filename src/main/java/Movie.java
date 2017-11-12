@@ -264,6 +264,11 @@ public class Movie implements Serializable {
     	else
     		System.out.println("Invalid date or date format entered");
     }
+    
+    /* Returns new movie abstract */
+    public String getMovieAbstract() {
+    	return this.movieAbstract;
+    }
     /* Allows new movie abstract */
     
     public void setMovieAbstract(String movieabstract) {
@@ -328,7 +333,7 @@ public class Movie implements Serializable {
      * @see MovieListing
      */
     public MovieListing getMovieListing(int index) {
-        return movielistings.get(index - 1);
+        return movielistings.get(index);
     }
     
     public ArrayList<MovieListing> getAllMovieListing()

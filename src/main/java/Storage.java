@@ -123,15 +123,15 @@ public class Storage {
         cast.add("Andrew");
         cast.add("Darien");
         cast.add("Yihao");
-        Cineplex cineplex1 = new Cineplex("Cathay","XX1");
+        Cineplex cineplex1 = new Cineplex("Cineplex 1","XX1");
         cineplex1.addNewCinema("IMAX 1",CinemaType.PLATINUM, 10, 10, "XXX1");
         cineplex1.addNewCinema("IMAX 2",CinemaType.PLATINUM, 10, 10, "XXX2");
         cineplex1.addNewCinema("IMAX 3",CinemaType.NORMAL, 10, 10, "XXX3");
-        Cineplex cineplex2 = new Cineplex("Golden Village","XX2");
+        Cineplex cineplex2 = new Cineplex("Cineplex 2","XX2");
         cineplex2.addNewCinema("IMAX 1",CinemaType.PLATINUM, 10, 10, "XXX1");
         cineplex2.addNewCinema("IMAX 2",CinemaType.PLATINUM, 10, 10, "XXX2");
         cineplex2.addNewCinema("IMAX 3",CinemaType.NORMAL, 10, 10, "XXX3");
-        Cineplex cineplex3 = new Cineplex("Eng Hwa","XX3");
+        Cineplex cineplex3 = new Cineplex("Cineplex 3","XX3");
         cineplex3.addNewCinema("IMAX 1",CinemaType.PLATINUM, 10, 10, "XXX1");
         cineplex3.addNewCinema("IMAX 2",CinemaType.PLATINUM, 10, 10, "XXX2");
         cineplex3.addNewCinema("IMAX 3",CinemaType.NORMAL, 10, 10, "XXX3");
@@ -156,11 +156,11 @@ public class Storage {
         movies.get(2).addMovieListing(cineplex3, cineplex3.getCinema(1),  "2017-10-12 | 17:30");
         movies.get(2).addMovieListing(cineplex3, cineplex3.getCinema(2),  "2017-10-12 | 17:30");
         movies.get(3).addMovieListing(cineplex1,cineplex1.getCinema(0),  "2017-17-11 | 16:00");
-        movies.get(3).addMovieListing(cineplex2,cineplex2.getCinema(1),  "2017-17-11");
-        movies.get(3).addMovieListing(cineplex3,cineplex3.getCinema(2),  "2017-17-11");
-        movies.get(4).addMovieListing(cineplex1, cineplex1.getCinema(0),  "2017-10-10");
-        movies.get(4).addMovieListing(cineplex2, cineplex2.getCinema(1),  "2017-10-10");
-        movies.get(4).addMovieListing(cineplex3, cineplex3.getCinema(2),  "2017-10-10");
+        movies.get(3).addMovieListing(cineplex2,cineplex2.getCinema(1),  "2017-17-11 | 17:30");
+        movies.get(3).addMovieListing(cineplex3,cineplex3.getCinema(2),  "2017-17-11 | 17:30");
+        movies.get(4).addMovieListing(cineplex1, cineplex1.getCinema(0),  "2017-10-10 | 17:30");
+        movies.get(4).addMovieListing(cineplex2, cineplex2.getCinema(1),  "2017-10-10 | 17:30");
+        movies.get(4).addMovieListing(cineplex3, cineplex3.getCinema(2),  "2017-10-10 | 17:30");
         writeMovieList(movies);
         
     }
