@@ -636,32 +636,139 @@ public class Driver {
 				}
 				case "4": {
 					ArrayList<Movie> movies2 = new ArrayList<Movie>();
-					movies2 = Storage.getMovieList();
-					System.out.println(movies2);
-					System.out.println("Please enter the movie that you would like to remove : ");
-					String delmovie = new String();
-					delmovie = sc.nextLine();
-					int q = 0;
-					boolean key1 = false;
-    			/* to get the index of the object in the Movie's array */
-					while (!key1) {
-						for (q = 0; q < movies2.size(); q++) {
-							if (movies2.get(q).getTitle().equals(delmovie)) {
-								key1 = true;
-								break;
+					ArrayList<Cineplex> cineplexlist2 = new ArrayList<Cineplex>();
+					String option3;
+					System.out.println("What would u like to remove?");
+					System.out.println("1 : Movie");
+					System.out.println("2 : Movielisting");
+					option3 = sc.nextLine();
+					
+					switch(option3) 
+					{
+
+					case "1" : 
+						movies2 = Storage.getMovieList();
+						System.out.println(movies2);					
+						System.out.println("Please enter the movie that you would like to remove : ");
+						String delmovie = new String();
+						delmovie = sc.nextLine();
+						int q = 0;
+						boolean key1 = false;
+	    			/* to get the index of the object in the Movie's array */
+						while (!key1) 
+						{
+							for (q = 0; q < movies2.size(); q++) {
+								if (movies2.get(q).getTitle().equals(delmovie)) {
+									key1 = true;
+									break;
+								}
+							}
+							if (key1 == false){
+								System.out.println("Invalid movie entered, Please try again! ");
+								System.out.println("Please enter the movie that you would like to remove : ");
+								delmovie = sc.nextLine();
 							}
 						}
-						if (key1 == false){
-							System.out.println("Invalid movie entered, Please try again! ");
-							System.out.println("Please enter the movie that you would like to remove : ");
-							delmovie = sc.nextLine();
+						movies2.remove(q);
+						Storage.writeMovieList(movies2);
+						System.out.println("Movie has been successfully removed");
+						break;
+					
+					case "2" : 
+						movies2 = Storage.getMovieList();
+						cineplexlist2 = Storage.getCineplexList();
+						String delmovie1;
+						System.out.println(movies2);					
+						System.out.println("Please enter the movie that you would like to remove its movie listing: ");
+						delmovie1 = sc.nextLine();
+						int delcineplex;
+						int delcinema;
+						String delshowing;
+						int w = 0;
+						boolean key2 = false;
+						/* to get the index of the object in the Movie's array */
+						while (!key2) 
+						{
+							for (w = 0; w < movies2.size(); w++) {
+								if (movies2.get(w).getTitle().equals(delmovie1)) {
+									key2 = true;
+									break;
+								}
+							}
+							if (key2 == false){
+								System.out.println("Invalid movie entered, Please try again! ");
+								System.out.println("Please enter the movie that you would like to remove : ");
+								delmovie1 = sc.nextLine();
+							}
 						}
-					}
-					movies2.remove(q);
-					Storage.writeMovieList(movies2);
-					System.out.println("Movie has been successfully removed");
-					break;
-				}
+						System.out.println("Movie found! Movie listings are as follow : ");
+						movies2.get(w).showMovieListings();
+						System.out.println("Select the movie listing that you would like to delete");
+						while (true) {
+							while(true) {
+								System.out.println("Please choose the cineplex that the movie is currently in : ");
+								System.out.println("1 : Cineplex 1 " );
+								System.out.println("2 : Cineplex 2 ");
+								System.out.println("3 : Cineplex 3 " );
+								delcineplex = sc.nextInt();
+								if (delcineplex == 1 || delcineplex == 2|| delcineplex==3)
+									break;
+								else 
+									System.out.println("Invalid value entered.Please try again!");
+							}	
+							
+							/* dummy scanner */
+							a= sc.nextLine();
+							
+							while(true) {
+								System.out.println("Please choose the cinema that the movie is currently in : ");
+								System.out.println("1 : IMAX 1 " );
+								System.out.println("2 : IMAX 2 ");
+								System.out.println("3 : IMAX 3 " );
+								delcinema = sc.nextInt();
+								if (delcinema == 1 || delcinema == 2|| delcinema ==3)
+									break;
+								else 
+								System.out.println("Invalid value entered.Please try again!");
+							}	
+							/* dummy scanner */
+							a= sc.nextLine();
+						
+							System.out.println("Please enter the movie showing time in this format : eg . YYYY-DD-MM | 20:00" );
+							delshowing = sc.nextLine();
+							
+							int c = 0;
+							int y = 0;
+							/* search through all movie listing */
+							/* search through all movie listing */
+							for (y = 0; y< movies2.get(j).getAllMovieListing().size(); y++)
+							{
+								/* check for same cineplex name to enter inner for loop */
+								if (movies2.get(j).getMovieListing(y).getCineplexName().equals(cineplexlist2.get(delcineplex-1).getName())) 
+								{
+									/* check which of the 3 cinemas */
+								
+										if (movies2.get(j).getMovieListing(y).getCinemaName().equals(cineplexlist2.get(delcineplex-1).getCinema(delcinema-1).getName()))	
+											if (movies2.get(j).getMovieListing(y).getShowing().equals(delshowing)) {
+												System.out.println("Movielisting found!");
+												movies2.get(j).getAllMovieListing().remove(y);
+												c = 1;
+												break;
+										
+				
+									}
+								}
+							}
+							if (c != 1)
+								System.out.println("Selected Movielisting do not exist! ");
+							else if (c == 1){
+								break;}
+							
+
+						}
+					
+					
+					
 				case "5": {
 					//order by sales or rating
 	    			System.out.println("1 : By Sales ");
@@ -695,9 +802,13 @@ public class Driver {
 			}
 		}
 
-	}
 
+			}
+		}
+	}
 }
+	
+
 
 
 
