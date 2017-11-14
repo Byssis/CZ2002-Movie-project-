@@ -160,9 +160,7 @@ public class Movie implements Serializable {
     public MovieStatus getStatus(){
     	return this.status;
     }
-    public void setMovieClass(String c) {
-    	this.movieclassification = c;
-    }
+   
     
     /**
      * String representation for the movie
@@ -385,6 +383,12 @@ public class Movie implements Serializable {
         for (int q = 0; q < movielistings.size(); q++) {
             if (now.compareTo(movielistings.get(q).getShowing()) < 0)
                 System.out.println((option++) + ": " + movielistings.get(q));
+        }
+    }
+    
+    public void showAdminMovieListings() {
+        for (int q = 0; q < movielistings.size(); q++) {
+                System.out.println((q) + ": " + movielistings.get(q));
         }
     }
 

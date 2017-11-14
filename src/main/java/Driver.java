@@ -264,9 +264,9 @@ public class Driver {
 				}
     			/* Input the start and end date of the movie */
 				while(true){
-					System.out.println("Enter the start date in the format YYYY MM DD");
+					System.out.println("Enter the start date in the format YYYY-MM-DD");
 					startDate = sc.nextLine();
-					System.out.println("Enter the end date in the format YYYY MM DD");
+					System.out.println("Enter the end date in the format YYYY-MM-DD");
 					endDate = sc.nextLine();
 				if(startDate.compareTo(endDate)<0 && isValidDate(startDate) && isValidDate(endDate)){
 					break;
@@ -322,7 +322,7 @@ public class Driver {
 				newshowing = sc.nextLine();
 				ArrayList<Cineplex> cineplexlist = new ArrayList<Cineplex>();
 				cineplexlist = Storage.getCineplexList();
-				newmovie.addMovieListing(cineplexlist.get(newcineplex), cineplexlist.get(newcineplex).getCinema(newcinema), newshowing);
+				newmovie.addMovieListing(cineplexlist.get(newcineplex-1), cineplexlist.get(newcineplex-1).getCinema(newcinema-1), newshowing);
 				ArrayList<Movie> movies = new ArrayList<Movie>();
 				movies = Storage.getMovieList();
 				movies.add(newmovie);
@@ -702,7 +702,7 @@ public class Driver {
 							}
 						}
 						System.out.println("Movie found! Movie listings are as follow : ");
-						movies2.get(w).showMovieListings();
+						movies2.get(w).showAdminMovieListings();
 						System.out.println("Select the movie listing that you would like to delete");
 						while (true) {
 							while(true) {
@@ -751,7 +751,6 @@ public class Driver {
 										if (movies2.get(j).getMovieListing(y).getCinemaName().equals(cineplexlist2.get(delcineplex-1).getCinema(delcinema-1).getName()))	
 											if (movies2.get(j).getMovieListing(y).getShowing().equals(delshowing)) {
 												System.out.println("Movielisting found!");
-												movies2.get(j).getAllMovieListing().remove(y);
 												c = 1;
 												break;
 										
@@ -766,7 +765,6 @@ public class Driver {
 							
 
 						}
-					
 					
 					
 				case "5": {
