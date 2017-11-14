@@ -193,7 +193,7 @@ public class UserApp {
                 default:            // Error
                     return true;
             }
-        } while (c > 4);
+        } while (c < 4);
         return false;
     }
 
@@ -265,7 +265,12 @@ public class UserApp {
      * @see Movie
      */
     private static boolean showListing(Movie movie) {
-        movie.showMovieListings();
+        if(movie.showMovieListings()) {
+            System.out.println("No valid movie listings!");
+            UIFunctions.waitForUser();
+            UIFunctions.clear();
+            return false;
+        }
         Scanner sc = new Scanner(System.in);
         System.out.print("Choose movie listing: ");
         int c = sc.nextInt();
