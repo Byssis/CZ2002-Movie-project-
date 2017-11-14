@@ -387,7 +387,7 @@ public class Movie implements Serializable {
     
     public void showAdminMovieListings() {
         for (int q = 0; q < movielistings.size(); q++) {
-                System.out.println((q) + ": " + movielistings.get(q));
+                System.out.println((q+1) + ": " + movielistings.get(q));
         }
     }
 

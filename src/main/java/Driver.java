@@ -329,7 +329,12 @@ public class Driver {
     			/* Adding it into movie's dataset */
 				Storage.writeMovieList(movies);
 				System.out.println("New movie has been successfully added");
-				System.out.println(movies);
+				int l;
+				for (l=0;l<movies.size();l++)
+				{
+					System.out.println(movies.get(l).toString());
+					System.out.println();
+				}
 				System.out.println();
 				break;
 				
@@ -338,7 +343,13 @@ public class Driver {
 					String updatemovie = new String();
 					ArrayList<Movie> movies1 = new ArrayList<Movie>();
 					movies1 = Storage.getMovieList();
-					System.out.println(movies1);
+					int n;
+					for (n=0;n<movies1.size();n++)
+					{
+						System.out.println(movies1.get(n).toString());
+						System.out.println();
+					}
+					
 					boolean key = true;
 					while (true) {
 						while (key) {
@@ -639,6 +650,7 @@ public class Driver {
 					ArrayList<Movie> movies2 = new ArrayList<Movie>();
 					ArrayList<Cineplex> cineplexlist2 = new ArrayList<Cineplex>();
 					String option3;
+					movies2 = Storage.getMovieList();
 					System.out.println("What would u like to remove?");
 					System.out.println("1 : Movie");
 					System.out.println("2 : Movielisting");
@@ -648,8 +660,13 @@ public class Driver {
 					{
 
 					case "1" : 
-						movies2 = Storage.getMovieList();
-						System.out.println(movies2);					
+						
+						int m;
+						for (m=0;m<movies2.size();m++)
+						{
+							System.out.println(movies2.get(m).getTitle());
+							System.out.println();
+						}					
 						System.out.println("Please enter the movie that you would like to remove : ");
 						String delmovie = new String();
 						delmovie = sc.nextLine();
@@ -676,10 +693,22 @@ public class Driver {
 						break;
 					
 					case "2" : 
-						movies2 = Storage.getMovieList();
+						
 						cineplexlist2 = Storage.getCineplexList();
 						String delmovie1;
-						System.out.println(movies2);					
+						int k;
+						for (k=0;k<movies2.size();k++)
+						{
+							if (k==0) {
+							System.out.print("Title : " + movies2.get(k).getTitle());
+							System.out.print( "||");
+							}
+							else {
+							System.out.print(movies2.get(k).getTitle());
+							System.out.print( "||");
+							}
+						}			
+						System.out.println("");
 						System.out.println("Please enter the movie that you would like to remove its movie listing: ");
 						delmovie1 = sc.nextLine();
 						int delcineplex;
@@ -742,17 +771,19 @@ public class Driver {
 							int y = 0;
 							/* search through all movie listing */
 							/* search through all movie listing */
-							for (y = 0; y< movies2.get(j).getAllMovieListing().size(); y++)
+							for (y = 0; y< movies2.get(w).getAllMovieListing().size(); y++)
 							{
 								/* check for same cineplex name to enter inner for loop */
-								if (movies2.get(j).getAdminMovieListing(y).getCineplexName().equals(cineplexlist2.get(delcineplex-1).getName())) 
+								if (movies2.get(w).getAdminMovieListing(y).getCineplexName().equals(cineplexlist2.get(delcineplex-1).getName())) 
 								{
 									/* check which of the 3 cinemas */
 								
-										if (movies2.get(j).getAdminMovieListing(y).getCinemaName().equals(cineplexlist2.get(delcineplex-1).getCinema(delcinema-1).getName()))	
-											if (movies2.get(j).getAdminMovieListing(y).getShowing().equals(delshowing)) {
+										if (movies2.get(w).getAdminMovieListing(y).getCinemaName().equals(cineplexlist2.get(delcineplex-1).getCinema(delcinema-1).getName()))	
+											if (movies2.get(w).getAdminMovieListing(y).getShowing().equals(delshowing)) {
 												System.out.println("Movielisting found!");
-												movies2.get(j).getAllMovieListing().remove(y);
+												movies2.get(w).getAllMovieListing().remove(y);
+												Storage.writeMovieList(movies2);
+												System.out.println("Movielisting has been deleted");
 												c = 1;
 												break;
 										
@@ -768,6 +799,7 @@ public class Driver {
 
 						}
 					}
+					break;
 				}
 					
 					
