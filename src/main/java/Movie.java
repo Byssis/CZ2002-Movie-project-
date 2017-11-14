@@ -154,7 +154,9 @@ public class Movie implements Serializable {
     public MovieStatus getStatus(){
     	return this.status;
     }
-    
+    public void setMovieClass(String c) {
+    	this.movieclassification = c;
+    }
     
     /**
      * String representation for the movie
