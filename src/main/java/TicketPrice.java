@@ -61,8 +61,8 @@ public class TicketPrice
 	
 	private boolean isPublicHol(){
 		Date now = new Date();
-		 SimpleDateFormat dateFormatter = new SimpleDateFormat("EEEE, MMMM d");
-		date = dateFormatter.format(now);	
+		SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+		date = dateFormatter.format(now);
 		ArrayList<String> hols = Storage.getHolidays();						//read in public holidays
 		if(hols.contains(date)){
 			return true;
