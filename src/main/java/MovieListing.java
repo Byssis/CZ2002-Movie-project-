@@ -49,7 +49,7 @@ public class MovieListing implements Serializable {
     	cineplexlist = Storage.getCineplexList();
     	int i;
     	for (i=0; i<3 ;i++) {
-    		if (cineplexlist.get(i).equals(cineplex))
+    		if (cineplexlist.get(i).getName().equals(cineplex))
     			this.cineplex = cineplexlist.get(i);
     	}
     	
@@ -59,10 +59,10 @@ public class MovieListing implements Serializable {
     {
     	ArrayList<Cineplex> cineplexlist = new ArrayList<Cineplex>();
     	cineplexlist = Storage.getCineplexList();
-    	int i,k;
+    	int i;
     	for (i=0; i<3 ;i++) 
     	{
-    		if (cineplexlist.get(0).getCinema(i).equals(cinema))
+    		if (cineplexlist.get(0).getCinema(i).getName().equals(cinema))
     				this.cinema = cineplexlist.get(0).getCinema(i);
     	}
     	

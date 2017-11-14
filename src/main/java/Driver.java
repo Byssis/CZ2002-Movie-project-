@@ -17,9 +17,18 @@ public class Driver {
 		}
 		return true;
 	}
-
+	
 	public static void main(String args[]) {
 
+
+		/*Date now = new Date();
+		SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+		String date = dateFormatter.format(now);
+		System.out.println(date);
+		*/
+	     
+		ArrayList<Movie> movies5 = new ArrayList<Movie>(); 
+		movies5 = Storage.getMovieList();
 
 		//ArrayList<String> hols = Storage.getHolidays();						//read in public holidays
 
@@ -178,10 +187,9 @@ public class Driver {
 							System.out.println("3 - Back to Main Menu");
 							opt = sc.nextLine();
 							if (opt.equals("1")) {//remove holiday
-								a = sc.nextLine();
 								String holtodelete;
 								while (true) {
-									System.out.println("Enter the new holiday in the format Day of Week, Month Day. eg. Monday, May 1");
+									System.out.println("Enter the holiday to delete in the format YYYY-MM-DD");
 									holtodelete = sc.nextLine();
 									if (!hols.contains(holtodelete)) {
 										System.out.println("Holiday does not exist! Try again!");
@@ -195,7 +203,7 @@ public class Driver {
 							} else if (opt.equals("2")) {
 								String newhol;
 								while (true) {
-									System.out.println("Enter the new holiday in the format Day of Week, Month Day. eg. Monday, May 1");
+									System.out.println("Enter the new holiday in the format YYYY-MM-DD");
 									newhol = sc.nextLine();
 									if (hols.contains(newhol)) {
 										System.out.println("Holiday alreadys exists! Try again!");
@@ -255,11 +263,22 @@ public class Driver {
 						type = Type.BLOCKBUSTER;
 				}
     			/* Input the start and end date of the movie */
-				System.out.println("Enter the start date in the format YYYY MM DD");
-				startDate = sc.nextLine();
-				System.out.println("Enter the end date in the format YYYY MM DD");
-				endDate = sc.nextLine();
-				
+				while(true){
+					System.out.println("Enter the start date in the format YYYY MM DD");
+					startDate = sc.nextLine();
+					System.out.println("Enter the end date in the format YYYY MM DD");
+					endDate = sc.nextLine();
+				if(startDate.compareTo(endDate)<0 && isValidDate(startDate) && isValidDate(endDate)){
+					break;
+				}		
+					if(!isValidDate(startDate)||!isValidDate(endDate)){
+						System.out.println("Invalid date error!");
+					}else{
+						System.out.println("End date must be later than start date!");
+					}
+				}
+					
+			
 				System.out.println("Enter a short movie abstract : ");
 				movieabstract = sc.nextLine();
 				
@@ -299,6 +318,7 @@ public class Driver {
 				}
 				
 				System.out.println("Please enter the showing time in this format : eg . YYYY-DD-MM | 20:00" );
+				a = sc.nextLine();
 				newshowing = sc.nextLine();
 				ArrayList<Cineplex> cineplexlist = new ArrayList<Cineplex>();
 				cineplexlist = Storage.getCineplexList();
@@ -343,10 +363,12 @@ public class Driver {
 						System.out.println(" 4 : Movie's Type");
 						System.out.println(" 5 : Movie's start date");
 						System.out.println(" 6 : Movie's end date");
-						System.out.println(" 7 : Movie's casts");
+						System.out.println(" 7 : Movie's cast");
 						System.out.println(" 8 : Movie's abstract ");
 						System.out.println(" 9 : Movielisting");
-						System.out.println("10 : Quit");
+						System.out.println("10 : Movie's showing status");
+						System.out.println("11 : Movie's classification");
+						System.out.println("12 : Quit");
 
 						String editchoice;
 
@@ -393,21 +415,44 @@ public class Driver {
 								break;
 							}
 							case "5": {
+							
+								while(true){
 								System.out.println("Please input the Movie's new start date (in YYYY-MM-DD) : ");
 								String newstartDate = new String();
 								newstartDate = sc.nextLine();
-								movies1.get(j).setStartDate(newstartDate);
-								Storage.writeMovieList(movies1);
-								System.out.println("Movie's start date has been successfully updated");
+								if(isValidDate(newstartDate) && newstartDate.compareTo(movies1.get(j).getEndDate())<0){
+									movies1.get(j).setStartDate(newstartDate);
+									Storage.writeMovieList(movies1);
+									System.out.println("Movie's start date has been successfully updated");
+									break;}
+								
+								if(!isValidDate(newstartDate)){
+									System.out.println("Invalid date!");
+								}else{
+									System.out.println("Start date must be earlier than end date!");
+								}
+								
+							}
+								
 								break;
 							}
 							case "6": {
-								System.out.println("Please input the Movie's new end date (in YYYY-MM-DD) : ");
-								String newendDate = new String();
-								newendDate = sc.nextLine();
-								movies1.get(j).setEndDate(newendDate);
-								Storage.writeMovieList(movies1);
-								System.out.println("Movie's end date has been successfully updated");
+								
+								while(true){
+									System.out.println("Please input the Movie's new end date (in YYYY-MM-DD) : ");
+									String newendDate = new String();
+									newendDate = sc.nextLine();
+									if(isValidDate(newendDate) && newendDate.compareTo(movies1.get(j).getStartDate())>0){
+										movies1.get(j).setStartDate(newendDate);
+										Storage.writeMovieList(movies1);
+										System.out.println("Movie's end date has been successfully updated");
+										break;}
+									if(!isValidDate(newendDate)){
+										System.out.println("Invalid date!");
+									}else{
+										System.out.println("End date must be later than start date!");
+									}
+								}
 								break;
 							}
 							case "7": {
@@ -487,28 +532,30 @@ public class Driver {
 									
 									int c = 0;
 									/* search through all movie listing */
+									/* search through all movie listing */
 									for (z = 0; z< movies1.get(j).getAllMovieListing().size(); z++)
 									{
 										/* check for same cineplex name to enter inner for loop */
-										if (movies1.get(j).getMovieListing(z).getCineplexName().equals(cineplexlist1.get(oldcineplex-1)))
+										if (movies1.get(j).getMovieListing(z).getCineplexName().equals(cineplexlist1.get(oldcineplex-1).getName())) 
 										{
 											/* check which of the 3 cinemas */
-											for (y=0;y<3;y++) 
-											{
-												if (movies1.get(j).getMovieListing(z).getCinemaName().equals(cineplexlist1.get(oldcineplex-1).getCinema(oldcinema-1)))
+										
+												if (movies1.get(j).getMovieListing(z).getCinemaName().equals(cineplexlist1.get(oldcineplex-1).getCinema(oldcinema-1).getName()))	
 													if (movies1.get(j).getMovieListing(z).getShowing().equals(oldshowing)) {
 														System.out.println("Movielisting found!");
 														c = 1;
 														break;
-													}
-															
+												
+						
 											}
 										}
 									}
 									if (c != 1)
 										System.out.println("Selected Movielisting do not exist! ");
-									else if (c == 1)
-										break;
+									else if (c == 1){
+										break;}
+									
+		
 								}
 								
 								
@@ -536,9 +583,10 @@ public class Driver {
 									}
 								
 								System.out.println("Please enter the showing time in this format : eg . YYYY-DD-MM | 20:00" );
+								a = sc.nextLine();
 								updateshowing = sc.nextLine();
-								movies1.get(j).getMovieListing(z).setCineplex(cineplexlist1.get(updatecinema-1).getName());;
-								movies1.get(j).getMovieListing(z).setCinema(cineplexlist1.get(updatecinema-1).getCinema(updatecinema-1).getName());;
+								movies1.get(j).getMovieListing(z).setCineplex(cineplexlist1.get(updatecineplex-1).getName());
+								movies1.get(j).getMovieListing(z).setCinema(cineplexlist1.get(updatecineplex-1).getCinema(updatecinema-1).getName());
 								movies1.get(j).getMovieListing(z).setShowing(updateshowing);
 								System.out.println("Movielisting has been successfully updated! ");
 								Storage.writeMovieList(movies1);
@@ -546,10 +594,40 @@ public class Driver {
 								}
 							
 							case "10":{
+								String opt;
+								while(true){
+									
+									System.out.println("What do you want to change the showing status to?");
+									System.out.println("1 - Coming soon");
+									System.out.println("2 - Preview");
+									System.out.println("3 - Now showing");
+									System.out.println("4 - End of showing");
+									opt = sc.nextLine();
+									if(opt.equals("1")||opt.equals("2")||opt.equals("3")||opt.equals("4")){
+										
+										break;
+									}
+										 
+								}
+								
+								movies1.get(j).setStatus(opt);
+								System.out.println("Movie's status has been successfully updated! ");
+								Storage.writeMovieList(movies1);
+								
+								
+							}
+							case "11":{
+								
+								System.out.println("Enter the movie classification (eg. PG/NC16/M18/R21) : ");
+								String c = sc.nextLine();
+								movies1.get(j).setMovieClass(c);
+								System.out.println("Movie's classification has been successfully updated! ");
+								Storage.writeMovieList(movies1);
 								break;
 							}
-							
-								
+							case "12":{
+								break;
+							}	
 							
 						}
 						break;
@@ -557,8 +635,6 @@ public class Driver {
 					break;
 				}
 				case "4": {
-    			/* dummy scanner */
-					a = sc.nextLine();
 					ArrayList<Movie> movies2 = new ArrayList<Movie>();
 					movies2 = Storage.getMovieList();
 					System.out.println(movies2);
@@ -566,17 +642,20 @@ public class Driver {
 					String delmovie = new String();
 					delmovie = sc.nextLine();
 					int q = 0;
-					boolean key1 = true;
+					boolean key1 = false;
     			/* to get the index of the object in the Movie's array */
-					while (key1) {
+					while (!key1) {
 						for (q = 0; q < movies2.size(); q++) {
 							if (movies2.get(q).getTitle().equals(delmovie)) {
-								key1 = false;
+								key1 = true;
 								break;
 							}
 						}
-						if (key1 == true)
+						if (key1 == false){
 							System.out.println("Invalid movie entered, Please try again! ");
+							System.out.println("Please enter the movie that you would like to remove : ");
+							delmovie = sc.nextLine();
+						}
 					}
 					movies2.remove(q);
 					Storage.writeMovieList(movies2);

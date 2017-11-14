@@ -116,6 +116,20 @@ public class Storage {
         /*
             For test
          */
+    	ArrayList<String> holidays = new ArrayList<String>();
+    	holidays.add("2017-01-01");
+    	holidays.add("2017-01-28");
+    	holidays.add("2017-01-29");
+    	holidays.add("2017-04-14");
+    	holidays.add("2017-05-01");
+    	holidays.add("2017-05-10");
+    	holidays.add("2017-06-25");
+    	holidays.add("2017-08-09");
+    	holidays.add("2017-09-01");
+    	holidays.add("2017-10-18");
+    	holidays.add("2017-12-25");
+    	writeHolidays(holidays);
+    	
         ArrayList<Movie> movies = new ArrayList<Movie>();
         ArrayList<String> cast = new ArrayList<String>();
         ArrayList<Cineplex> cineplexlist = new ArrayList<Cineplex>();
@@ -141,11 +155,11 @@ public class Storage {
         writeCineplexList(cineplexlist);
         // put 3 cinema into array then add into cinplex 1,2 and 3 each //
         
-        movies.add(new Movie("Die Hard", "A director", "90", cast, Type.BLOCKBUSTER, "2017-05-12", "2017-06-20","Abstract 1","PG"));
-        movies.add(new Movie("Finding Nemo", "B director", "100", cast, Type.BLOCKBUSTER, "2017-10-10", "2017-11-20","Astract 2","PG"));
-        movies.add(new Movie("Planet of the apes", "C director", "120", cast, Type.BLOCKBUSTER, "2017-20-11", "2017-05-20","Abstract 3","PG"));
-        movies.add(new Movie("Spiderman", "D director", "130", cast, Type.BLOCKBUSTER, "2017-17-11", "2017-03-03","Abstract 4","PG"));
-        movies.add(new Movie("Superman", "E director", "140", cast, Type.BLOCKBUSTER, "2017-01-01", "2017-02-02","Abstract 5","PG"));
+        movies.add(new Movie("Die Hard", "A director", "90", cast, Type.BLOCKBUSTER, "2017-11-11", "2017-12-12","Abstract 1","PG"));
+        movies.add(new Movie("Finding Nemo", "B director", "100", cast, Type.BLOCKBUSTER, "2017-11-11", "2017-12-12","Astract 2","PG"));
+        movies.add(new Movie("Planet of the apes", "C director", "120", cast, Type.BLOCKBUSTER, "2017-11-11", "2017-12-12","Abstract 3","PG"));
+        movies.add(new Movie("Spiderman", "D director", "130", cast, Type.BLOCKBUSTER, "2017-11-20", "2017-12-12","Abstract 4","PG"));
+        movies.add(new Movie("Superman", "E director", "140", cast, Type.BLOCKBUSTER, "2017-11-22", "2017-12-12","Abstract 5","PG"));
         movies.get(0).addMovieListing(cineplex1, cineplex1.getCinema(0) ,  "2017-05-12 | 19:00");
         movies.get(0).addMovieListing(cineplex1, cineplex1.getCinema(1) ,  "2017-05-12 | 19:00");
         movies.get(0).addMovieListing(cineplex1, cineplex1.getCinema(2) ,  "2017-05-12 | 19:00");

@@ -9,7 +9,34 @@ import java.text.*;
  * Created by Albin on 2017-10-17.
  */
 public class Movie implements Serializable {
-    /*
+    
+	
+	private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	/**
+	 * 
+	 * @param start
+	 * @param end
+	 * @return
+	 */
+	public static long getDayCount(String start, String end) {
+	  long diff = -1;
+	  try {
+	    Date dateStart = simpleDateFormat.parse(start);
+	    Date dateEnd = simpleDateFormat.parse(end);
+
+	    //time is always 00:00:00 so rounding should help to ignore the missing hour when going from winter to summer time as well as the extra hour in the other direction
+	    diff = Math.round((dateEnd.getTime() - dateStart.getTime()) / (double) 86400000);
+	  } catch (Exception e) {
+	    //handle the exception according to your own situation
+	  }
+	  return diff;
+	}
+
+	/*
+     	Status of movie
+     */
+	private MovieStatus status;
+	/*
         Title of movie
      */
     private String title;
@@ -90,8 +117,45 @@ public class Movie implements Serializable {
         reviews = new ArrayList<Review>();
         movielistings = new ArrayList<MovieListing>();
         this.movieAbstract = movieAbstract;
+        findStatus();
     }
-
+    
+    //findStatus
+    public void findStatus(){
+    	Date now = new Date();
+		SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+		String date = dateFormatter.format(now);
+		if(date.compareTo(startDate)>0 && date.compareTo(endDate)<0){
+			this.status = MovieStatus.NOW_SHOWING;
+		}else if(date.compareTo(endDate)>0){
+			this.status = MovieStatus.END_OF_SHOWING;
+		}else if(getDayCount(date,startDate)>7){
+			this.status = MovieStatus.COMING_SOON;
+		}else{
+			this.status = MovieStatus.PREVIEW;
+		}	
+    }
+    
+    //setStatus
+    public void setStatus(String option){
+    	if(option.equals("1"))
+			this.status = MovieStatus.PREVIEW;
+    	else if (option.equals("2"))
+			this.status = MovieStatus.COMING_SOON;
+    	else if (option.equals("3"))
+    		this.status = MovieStatus.NOW_SHOWING;
+    	else{
+    		this.status = MovieStatus.END_OF_SHOWING;
+    	}
+    	
+    }
+    
+    //getStatus
+    public MovieStatus getStatus(){
+    	return this.status;
+    }
+    
+    
     /**
      * String representation for the movie
      *
@@ -112,6 +176,23 @@ public class Movie implements Serializable {
         for (String c : this.cast) {                             // Go through all cast names
             out.append("\t\t" + c);                         // Append cast
         }
+        out.append("\nStatus : \t");
+        switch(status){
+        	case PREVIEW:
+        		out.append("PREVIEW");
+        		break;
+        	case COMING_SOON:
+        		out.append("COMING SOON");
+        		break;        	
+        	case NOW_SHOWING:
+        		out.append("NOW SHOWING");
+        		break;
+        	case END_OF_SHOWING:
+        		out.append("END OF SHOWING");
+        		break;
+        
+        }
+        
         out.append("\nType:\t\t");                              // Append type of movie
         switch (type) {
             case ThreeD:
@@ -246,24 +327,24 @@ public class Movie implements Serializable {
     /* Set the start date of the movie */
     public void setStartDate(String startdate) {
 
-    	if(isValidDate(startdate))
-    	{
-    		startDate = startdate;
-    	}
-    	else 
-    		System.out.println("Invalid date or date format entered");
+    		this.startDate = startdate;
+    		findStatus();
     }   	
     
     /* Set the end date of the movie */
     public void setEndDate(String enddate) {
-    	if(isValidDate(enddate))
-    	{
-    		if (this.startDate.compareTo(enddate)<= 0)
     			this.endDate = enddate;
-    	}
-    	else
-    		System.out.println("Invalid date or date format entered");
+    			findStatus();
     }
+    
+    public String getStartDate(){
+    	return startDate;
+    }
+    
+    public String getEndDate(){
+    	return endDate;
+    }
+    
     
     /* Returns new movie abstract */
     public String getMovieAbstract() {
