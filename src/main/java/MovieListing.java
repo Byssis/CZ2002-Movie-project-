@@ -102,6 +102,7 @@ public class MovieListing implements Serializable {
         sb.append(this.cineplex.getName());
         sb.append("\n\tCinema:\t\t");
         sb.append(this.cinema.getName());
+        sb.append(" "+this.cinema.getTypeString());
         sb.append("\n\tTime:\t\t");
         sb.append(this.showing);
 

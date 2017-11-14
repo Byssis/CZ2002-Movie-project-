@@ -455,5 +455,19 @@ public class Movie implements Serializable {
             return "NA";
         return "" +this.averageRating();
     }
+
+    public String getStatusString() {
+        MovieStatus status = this.getStatus();
+        if(status == MovieStatus.COMING_SOON)
+            return "Coming Soon";
+        if(status == MovieStatus.NOW_SHOWING)
+            return "Now showing";
+        if(status == MovieStatus.PREVIEW)
+            return "Preview";
+        if(status == MovieStatus.END_OF_SHOWING)
+            return "End of showing";
+
+        return "";
+    }
 }
 
