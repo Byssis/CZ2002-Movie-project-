@@ -378,12 +378,8 @@ public class Movie implements Serializable {
      * Show all movieListings in stdout
      */
     public void showMovieListings() {
-        for (int i = 0; i < movielistings.size(); i++) {
-            System.out.println((i + 1) + ": " + movielistings.get(i));
-        }
         String now = getToDaysDateString();
         int option = 1;
-        
         for (int q = 0; q < movielistings.size(); q++) {
             if (now.compareTo(movielistings.get(q).getShowing()) < 0)
                 System.out.println((option++) + ": " + movielistings.get(q));
@@ -408,7 +404,7 @@ public class Movie implements Serializable {
         sb.append(((hour < 10) ? "0" : "") + hour);
         sb.append(":");
         sb.append(((minutes < 10) ? "0" : "") + hour);
-        System.out.println("DEBUG: " + sb.toString());
+        //System.out.println("DEBUG: " + sb.toString());
         return sb.toString();
     }
 
