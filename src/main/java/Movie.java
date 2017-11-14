@@ -155,13 +155,10 @@ public class Movie implements Serializable {
     	}
     	
     }
-    
+
     //getStatus
     public MovieStatus getStatus(){
     	return this.status;
-    }
-    public void setMovieClass(String c) {
-    	this.movieclassification = c;
     }
     
     /**
@@ -379,13 +376,14 @@ public class Movie implements Serializable {
     /**
      * Show all movieListings in stdout
      */
-    public void showMovieListings() {
+    public boolean showMovieListings() {
         String now = getToDaysDateString();
         int option = 1;
         for (int q = 0; q < movielistings.size(); q++) {
             if (now.compareTo(movielistings.get(q).getShowing()) < 0)
                 System.out.println((option++) + ": " + movielistings.get(q));
         }
+        return (option == 1) ? true : false;
     }
 
     private static String getToDaysDateString() {
@@ -418,7 +416,14 @@ public class Movie implements Serializable {
      * @see MovieListing
      */
     public MovieListing getMovieListing(int index) {
-        return movielistings.get(index);
+        String now = getToDaysDateString();
+        int option = 1;
+        int q = 0;
+        for (; q < movielistings.size(); q++) {
+            if (now.compareTo(movielistings.get(q).getShowing()) < 0 && option++ == index)
+                break;
+        }
+        return movielistings.get(q);
     }
     
     public ArrayList<MovieListing> getAllMovieListing()
