@@ -120,12 +120,6 @@ public class Movie implements Serializable {
         findStatus();
     }
     
-    //setmovieclassification
-    public void setMovieClass(String c){
-    	this.movieclassification = c;
-    }
-    
-    
     //findStatus
     public void findStatus(){
     	Date now = new Date();
