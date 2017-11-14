@@ -160,11 +160,6 @@ public class Movie implements Serializable {
     public MovieStatus getStatus(){
     	return this.status;
     }
-<<<<<<< HEAD
-   
-=======
->>>>>>> be796ac412e3d21245b90be7a8ebf6743a9cde41
-    
     /**
      * String representation for the movie
      *
@@ -434,6 +429,10 @@ public class Movie implements Serializable {
                 break;
         }
         return movielistings.get(q);
+    }
+    
+    public MovieListing getAdminMovieListing(int index) {
+       return movielistings.get(index);
     }
     
     public ArrayList<MovieListing> getAllMovieListing()

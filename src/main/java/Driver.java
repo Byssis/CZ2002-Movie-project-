@@ -536,12 +536,12 @@ public class Driver {
 									for (z = 0; z< movies1.get(j).getAllMovieListing().size(); z++)
 									{
 										/* check for same cineplex name to enter inner for loop */
-										if (movies1.get(j).getMovieListing(z).getCineplexName().equals(cineplexlist1.get(oldcineplex-1).getName())) 
+										if (movies1.get(j).getAdminMovieListing(z).getCineplexName().equals(cineplexlist1.get(oldcineplex-1).getName())) 
 										{
 											/* check which of the 3 cinemas */
 										
-												if (movies1.get(j).getMovieListing(z).getCinemaName().equals(cineplexlist1.get(oldcineplex-1).getCinema(oldcinema-1).getName()))	
-													if (movies1.get(j).getMovieListing(z).getShowing().equals(oldshowing)) {
+												if (movies1.get(j).getAdminMovieListing(z).getCinemaName().equals(cineplexlist1.get(oldcineplex-1).getCinema(oldcinema-1).getName()))	
+													if (movies1.get(j).getAdminMovieListing(z).getShowing().equals(oldshowing)) {
 														System.out.println("Movielisting found!");
 														c = 1;
 														break;
@@ -585,11 +585,12 @@ public class Driver {
 								System.out.println("Please enter the showing time in this format : eg . YYYY-DD-MM | 20:00" );
 								a = sc.nextLine();
 								updateshowing = sc.nextLine();
-								movies1.get(j).getMovieListing(z).setCineplex(cineplexlist1.get(updatecineplex-1).getName());
-								movies1.get(j).getMovieListing(z).setCinema(cineplexlist1.get(updatecineplex-1).getCinema(updatecinema-1).getName());
-								movies1.get(j).getMovieListing(z).setShowing(updateshowing);
+								movies1.get(j).getAdminMovieListing(z).setCineplex(cineplexlist1.get(updatecineplex-1).getName());
+								movies1.get(j).getAdminMovieListing(z).setCinema(cineplexlist1.get(updatecineplex-1).getCinema(updatecinema-1).getName());
+								movies1.get(j).getAdminMovieListing(z).setShowing(updateshowing);
 								System.out.println("Movielisting has been successfully updated! ");
 								Storage.writeMovieList(movies1);
+								break;
 									
 								}
 							
@@ -744,13 +745,14 @@ public class Driver {
 							for (y = 0; y< movies2.get(j).getAllMovieListing().size(); y++)
 							{
 								/* check for same cineplex name to enter inner for loop */
-								if (movies2.get(j).getMovieListing(y).getCineplexName().equals(cineplexlist2.get(delcineplex-1).getName())) 
+								if (movies2.get(j).getAdminMovieListing(y).getCineplexName().equals(cineplexlist2.get(delcineplex-1).getName())) 
 								{
 									/* check which of the 3 cinemas */
 								
-										if (movies2.get(j).getMovieListing(y).getCinemaName().equals(cineplexlist2.get(delcineplex-1).getCinema(delcinema-1).getName()))	
-											if (movies2.get(j).getMovieListing(y).getShowing().equals(delshowing)) {
+										if (movies2.get(j).getAdminMovieListing(y).getCinemaName().equals(cineplexlist2.get(delcineplex-1).getCinema(delcinema-1).getName()))	
+											if (movies2.get(j).getAdminMovieListing(y).getShowing().equals(delshowing)) {
 												System.out.println("Movielisting found!");
+												movies2.get(j).getAllMovieListing().remove(y);
 												c = 1;
 												break;
 										
@@ -765,6 +767,8 @@ public class Driver {
 							
 
 						}
+					}
+				}
 					
 					
 				case "5": {
@@ -791,6 +795,7 @@ public class Driver {
 				}
 				case "6": {
 					System.out.println("Bye!");
+					break;
 
 				} //quit
 			}
@@ -799,12 +804,14 @@ public class Driver {
 				break;            //Quit program
 			}
 		}
-
-
-			}
-		}
 	}
 }
+
+
+			
+		
+	
+
 	
 
 

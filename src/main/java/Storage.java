@@ -153,7 +153,7 @@ public class Storage {
         cineplexlist.add(cineplex2);
         cineplexlist.add(cineplex3);
         writeCineplexList(cineplexlist);
-        // put 3 cinema into array then add into cinplex 1,2 and 3 each //
+        // put 3 cinema into array then add into cineplex 1,2 and 3 each //
         
         movies.add(new Movie("Die Hard", "A director", "90", cast, Type.BLOCKBUSTER, "2017-11-11", "2017-12-12","Abstract 1","PG"));
         movies.add(new Movie("Finding Nemo", "B director", "100", cast, Type.BLOCKBUSTER, "2017-11-11", "2017-12-12","Astract 2","PG"));
