@@ -47,7 +47,7 @@ public class Cinema implements Serializable {
      */
     public Cinema(Cinema cinema) {
         this.name = cinema.getName();
-        this.type = getType();
+        this.type = cinema.getType();
         this.seats = cinema.getSeats();
         this.cinemaCode = cinema.getCinemaCode();
     }
@@ -137,5 +137,11 @@ public class Cinema implements Serializable {
 
     public String getCinemaCode() {
         return cinemaCode;
+    }
+
+    public String getTypeString() {
+        if(this.getType() == CinemaType.PLATINUM)
+            return "Platinum";
+        return "";
     }
 }
