@@ -39,7 +39,7 @@ public class Booking implements Serializable {
         Date date = new Date();
         Calendar cal = Calendar.getInstance();
         StringBuilder sb = new StringBuilder();
-        sb.append(this.movieListing.getCinemaCode()+ "\n");
+        sb.append(this.movieListing.getCinemaCode());
         sb.append(cal.get(Calendar.YEAR));
         sb.append(cal.get(Calendar.MONTH));
         sb.append(cal.get(Calendar.DAY_OF_MONTH));
@@ -56,7 +56,7 @@ public class Booking implements Serializable {
     public String toString(){
         StringBuilder sb = new StringBuilder();
         sb.append("Tid:" + this.transactionID);
-        sb.append("Name:" + this.movieGoer.getName());
+        sb.append("\nName:" + this.movieGoer.getName());
         sb.append(", Movie:" + this.movieListing.getMovieTitle());
         sb.append(this.movieListing + "\n");
         for (Seat s: seats){

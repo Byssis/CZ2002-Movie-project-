@@ -11,8 +11,9 @@ public class UserApp {
     public static void main(String[] args) {
         int option;
         Scanner sc = new Scanner(System.in);
-
         do {
+            UIFunctions.clear();
+            UIFunctions.divider();
             System.out.println("User Menu: ");
             UIFunctions.divider();
             System.out.println("1: List all movies");
@@ -69,6 +70,7 @@ public class UserApp {
             Scanner sc = new Scanner(System.in);
             int i = 1;
             System.out.println("Title, " + " Movie Status, " +((rating) ? "Rating" : "Ticket Sales"));
+            UIFunctions.divider();
             for (Movie m : movies) {
                 System.out.println((i++) + ": " + m.getTitle() + ", " + m.getStatusString() +  ", " + ((rating) ? m.averageRatingStr() : m.getTicketSales()));
             }
@@ -76,6 +78,7 @@ public class UserApp {
             UIFunctions.divider();
             System.out.print("Enter option: ");
             int c = sc.nextInt();
+            UIFunctions.clear();
             if (c > 0 && c < movies.size()+1) {
                 //System.out.println(movies.get(c));
                 // Booking menu
@@ -156,6 +159,8 @@ public class UserApp {
         int c = 0;
         do {
             UIFunctions.divider();
+           // System.out.println("Movie menu");
+            //UIFunctions.divider();
             System.out.println(movie);
             UIFunctions.divider();
             int i = 1;
@@ -265,6 +270,9 @@ public class UserApp {
      * @see Movie
      */
     private static boolean showListing(Movie movie) {
+        UIFunctions.divider();
+        System.out.println(movie);
+        UIFunctions.divider();
         if(movie.showMovieListings()) {
             System.out.println("No valid movie listings!");
             UIFunctions.waitForUser();
@@ -272,8 +280,10 @@ public class UserApp {
             return false;
         }
         Scanner sc = new Scanner(System.in);
+        UIFunctions.divider();
         System.out.print("Choose movie listing: ");
         int c = sc.nextInt();
+        UIFunctions.clear();
         if (c > 0) // && c > #movieListings
             return booking(movie, movie.getMovieListing(c));
         return false;
@@ -289,8 +299,11 @@ public class UserApp {
      */
     private static boolean booking(Movie movie, MovieListing movieListing) {
         while (true) {
+            UIFunctions.divider();
             System.out.println(movie);
+            UIFunctions.divider();
             System.out.println(movieListing);
+            UIFunctions.divider();
             movieListing.displayCinema();
 
             Scanner sc = new Scanner(System.in);
@@ -301,6 +314,7 @@ public class UserApp {
             System.out.print("Enter option: ");
 
             int c = sc.nextInt();
+            UIFunctions.divider();
             if (c == 1) {
                 List<Character> rows;
                 List<Integer> setNrs;
@@ -355,14 +369,15 @@ public class UserApp {
      * @see UIFunctions
      */
     private static void payment(List<Character> rows, List<Integer> setNrs, MovieListing movieListing) {
+        UIFunctions.divider();
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter your name: ");
-        String name = sc.next();
-        System.out.println("Enter your email number: ");
-        String email = sc.next();
-        System.out.print("Enter your phone: ");
-
-        String phoneNumber = sc.next();
+        String name = sc.nextLine();
+        System.out.print("Enter your email: ");
+        String email = sc.nextLine();
+        System.out.print("Enter your phone nummer: ");
+        String phoneNumber = sc.nextLine();
+        UIFunctions.divider();
         List<MovieGoer> movieGoers = Storage.getUserList();
         MovieGoer user = findMovieGoer(name, movieGoers, phoneNumber, email);
         Seat[] seats = new Seat[rows.size()];
@@ -380,10 +395,11 @@ public class UserApp {
 
         user.addBooking(booking);
         Storage.writeUserList(movieGoers);
+        UIFunctions.divider();
         System.out.println("Payments done!");
         System.out.println(booking);
-        System.out.println("Press enter to continue...");
         UIFunctions.waitForUser();
+        UIFunctions.clear();
     }
 
     /**

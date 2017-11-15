@@ -160,10 +160,6 @@ public class Movie implements Serializable {
     public MovieStatus getStatus(){
     	return this.status;
     }
-<<<<<<< HEAD
-   
-=======
->>>>>>> be796ac412e3d21245b90be7a8ebf6743a9cde41
     
     /**
      * String representation for the movie
@@ -173,7 +169,7 @@ public class Movie implements Serializable {
     public String toString() {
         StringBuilder out = new StringBuilder();                // Stringbuilder to build out string
         System.out.println();
-        out.append("\nTitle:\t\t" + this.title + "\n");          // Append tittle
+        out.append("Title:\t\t" + this.title + "\n");          // Append tittle
         out.append("Rating:\t\t" + this.averageRatingStr() + "\n");
         out.append("Director:\t" + this.director + "\n");       // Append Director
         out.append("Abstract: \t" + this.movieAbstract + "\n" );
