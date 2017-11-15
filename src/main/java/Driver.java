@@ -286,23 +286,22 @@ public class Driver {
 					}
 				}
 					
-			
+				/* Input a short movie abstract */
 				System.out.println("Enter a short movie abstract : ");
 				movieabstract = sc.nextLine();
-				
+				/* Input the movie classification */
 				System.out.println("Enter the movie classification (eg. PG/NC16/M18/R21) : ");
 				classification = sc.nextLine();
-				/* Instantiating the movie object */
+				/* Instantiating the new movie object */
 				Movie newmovie = new Movie(title, director, duration, cast, type, startDate, endDate, movieabstract,classification);
+				/* Creating a new movie arraylist to retrieve and store from storage */
 				ArrayList<Movie> movies = new ArrayList<Movie>();
 				movies = Storage.getMovieList();
+				/* Add the new movie to the movielist that we have and then add to storage*/
 				movies.add(newmovie);
 				Storage.writeMovieList(movies);
-				
-    			/* Adding it into movie's dataset */
-				
 				System.out.println("New movie has been successfully added");
-				
+				/* Print all movies from list to show all movies including the one that is newly added */
 				int l;
 				for (l=0;l<movies.size();l++)
 				{
@@ -314,10 +313,12 @@ public class Driver {
 				
 
 				case "3": {
+					/* Retrieve and store movielist into movies1*/
 					String updatemovie = new String();
 					ArrayList<Movie> movies1 = new ArrayList<Movie>();
 					movies1 = Storage.getMovieList();
 					int n;
+					/* Print all movies from list for user to choose*/
 					for (n=0;n<movies1.size();n++)
 					{
 						System.out.println(movies1.get(n).toString());
@@ -340,7 +341,7 @@ public class Driver {
 							if (key == true)
 								System.out.println("Movie entered is invalid! Please try again!");
 						}
-
+						/* Prompt the admin to choose what to update*/
 						System.out.println("Movie found! What would u like to update for this movie? ");
 						System.out.println(" 1 : Movie's Title  ");
 						System.out.println(" 2 : Director's Name");
@@ -360,6 +361,7 @@ public class Driver {
 						editchoice = sc.nextLine();
 
 						switch (editchoice) {
+							/* Update the new title */
 							case "1": {
 								System.out.println("Please input the new movie title :  ");
 								String newtitle;
@@ -369,6 +371,7 @@ public class Driver {
 								System.out.println("Movie's title has been successfully updated ");
 								break;
 							}
+							/*Update the new director */
 							case "2": {
 								System.out.println("Please input the new Director's :  ");
 								String directname = new String();
@@ -378,6 +381,7 @@ public class Driver {
 								System.out.println("Director's name has been successfully updated ");
 								break;
 							}
+							/*Update the new movie's duration*/
 							case "3": {
 								System.out.println("Please input the new Movie's duration : ");
 								String newDuration = "0";
@@ -387,6 +391,7 @@ public class Driver {
 								System.out.println("Movie's duration has been successfully updated");
 								break;
 							}
+							/*Update the new movie's type */
 							case "4": {
 								System.out.println("Please input the new Movie's Type : ");
 								System.out.println("1 : TREED");
@@ -399,6 +404,7 @@ public class Driver {
 								System.out.println("Movie's Type has been successfully changed");
 								break;
 							}
+							/*Update the new movie start date */
 							case "5": {
 							
 								while(true){
@@ -421,6 +427,8 @@ public class Driver {
 								
 								break;
 							}
+							/*Update the new movie end date*/
+							/*If want to change both start and end date, need to change end date first due to compareto*/
 							case "6": {
 								
 								while(true){
@@ -440,14 +448,15 @@ public class Driver {
 								}
 								break;
 							}
+							/*Update the new cast name from old cast name*/
 							case "7": {
 								System.out.println("Please enter the cast name that you would like to update");
 								int k;
 								System.out.println(movies1.get(j).getCast());
 								String oldcastname = new String();
 								oldcastname = sc.nextLine();
-    				/* j is already the index of the movie in the movie arraylist */
-    				/* Use k to iterate in the cast list inside movie */
+								/* j is already the index of the movie in the movie arraylist */
+								/* Use k to iterate in the cast list inside movie */
 								for (k = 1; k < movies1.get(j).getCast().size(); k++) {
 									if (movies1.get(j).getCast().get(k).equals(oldcastname))
 										break;
@@ -461,6 +470,7 @@ public class Driver {
 								System.out.println("Cast's name has been updated successfully");
 								break;
 							}
+							/*Update the movie abstract*/
 							case "8":{
 								System.out.println(movies1.get(j).getMovieAbstract());
 								System.out.println("Please enter the new movie abstract : ");
