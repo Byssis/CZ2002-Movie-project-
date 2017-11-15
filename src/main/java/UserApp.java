@@ -327,7 +327,7 @@ public class UserApp {
                         System.out.println("Seat " + (i + 1));
 
                         System.out.print("Enter row:");
-                        char row = sc.next().toCharArray()[0];
+                        char row = sc.next().toUpperCase().toCharArray()[0];
 
                         System.out.print("Enter seat nr :");
                         int seatNr = sc.nextInt();
