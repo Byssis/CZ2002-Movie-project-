@@ -7,7 +7,12 @@ import java.text.*;
 
 public class Driver {
 
-	public static boolean isValidDate(String inDate) {                        //check if the date passed in is a valid one
+	/**
+	 * Check if the date is valid
+	 * @param inDate : date to be checked
+	 * @return true if date is valid, false if not valid
+	 */
+	public static boolean isValidDate(String inDate) {                       
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		dateFormat.setLenient(false);
 		try {
@@ -20,25 +25,22 @@ public class Driver {
 	
 	public static void main(String args[]) {
 
-		
-		/*Date now = new Date();
-		SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
-		String date = dateFormatter.format(now);
-		System.out.println(date);
-		*/
-	     
+	    //read in movies from Storage
 		ArrayList<Movie> movies5 = new ArrayList<Movie>(); 
 		movies5 = Storage.getMovieList();
 
-		//ArrayList<String> hols = Storage.getHolidays();						//read in public holidays
-
+		//to store the prices to be read from txt
 		double childprice = 0;
 		double adultprice = 0;
 		double seniorprice = 0;
 		double threeD = 0;
 		double platinum = 0;
 		double wkendhol = 0;
+		
+		//instance of Userapp
 		UserApp userapp;
+		
+		//variables for the creation of a new movie
 		String title;
 		String director;
 		String duration;
@@ -53,17 +55,19 @@ public class Driver {
 		int castno;
 		ArrayList<String> cast;
 		Type type = null;
+		
+		//For movielistings
 		Cineplex cineplex;
 		Cinema cinema;	
 		
 
-
 		Scanner sc = new Scanner(System.in);	
 
-
+		//reading in username and passwords from Storage
 		List<String> useracc = Storage.getAdmins();
 
 		String user, password;
+		//Log in menu
 		while (true) {
 			System.out.println("Enter username");
 			user = sc.next();
@@ -78,10 +82,12 @@ public class Driver {
 				System.out.println("Incorrect username or password! Please try again");
 			}
 		}
+		//dummy scanner
 		a =sc.nextLine();
 		String choice;
-    	/* Need to initialize here for Case 3 - Find movie in movie array */
 		int j = 0;
+		
+		//read in movies from Storage
 		ArrayList<Movie> initialmovies = new ArrayList<Movie>();
 		initialmovies = Storage.getMovieList();
 
@@ -101,7 +107,8 @@ public class Driver {
 					if (sc.nextLine().equals("1")) {
 
 						try {
-							File price = new File("/Users/Public/prices.txt");                        //read in ticket prices
+							//read in ticket prices from txt
+							File price = new File("/Users/Public/prices.txt");                        
 							BufferedReader getInfo = new BufferedReader(new FileReader(price));
 							String s = getInfo.readLine();
 							childprice = Double.parseDouble(s);
@@ -117,6 +124,7 @@ public class Driver {
 							wkendhol = Double.parseDouble(z);
 							getInfo.close();
 						} catch (Exception e) {
+							//catch File Not Found Error
 							System.out.println("File not Found!");
 						}
 
@@ -126,6 +134,7 @@ public class Driver {
 
 						System.out.println("");
 						while (true) {
+							//menu for user to select which price to update
 							System.out.println("Which price would you like to change?");
 							System.out.println("1 - Child ticket price");
 							System.out.println("2 - Adult ticket price");
@@ -165,6 +174,7 @@ public class Driver {
 								System.out.println("Invalid option! Try again!");
 							}
 							try {
+								//write the newprices to the txt
 								PrintWriter newprice = new PrintWriter("/Users/Public/prices.txt");
 								newprice.println(childprice);
 								newprice.println(adultprice);
@@ -174,13 +184,16 @@ public class Driver {
 								newprice.println(wkendhol);
 								newprice.close();
 							} catch (Exception e) {
+								//catch File Not Found Error
 								System.out.println("Error!");
 							}
+								//dummy scanner
 								a = sc.nextLine();
 								
 						}
 
 					} else {
+						//read in current holidays from Storage
 						ArrayList<String> hols = Storage.getHolidays();
 						System.out.println("Here are the current holidays:");
 						for (int x = 0; x < hols.size(); x++) {
@@ -193,7 +206,8 @@ public class Driver {
 							System.out.println("2 - Add Holiday");
 							System.out.println("3 - Back to Main Menu");
 							opt = sc.nextLine();
-							if (opt.equals("1")) {//remove holiday
+							if (opt.equals("1")) {
+								//remove holiday
 								String holtodelete;
 								while (true) {
 									System.out.println("Enter the holiday to delete in the format YYYY-MM-DD");
@@ -208,6 +222,7 @@ public class Driver {
 								System.out.println("Holiday " +  holtodelete + " successfully removed!");
 
 							} else if (opt.equals("2")) {
+								//add new holiday
 								String newhol;
 								while (true) {
 									System.out.println("Enter the new holiday in the format YYYY-MM-DD");
@@ -230,6 +245,7 @@ public class Driver {
 								System.out.println("Invalid option!");
 							}
 						}
+						//write the updated holidays back to Storage
 						Storage.writeHolidays(hols);
 					}
 					break;
