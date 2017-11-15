@@ -6,11 +6,11 @@ import java.text.*;
 
 public class TicketPrice 
 {
+	
 	private static final double GST = 1.07;
 	private double price;
 	private int customerAge;
-	private String date;
-	//private MovieStatus movie;
+	private String date;	//to read current date
 	private Type type;
 	private CinemaType ctype;
 	private double childprice;
@@ -21,8 +21,11 @@ public class TicketPrice
 	private double wkendhol;
 	
 	{
+		/**
+		 * read in prices from txt
+		 */
 		try{
-			File price = new File("/Users/Public/prices.txt");						//read in ticket prices
+			File price = new File("/Users/Public/prices.txt");					
 			BufferedReader getInfo = new BufferedReader(new FileReader(price));
 			String s = getInfo.readLine();
 			childprice = Double.parseDouble(s);
@@ -38,15 +41,29 @@ public class TicketPrice
 			wkendhol = Double.parseDouble(z);
 			getInfo.close();
 		}
+		/**
+		 * catch for File Not Found Error
+		 */
 		catch(Exception e){
 				System.out.println("File not Found!");
 		}}
-	public TicketPrice(int age,Type movie,CinemaType ctype){
+	
+	/**
+	 * Constructor for TicketPrice
+	 * @param age: age of customer
+	 * @param t : Type of movie 
+	 * @param ctype : Cinema type
+	 */
+	public TicketPrice(int age,Type t,CinemaType ctype){
 		customerAge = age;
-		this.type = movie;
+		this.type = t;
 		this.ctype = ctype;
 	}
 	
+	/**
+	 * check if current date is weekend
+	 * @return true if weekend, else false
+	 */
 	private boolean isWeekend(){
 		Date now = new Date(); 
 	    Calendar calendar = Calendar.getInstance();
@@ -59,6 +76,10 @@ public class TicketPrice
 	    }
 	}
 	
+	/**
+	 * check if current date is public holiday
+	 * @return true if holiday, else false
+	 */
 	private boolean isPublicHol(){
 		Date now = new Date();
 		SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -72,6 +93,10 @@ public class TicketPrice
 	}
 		
 	
+	/**
+	 * Return the price of the movie ticket inclusive of GST
+	 * @return double price
+	 */
 	public double getPrice(){
 		if(customerAge<=12){
 			price = childprice;

@@ -160,7 +160,7 @@ public class Movie implements Serializable {
     public MovieStatus getStatus(){
     	return this.status;
     }
-    
+
     /**
      * String representation for the movie
      *
@@ -174,7 +174,7 @@ public class Movie implements Serializable {
         out.append("Director:\t" + this.director + "\n");       // Append Director
         out.append("Abstract: \t" + this.movieAbstract + "\n" );
         out.append("Duration:\t" + this.duration + "\n");  // Append Duration of movie
-        out.append("Rating : \t" + this.movieclassification + "\n");
+        out.append("Movie Classification : \t" + this.movieclassification + "\n");
         out.append("Start Date : \t" + this.startDate);
         out.append("\nEnd Date : \t" + this.endDate);
         out.append("\nCast:");
@@ -342,10 +342,18 @@ public class Movie implements Serializable {
     			findStatus();
     }
     
+    /**
+     * get start date of movie
+     * @return startDate
+     */
     public String getStartDate(){
     	return startDate;
     }
     
+    /**
+     * get end date of movie
+     * @return endDate
+     */
     public String getEndDate(){
     	return endDate;
     }
@@ -386,12 +394,16 @@ public class Movie implements Serializable {
         return (option == 1) ? true : false;
     }
     
+    /**
+     * return movelistings to admin
+     */
     public void showAdminMovieListings() {
         for (int q = 0; q < movielistings.size(); q++) {
-                System.out.println((q) + ": " + movielistings.get(q));
+                System.out.println((q+1) + ": " + movielistings.get(q));
         }
     }
-
+    
+ 
     private static String getToDaysDateString() {
         Calendar cal = Calendar.getInstance();
         int year = cal.get(Calendar.YEAR);
@@ -410,7 +422,6 @@ public class Movie implements Serializable {
         sb.append(((hour < 10) ? "0" : "") + hour);
         sb.append(":");
         sb.append(((minutes < 10) ? "0" : "") + hour);
-        //System.out.println("DEBUG: " + sb.toString());
         return sb.toString();
     }
 
@@ -430,6 +441,10 @@ public class Movie implements Serializable {
                 break;
         }
         return movielistings.get(q);
+    }
+    
+    public MovieListing getAdminMovieListing(int index) {
+       return movielistings.get(index);
     }
     
     public ArrayList<MovieListing> getAllMovieListing()
@@ -453,8 +468,11 @@ public class Movie implements Serializable {
         return this.ticketSales;
     }
 
-
-    public static boolean isValidDate(String inDate) {                        //check if the date passed in is a valid one
+	/**
+	 * check if current date is weekend
+	 * @return true if weekend, else false
+	 */
+    public static boolean isValidDate(String inDate) {                        
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         dateFormat.setLenient(false);
         try {
@@ -464,13 +482,15 @@ public class Movie implements Serializable {
         }
         return true;
     }
-
+    
+    //return average rating
     public String averageRatingStr() {
         if(this.ratings.size() == 0)
             return "NA";
         return "" +this.averageRating();
     }
 
+    //return status of movie
     public String getStatusString() {
         MovieStatus status = this.getStatus();
         if(status == MovieStatus.COMING_SOON)

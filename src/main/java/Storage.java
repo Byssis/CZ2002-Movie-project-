@@ -153,13 +153,13 @@ public class Storage {
         cineplexlist.add(cineplex2);
         cineplexlist.add(cineplex3);
         writeCineplexList(cineplexlist);
-        // put 3 cinema into array then add into cinplex 1,2 and 3 each //
+        // put 3 cinema into array then add into cineplex 1,2 and 3 each //
         
-        movies.add(new Movie("Die Hard", "A director", "90", cast, Type.BLOCKBUSTER, "2017-11-11", "2017-12-12","Abstract 1","PG"));
-        movies.add(new Movie("Finding Nemo", "B director", "100", cast, Type.BLOCKBUSTER, "2017-11-11", "2017-12-12","Astract 2","PG"));
-        movies.add(new Movie("Planet of the apes", "C director", "120", cast, Type.BLOCKBUSTER, "2017-11-11", "2017-12-12","Abstract 3","PG"));
-        movies.add(new Movie("Spiderman", "D director", "130", cast, Type.BLOCKBUSTER, "2017-11-20", "2017-12-12","Abstract 4","PG"));
-        movies.add(new Movie("Superman", "E director", "140", cast, Type.BLOCKBUSTER, "2017-11-22", "2017-12-12","Abstract 5","PG"));
+        movies.add(new Movie("Power Ranger", "Richard Lee", "90", cast, Type.BLOCKBUSTER, "2017-11-11", "2017-12-12","Rangers join forces to save mankind","PG"));
+        movies.add(new Movie("Finding Nemo", "Tom Hanks", "100", cast, Type.NORMAL, "2017-11-11", "2017-12-12","Fish went missing","PG"));
+        movies.add(new Movie("Planet of the apes", "Janessa Seah ", "120", cast, Type.NORMAL, "2017-11-11", "2017-12-12","Abstract 3","PG"));
+        movies.add(new Movie("Spiderman", "Michael Bay", "130", cast, Type.ThreeD, "2017-11-20", "2017-12-12","Abstract 4","PG"));
+        movies.add(new Movie("Superman", "Wes Anderson", "140", cast, Type.ThreeD, "2017-11-22", "2017-12-12","Abstract 5","PG"));
         movies.get(0).addMovieListing(cineplex1, cineplex1.getCinema(0) ,  "2017-11-20 | 19:00");
         movies.get(0).addMovieListing(cineplex1, cineplex1.getCinema(1) ,  "2017-11-20 | 19:00");
         movies.get(0).addMovieListing(cineplex1, cineplex1.getCinema(2) ,  "2017-11-20 | 19:00");
