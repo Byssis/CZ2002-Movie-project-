@@ -173,7 +173,7 @@ public class Movie implements Serializable {
         out.append("Director:\t" + this.director + "\n");       // Append Director
         out.append("Abstract: \t" + this.movieAbstract + "\n" );
         out.append("Duration:\t" + this.duration + "\n");  // Append Duration of movie
-        out.append("Rating : \t" + this.movieclassification + "\n");
+        out.append("Movie Classification : \t" + this.movieclassification + "\n");
         out.append("Start Date : \t" + this.startDate);
         out.append("\nEnd Date : \t" + this.endDate);
         out.append("\nCast:");
