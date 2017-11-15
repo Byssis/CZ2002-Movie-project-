@@ -76,7 +76,7 @@ public class UserApp {
             UIFunctions.divider();
             System.out.print("Enter option: ");
             int c = sc.nextInt();
-            if (c > 0 && c < movies.size()) {
+            if (c > 0 && c < movies.size()+1) {
                 //System.out.println(movies.get(c));
                 // Booking menu
                 Movie movie = movies.get(c - 1);
