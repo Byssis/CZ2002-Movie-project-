@@ -46,7 +46,7 @@ public class Driver {
 		String option;
 		String startDate;
 		String endDate;
-		String a; //dummy scanner
+		String a;
 		String cineplexname;
 		String cinemaname;
 		String classification;
@@ -138,21 +138,27 @@ public class Driver {
 							if (opt.equals("1")) {
 								System.out.println("Enter the new Child ticket price");
 								childprice = sc.nextDouble();
+								System.out.printf("The new Child ticket price is now $%.2f\n",childprice);
 							} else if (opt.equals("2")) {
 								System.out.println("Enter the new Adult ticket price");
 								adultprice = sc.nextDouble();
+								System.out.printf("The new Adult ticket price is now $%.2f\n",adultprice);
 							} else if (opt.equals("3")) {
 								System.out.println("Enter the new Senior ticket price");
 								seniorprice = sc.nextDouble();
+								System.out.printf("The new Senior ticket price is now $%.2f\n",seniorprice);
 							} else if (opt.equals("4")) {
 								System.out.println("Enter the new 3D Movie add-on price");
 								threeD = sc.nextDouble();
+								System.out.printf("The new 3D Movie add-on price is now $%.2f\n",threeD);
 							} else if (opt.equals("5")) {
 								System.out.println("Enter the new Platinum Suite add-on price");
 								platinum = sc.nextDouble();
+								System.out.printf("The new PLatinum Suite add-on price is now $%.2f\n",platinum);
 							} else if (opt.equals("6")) {
 								System.out.println("Enter the new Weekend/Holiday add-on price");
 								wkendhol = sc.nextDouble();
+								System.out.printf("The new Weekend/Holiday add-on price is now $%.2f\n",wkendhol);
 							} else if (opt.equals("7")) {
 								break;
 							} else {
@@ -170,7 +176,8 @@ public class Driver {
 							} catch (Exception e) {
 								System.out.println("Error!");
 							}
-
+								a = sc.nextLine();
+								
 						}
 
 					} else {
@@ -198,7 +205,7 @@ public class Driver {
 									}
 								}
 								hols.remove(holtodelete);
-								System.out.println("Holiday successfully removed!");
+								System.out.println("Holiday " +  holtodelete + " successfully removed!");
 
 							} else if (opt.equals("2")) {
 								String newhol;
@@ -216,6 +223,7 @@ public class Driver {
 									}
 								}
 								hols.add(newhol);
+								System.out.println(newhol + " added as a holiday!");
 							} else if (opt.equals("3")) {
 								break;
 							} else {
