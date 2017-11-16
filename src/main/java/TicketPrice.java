@@ -19,6 +19,7 @@ public class TicketPrice
 	private double threeD;
 	private double platinum;
 	private double wkendhol;
+	private String showignDate;
 	
 	/**
 	 * Constructor for TicketPrice
@@ -26,7 +27,7 @@ public class TicketPrice
 	 * @param t : Type of movie 
 	 * @param ctype : Cinema type
 	 */
-	public TicketPrice(int age,Type t,CinemaType ctype){
+	public TicketPrice(int age,Type t,CinemaType ctype, String showingDate){
 		Price price = Storage.getPrice();
 		customerAge = age;
 		this.type = t;
@@ -38,6 +39,7 @@ public class TicketPrice
 		this.platinum = price.getPlatinum();
 		this.wkendhol = price.getWkendHol();
 		this.GST = price.getGST();
+		this.showignDate = showingDate;
 	}
 	
 	/**
@@ -45,15 +47,22 @@ public class TicketPrice
 	 * @return true if weekend, else false
 	 */
 	private boolean isWeekend(){
-		Date now = new Date(); 
-	    Calendar calendar = Calendar.getInstance();
-	    calendar.setTime(now);
-	    int day = calendar.get(Calendar.DAY_OF_WEEK);
-	    if(day==1 || day==6 || day==7){	//1 is Sunday, 6 is Friday, 7 is Saturday.
-	    	return true;
-	    }else{
-	    	return false;
-	    }
+		try {
+			String string = showignDate;
+			DateFormat format = new SimpleDateFormat("yyyy-MM-dd | HH:mm", Locale.ENGLISH);
+			Date date = format.parse(string);
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(date);
+			int day = calendar.get(Calendar.DAY_OF_WEEK);
+			if(day==1 || day==6 || day==7){	//1 is Sunday, 6 is Friday, 7 is Saturday.
+				return true;
+			}else{
+				return false;
+			}
+		}catch (Exception e){
+
+		}
+		return false;
 	}
 	
 	/**
@@ -61,11 +70,18 @@ public class TicketPrice
 	 * @return true if holiday, else false
 	 */
 	private boolean isPublicHol(){
-		Date now = new Date();
+		String string = this.showignDate;
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd | HH:mm", Locale.ENGLISH);
+		Date date = null;
+		try {
+			date = format.parse(string);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
-		date = dateFormatter.format(now);
+		String s = dateFormatter.format(date);
 		ArrayList<String> hols = Storage.getHolidays();						//read in public holidays
-		if(hols.contains(date)){
+		if(hols.contains(s)){
 			return true;
 		}else{
 			return false;
@@ -94,7 +110,7 @@ public class TicketPrice
 		if(ctype==CinemaType.PLATINUM){
 			price += platinum;
 		}
-		return price * this.GST;
+		return Math.round(price * this.GST*100)/100;
 	}
 	
 	
