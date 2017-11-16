@@ -41,6 +41,7 @@ public class TicketPrice
 		catch(Exception e){
 				System.out.println("File not Found!");
 		}}
+	
 	public TicketPrice(int age,Type movie,CinemaType ctype){
 		customerAge = age;
 		this.type = movie;

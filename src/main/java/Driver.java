@@ -20,7 +20,7 @@ public class Driver {
 	
 	public static void main(String args[]) {
 
-
+		
 		/*Date now = new Date();
 		SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
 		String date = dateFormatter.format(now);
@@ -131,7 +131,7 @@ public class Driver {
 							System.out.println("2 - Adult ticket price");
 							System.out.println("3 - Senior ticket price");
 							System.out.println("4 - 3D Movie add-on");
-							System.out.println("5 - Platinum Suit add-on");
+							System.out.println("5 - Platinum Suite add-on");
 							System.out.println("6 - Weekend/Holiday add-on");
 							System.out.println("7 - Back");
 							opt = sc.nextLine();
