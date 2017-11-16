@@ -37,12 +37,7 @@ public class Driver {
 
 		//ArrayList<String> hols = Storage.getHolidays();						//read in public holidays
 
-		double childprice = 0;
-		double adultprice = 0;
-		double seniorprice = 0;
-		double threeD = 0;
-		double platinum = 0;
-		double wkendhol = 0;
+
 		UserApp userapp;
 		String title;
 		String director;
@@ -104,28 +99,8 @@ public class Driver {
 					System.out.println("1 - Change Ticket Prices");
 					System.out.println("2 - Add/Remove Holidays");
 					if (sc.nextLine().equals("1")) {
-
-						try {
-							File price = new File("/Users/Public/prices.txt");                        //read in ticket prices
-							BufferedReader getInfo = new BufferedReader(new FileReader(price));
-							String s = getInfo.readLine();
-							childprice = Double.parseDouble(s);
-							String t = getInfo.readLine();
-							adultprice = Double.parseDouble(t);
-							String q = getInfo.readLine();
-							seniorprice = Double.parseDouble(q);
-							String r = getInfo.readLine();
-							threeD = Double.parseDouble(r);
-							String y = getInfo.readLine();
-							platinum = Double.parseDouble(y);
-							String z = getInfo.readLine();
-							wkendhol = Double.parseDouble(z);
-							getInfo.close();
-						} catch (Exception e) {
-							System.out.println("File not Found!");
-						}
-
-						System.out.printf("Current prices:\nChild: $%.2f\nAdult: $%.2f\nSenior: $%.2f\n3D Movie add-on: $%.2f\nPlatinum Suite add-on: $%.2f\nWeekend/Holiday add-on: $%.2f\n", childprice, adultprice, seniorprice, threeD, platinum, wkendhol);
+                        Price price = Storage.getPrice();
+						System.out.printf("Current prices:\nChild: $%.2f\nAdult: $%.2f\nSenior: $%.2f\n3D Movie add-on: $%.2f\nPlatinum Suite add-on: $%.2f\nWeekend/Holiday add-on: $%.2f\n", price.getChildPrice(), price.getAdultPrice(), price.getSeniorPrice(), price.getThreeD(), price.getPlatinum(), price.getWkendHol());
 
 						String opt;
 
@@ -142,46 +117,36 @@ public class Driver {
 							opt = sc.nextLine();
 							if (opt.equals("1")) {
 								System.out.println("Enter the new Child ticket price");
-								childprice = sc.nextDouble();
-								System.out.printf("The new Child ticket price is now $%.2f\n",childprice);
+								price.setChildPrice( sc.nextDouble());
+								System.out.printf("The new Child ticket price is now $%.2f\n",price.getChildPrice());
 							} else if (opt.equals("2")) {
 								System.out.println("Enter the new Adult ticket price");
-								adultprice = sc.nextDouble();
-								System.out.printf("The new Adult ticket price is now $%.2f\n",adultprice);
+                                price.setAdultPrice( sc.nextDouble());
+								System.out.printf("The new Adult ticket price is now $%.2f\n",price.getAdultPrice());
 							} else if (opt.equals("3")) {
 								System.out.println("Enter the new Senior ticket price");
-								seniorprice = sc.nextDouble();
-								System.out.printf("The new Senior ticket price is now $%.2f\n",seniorprice);
+                                price.setSeniorPrice( sc.nextDouble());
+								System.out.printf("The new Senior ticket price is now $%.2f\n",price.getSeniorPrice());
 							} else if (opt.equals("4")) {
 								System.out.println("Enter the new 3D Movie add-on price");
-								threeD = sc.nextDouble();
-								System.out.printf("The new 3D Movie add-on price is now $%.2f\n",threeD);
+                                price.setThreeD( sc.nextDouble());
+								System.out.printf("The new 3D Movie add-on price is now $%.2f\n",price.getThreeD());
 							} else if (opt.equals("5")) {
 								System.out.println("Enter the new Platinum Suite add-on price");
-								platinum = sc.nextDouble();
-								System.out.printf("The new PLatinum Suite add-on price is now $%.2f\n",platinum);
+                                price.setPlatinum( sc.nextDouble());
+								System.out.printf("The new PLatinum Suite add-on price is now $%.2f\n",price.getPlatinum());
 							} else if (opt.equals("6")) {
 								System.out.println("Enter the new Weekend/Holiday add-on price");
-								wkendhol = sc.nextDouble();
-								System.out.printf("The new Weekend/Holiday add-on price is now $%.2f\n",wkendhol);
+                                price.setWkendHol( sc.nextDouble());
+								System.out.printf("The new Weekend/Holiday add-on price is now $%.2f\n",price.getWkendHol());
 							} else if (opt.equals("7")) {
 								break;
 							} else {
 								System.out.println("Invalid option! Try again!");
 							}
-							try {
-								PrintWriter newprice = new PrintWriter("/Users/Public/prices.txt");
-								newprice.println(childprice);
-								newprice.println(adultprice);
-								newprice.println(seniorprice);
-								newprice.println(threeD);
-								newprice.println(platinum);
-								newprice.println(wkendhol);
-								newprice.close();
-							} catch (Exception e) {
-								System.out.println("Error!");
-							}
-								a = sc.nextLine();
+
+							Storage.writePrice(price);
+							UIFunctions.waitForUser();
 								
 						}
 

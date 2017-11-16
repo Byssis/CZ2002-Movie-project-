@@ -14,6 +14,8 @@ public class Storage {
     private final static String CINEPLEX_LIST_FILENAME = FILE_PATH + "cineplex.dat";
     public final static String USER_ACC_FILENAME =  FILE_PATH + "useracc.dat";
     public final static String HOLIDAYS_FILENAME = FILE_PATH + "pubhol.dat";
+    public final static String PRICE_FILENAME = FILE_PATH + "price.dat";
+
 
 
 
@@ -100,6 +102,21 @@ public class Storage {
         } catch (IOException e) {
             return new ArrayList<Cineplex>();
         }
+    }
+
+    public static Price getPrice(){
+        try {
+            return ((List<Price>) SerializeDB.readSerializedObject(PRICE_FILENAME)).get(0);
+        } catch (IOException e) {
+            return new Price(7,9,8,2,3,2,1.07);
+        }
+    }
+
+
+    public static void writePrice(Price price){
+        List<Price> list = new ArrayList<Price>();
+        list.add(price);
+        SerializeDB.writeSerializedObject(PRICE_FILENAME, list);
     }
 
 

@@ -7,7 +7,7 @@ import java.text.*;
 public class TicketPrice 
 {
 	
-	private static final double GST = 1.07;
+	private final double GST;
 	private double price;
 	private int customerAge;
 	private String date;	//to read current date
@@ -20,34 +20,6 @@ public class TicketPrice
 	private double platinum;
 	private double wkendhol;
 	
-	{
-		/**
-		 * read in prices from txt
-		 */
-		try{
-			File price = new File("/Users/Public/prices.txt");					
-			BufferedReader getInfo = new BufferedReader(new FileReader(price));
-			String s = getInfo.readLine();
-			childprice = Double.parseDouble(s);
-			String t = getInfo.readLine();
-			adultprice = Double.parseDouble(t);
-			String q = getInfo.readLine();
-			seniorprice = Double.parseDouble(q);
-			String r = getInfo.readLine();
-			threeD = Double.parseDouble(r);
-			String y = getInfo.readLine();
-			platinum = Double.parseDouble(y);
-			String z = getInfo.readLine();
-			wkendhol = Double.parseDouble(z);
-			getInfo.close();
-		}
-		/**
-		 * catch for File Not Found Error
-		 */
-		catch(Exception e){
-				System.out.println("File not Found!");
-		}}
-	
 	/**
 	 * Constructor for TicketPrice
 	 * @param age: age of customer
@@ -55,9 +27,17 @@ public class TicketPrice
 	 * @param ctype : Cinema type
 	 */
 	public TicketPrice(int age,Type t,CinemaType ctype){
+		Price price = Storage.getPrice();
 		customerAge = age;
 		this.type = t;
 		this.ctype = ctype;
+		this.childprice = price.getChildPrice();
+		this.adultprice = price.getAdultPrice();
+		this.seniorprice = price.getSeniorPrice();
+		this.threeD = price.getThreeD();
+		this.platinum = price.getPlatinum();
+		this.wkendhol = price.getWkendHol();
+		this.GST = price.getGST();
 	}
 	
 	/**
