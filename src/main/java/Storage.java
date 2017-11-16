@@ -201,9 +201,9 @@ public class Storage {
         movies.get(0).addMovieListing(cineplex1, cineplex1.getCinema(0) ,  "2017-11-05 | 10:00");
         movies.get(0).addMovieListing(cineplex1, cineplex1.getCinema(1) ,  "2017-11-10 | 15:00");
         movies.get(0).addMovieListing(cineplex1, cineplex1.getCinema(2) ,  "2017-11-15 | 17:00");
-        movies.get(1).addMovieListing(cineplex2, cineplex2.getCinema(0),  "2017-11-11 | 11:00");
-        movies.get(1).addMovieListing(cineplex2, cineplex2.getCinema(1),  "2017-11-12 | 16:00");
-        movies.get(1).addMovieListing(cineplex2, cineplex2.getCinema(2),  "2017-11-13 | 19:00");
+        movies.get(1).addMovieListing(cineplex2, cineplex2.getCinema(0),  "2017-11-20 | 11:00");
+        movies.get(1).addMovieListing(cineplex2, cineplex2.getCinema(1),  "2017-11-21 | 16:00");
+        movies.get(1).addMovieListing(cineplex2, cineplex2.getCinema(2),  "2017-11-22 | 19:00");
         movies.get(2).addMovieListing(cineplex3,cineplex3.getCinema(0),  "2017-11-25 | 09:30");
         movies.get(2).addMovieListing(cineplex3, cineplex3.getCinema(1),  "2017-11-25 | 12:30");
         movies.get(2).addMovieListing(cineplex3, cineplex3.getCinema(2),  "2017-11-25 | 17:30");
