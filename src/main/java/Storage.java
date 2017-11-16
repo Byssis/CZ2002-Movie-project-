@@ -17,8 +17,8 @@ public class Storage {
 
 
     /**
-     * get current holidays
-     * @return arraylist of holidays
+     * Get all holidays
+     * @return list of all holidays
      */
     public static ArrayList<String> getHolidays(){
         try {
@@ -28,10 +28,19 @@ public class Storage {
         }
     }
 
+    /**
+     * Save holidays to storage
+     * @param holidays list of holidays to save
+     */
     public static void writeHolidays(List holidays){
         SerializeDB.writeSerializedObject(HOLIDAYS_FILENAME, holidays);
     }
 
+
+    /**
+     * Get all admins user information
+     * @return  list of admins
+     */
     public static ArrayList<String> getAdmins(){
         try {
             return (ArrayList)SerializeDB.readSerializedObject(USER_ACC_FILENAME);
@@ -44,6 +53,7 @@ public class Storage {
     }
 
     /**
+     * Save admin information
      * @param admins
      */
     public static void writeAdmins(List admins){
