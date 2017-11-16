@@ -6,9 +6,21 @@ import java.util.List;
  * Created by Albin on 2017-10-19.
  */
 public class MovieGoer implements Serializable {
+    /**
+     * Name of movie goer
+     */
     private final String name;
+    /**
+     * Email of movie goer
+     */
     private final String email;
+    /**
+     * Phone number for movie goer
+     */
     private final String phone;
+    /**
+     * Booking history for movie goer
+     */
     private List<Booking> bookingHistory;
 
     /**
@@ -39,6 +51,7 @@ public class MovieGoer implements Serializable {
     }
 
     /**
+     * Get name of movie goer
      * @return  Name of movie goer
      */
     public String getName() {
@@ -46,6 +59,7 @@ public class MovieGoer implements Serializable {
     }
 
     /**
+     * Get phone for movie goer
      * @return  Phone of movie goer
      */
     public String getPhone() {

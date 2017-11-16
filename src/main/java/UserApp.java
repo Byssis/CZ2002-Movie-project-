@@ -529,7 +529,7 @@ public class UserApp {
     }
 
     /**
-     *
+     * Compare movies based on tickets sales
      */
     public static Comparator<Movie> tickets = new Comparator<Movie>() {
 
@@ -539,7 +539,7 @@ public class UserApp {
     };
 
     /**
-     *
+     * Compare movies based on ratings
      */
     public static Comparator<Movie> ratings = new Comparator<Movie>() {
         public int compare(Movie o1, Movie o2) {

@@ -15,6 +15,9 @@ public class Cineplex implements Serializable {
      */
     final private String name;
 
+    /**
+     * Cineplex code
+     */
     final private String cineplexCode;
 
     /**
@@ -39,7 +42,12 @@ public class Cineplex implements Serializable {
     public void addNewCinema(String name, CinemaType type,int numOfRows, int numOfSeats, String cinemaCode){
         this.cinemas.add(new Cinema(name, type, numOfRows, numOfSeats, cinemaCode));
     }
-    
+
+    /**
+     * Get cinema based on index
+     * @param i cinema index
+     * @return cinema
+     */
     public Cinema getCinema(int i) {
     	return cinemas.get(i);
     }
@@ -52,6 +60,10 @@ public class Cineplex implements Serializable {
         return name;
     }
 
+    /**
+     * Get cineplex code
+     * @return cineplex code
+     */
     public String getCineplexCode() {
         return cineplexCode;
     }
