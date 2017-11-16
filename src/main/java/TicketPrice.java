@@ -25,7 +25,7 @@ public class TicketPrice
 		 * read in prices from txt
 		 */
 		try{
-			File price = new File("/Users/Public/prices.txt");					
+			File price = new File("prices.txt");
 			BufferedReader getInfo = new BufferedReader(new FileReader(price));
 			String s = getInfo.readLine();
 			childprice = Double.parseDouble(s);

@@ -5,8 +5,6 @@ import java.util.*;
  * Created by Albin on 2017-10-20.
  */
 public class UserApp {
-    //static List<Movie> movies = new ArrayList<Movie>();
-    //static List<MovieGoer> moviegoers = new ArrayList<MovieGoer>();
 
     public static void main(String[] args) {
         int option;
@@ -16,7 +14,7 @@ public class UserApp {
             UIFunctions.divider();
             System.out.println("User Menu: ");
             UIFunctions.divider();
-            System.out.println("1: List all movies");
+            System.out.println("1: Book/Show movies");
             System.out.println("2. Search movie");
             System.out.println("3. List top 5 movies");
             System.out.println("4. Booking history");
@@ -437,7 +435,8 @@ public class UserApp {
 
         Scanner sc = new Scanner(System.in);
         int c = sc.nextInt();
-
+        UIFunctions.clear();
+        UIFunctions.divider();
         if (c == 1) {
             listTop5MoviesRating();
         } else if (c == 2) {
@@ -486,9 +485,9 @@ public class UserApp {
     private static void showBookingHistory() {
         System.out.println("Enter your name: ");
         Scanner sc = new Scanner(System.in);
-        String name = sc.next();
+        String name = sc.nextLine();
         System.out.println("Enter your phone number: ");
-        String phone = sc.next();
+        String phone = sc.nextLine();
 
         for (MovieGoer mg : Storage.getUserList()) {
             if (name.equals(mg.getName()) && phone.equals(mg.getPhone())) {
@@ -510,6 +509,7 @@ public class UserApp {
      */
     public static List<Movie> top5Movies(List<Movie> movies, Comparator<Movie> comparator) {
         List<Movie> top5Movies = new ArrayList<Movie>();
+        if(top5Movies.size() < 1) return movies;
         for (int i = 0; i < 5; i++) {
             Movie m = movies.get(0);
             for (Movie candidatemovie : movies) {

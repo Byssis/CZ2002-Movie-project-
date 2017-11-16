@@ -44,6 +44,9 @@ public class UIFunctions {
         }
     }
 
+    /**
+     * Wait for users input
+     */
     public static void waitForUser(){
         System.out.println("Press enter to continue...");
         try {
@@ -53,6 +56,9 @@ public class UIFunctions {
         }
     }
 
+    /**
+     * Prints a line in the cmd
+     */
     public static void divider() {
         System.out.println("========================================");
     }
