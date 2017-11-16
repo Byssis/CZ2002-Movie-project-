@@ -34,8 +34,9 @@ public class MovieGoer implements Serializable {
      * Show all bookings
      */
     public void showBookingHistory(){
-        for(Booking b : bookingHistory)
-            System.out.println(b);
+        for(Booking b : bookingHistory) {
+            System.out.println(b + "\n");
+        }
     }
 
     /**

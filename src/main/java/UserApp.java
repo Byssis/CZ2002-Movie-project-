@@ -523,7 +523,7 @@ public class UserApp {
         UIFunctions.divider();
         System.out.println("Enter your name: ");
         Scanner sc = new Scanner(System.in);
-        String name = sc.next();
+        String name = sc.nextLine();
         System.out.println("Enter your phone number: ");
 
         String phone = sc.nextLine();
@@ -559,7 +559,7 @@ public class UserApp {
 
         if(movies.size() < 1) return copy;
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < ((movies.size() > 5)? 5 : movies.size()); i++) {
             top5Movies.add(copy.get(i));
         }
         return top5Movies;

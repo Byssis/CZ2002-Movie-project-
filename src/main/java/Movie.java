@@ -137,7 +137,7 @@ public class Movie implements Serializable {
     	Date now = new Date();
 		SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
 		String date = dateFormatter.format(now);
-		if(date.compareTo(startDate)>0 && date.compareTo(endDate)<0){
+		if(date.compareTo(startDate)>=0 && date.compareTo(endDate)<=0){
 			this.status = MovieStatus.NOW_SHOWING;
 		}else if(date.compareTo(endDate)>0){
 			this.status = MovieStatus.END_OF_SHOWING;
