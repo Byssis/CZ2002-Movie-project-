@@ -409,7 +409,7 @@ public class UserApp {
         double price = 0;
         for (int i = 0; i < seats.length; i++) {
             System.out.print("Enter age of movie goer " + (i + 1) + " :");
-            price += new TicketPrice(sc.nextInt(), movieListing.getMovieType(), movieListing.getCinemaType()).getPrice();
+            price += new TicketPrice(sc.nextInt(), movieListing.getMovieType(), movieListing.getCinemaType(), movieListing.getShowing()).getPrice();
         }
 
         Booking booking = new Booking(user, movieListing, seats, price);
