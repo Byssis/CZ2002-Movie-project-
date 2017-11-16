@@ -132,27 +132,11 @@ public class Storage {
     	
         ArrayList<Movie> movies = new ArrayList<Movie>();
         ArrayList<String> cast = new ArrayList<String>();
-        ArrayList<String> cast1 = new ArrayList<String>();
-        ArrayList<String> cast2 = new ArrayList<String>();
-        ArrayList<String> cast3 = new ArrayList<String>();
-        ArrayList<String> cast4 = new ArrayList<String>();
         ArrayList<Cineplex> cineplexlist = new ArrayList<Cineplex>();
-        cast.add("Albert");
-        cast.add("Tom");
-        cast.add("Dick");
-        cast.add("Harry");
-        cast1.add("Peter");
-        cast1.add("Richard");
-        cast1.add("Sally");
-        cast2.add("Puffy");
-        cast2.add("Thomas");
-        cast3.add("Vanessa");
-        cast3.add("Michael");
-        cast3.add("Tessa");
-        cast3.add("Putin");
-        cast4.add("Xiao Li");
-        cast4.add("Queenie");
-        cast4.add("Desiree");
+        cast.add("Albin");
+        cast.add("Andrew");
+        cast.add("Darien");
+        cast.add("Yihao");
         Cineplex cineplex1 = new Cineplex("Cineplex 1","XX1");
         cineplex1.addNewCinema("IMAX 1",CinemaType.PLATINUM, 10, 10, "XXX1");
         cineplex1.addNewCinema("IMAX 2",CinemaType.PLATINUM, 10, 10, "XXX2");
@@ -171,25 +155,26 @@ public class Storage {
         writeCineplexList(cineplexlist);
         // put 3 cinema into array then add into cineplex 1,2 and 3 each //
         
-        /* Now showing */
-        movies.add(new Movie("Power Ranger", "Richard Lee", "90", cast, Type.BLOCKBUSTER, "2017-11-01", "2017-12-30","Rangers join forces to save mankind","PG"));
-        /* Now Showing */
-        movies.add(new Movie("Finding Nemo", "Tom Hanks", "100", cast1, Type.NORMAL, "2017-11-10", "2017-12-28","Fish went missing in the deep blue ocean","PG"));
-        /* Preview */
-        movies.add(new Movie("Planet of the apes", "Janessa Seah ", "120", cast2, Type.NORMAL, "2017-11-20", "2017-12-12","Apes that are smarter than humans","NC16"));
-        /* End of Showing */
-        movies.add(new Movie("Spiderman", "Michael Bay", "130", cast3, Type.ThreeD, "2017-10-20", "2017-11-10","Spider becomes a man and saves the city","M18"));
-        /* Coming Soon */
-        movies.add(new Movie("Superman", "Wes Anderson", "140", cast4, Type.ThreeD, "2017-11-30", "2017-12-31","Alien from outer space, landed on Earth","PG"));
-        movies.get(0).addMovieListing(cineplex1, cineplex1.getCinema(0) ,  "2017-11-05 | 10:00");
-        movies.get(0).addMovieListing(cineplex1, cineplex1.getCinema(1) ,  "2017-11-10 | 15:00");
-        movies.get(0).addMovieListing(cineplex1, cineplex1.getCinema(2) ,  "2017-11-15 | 17:00");
-        movies.get(1).addMovieListing(cineplex2, cineplex2.getCinema(0),  "2017-11-11 | 11:00");
-        movies.get(1).addMovieListing(cineplex2, cineplex2.getCinema(1),  "2017-11-12 | 16:00");
-        movies.get(1).addMovieListing(cineplex2, cineplex2.getCinema(2),  "2017-11-13 | 19:00");
-        movies.get(2).addMovieListing(cineplex3,cineplex3.getCinema(0),  "2017-11-25 | 09:30");
-        movies.get(2).addMovieListing(cineplex3, cineplex3.getCinema(1),  "2017-11-25 | 12:30");
+        movies.add(new Movie("Power Ranger", "Richard Lee", "90", cast, Type.BLOCKBUSTER, "2017-11-11", "2017-12-12","Rangers join forces to save mankind","PG"));
+        movies.add(new Movie("Finding Nemo", "Tom Hanks", "100", cast, Type.NORMAL, "2017-11-11", "2017-12-12","Fish went missing","PG"));
+        movies.add(new Movie("Planet of the apes", "Janessa Seah ", "120", cast, Type.NORMAL, "2017-11-11", "2017-12-12","Abstract 3","PG"));
+        movies.add(new Movie("Spiderman", "Michael Bay", "130", cast, Type.ThreeD, "2017-11-20", "2017-12-12","Abstract 4","PG"));
+        movies.add(new Movie("Superman", "Wes Anderson", "140", cast, Type.ThreeD, "2017-11-22", "2017-12-12","Abstract 5","PG"));
+        movies.get(0).addMovieListing(cineplex1, cineplex1.getCinema(0) ,  "2017-11-20 | 19:00");
+        movies.get(0).addMovieListing(cineplex1, cineplex1.getCinema(1) ,  "2017-11-20 | 19:00");
+        movies.get(0).addMovieListing(cineplex1, cineplex1.getCinema(2) ,  "2017-11-20 | 19:00");
+        movies.get(1).addMovieListing(cineplex2, cineplex2.getCinema(0),  "2017-11-22 | 18:00");
+        movies.get(1).addMovieListing(cineplex2, cineplex2.getCinema(1),  "2017-11-22 | 18:00");
+        movies.get(1).addMovieListing(cineplex2, cineplex2.getCinema(2),  "2017-11-22 | 18:00");
+        movies.get(2).addMovieListing(cineplex3,cineplex3.getCinema(0),  "2017-11-25 | 17:00");
+        movies.get(2).addMovieListing(cineplex3, cineplex3.getCinema(1),  "2017-11-25 | 17:30");
         movies.get(2).addMovieListing(cineplex3, cineplex3.getCinema(2),  "2017-11-25 | 17:30");
+        movies.get(3).addMovieListing(cineplex1,cineplex1.getCinema(0),  "2017-11-30 | 16:00");
+        movies.get(3).addMovieListing(cineplex2,cineplex2.getCinema(1),  "2017-11-30 | 17:30");
+        movies.get(3).addMovieListing(cineplex3,cineplex3.getCinema(2),  "2017-11-30 | 17:30");
+        movies.get(4).addMovieListing(cineplex1, cineplex1.getCinema(0),  "2017-12-10 | 17:30");
+        movies.get(4).addMovieListing(cineplex2, cineplex2.getCinema(1),  "2017-12-10 | 17:30");
+        movies.get(4).addMovieListing(cineplex3, cineplex3.getCinema(2),  "2017-12-10 | 17:30");
         writeMovieList(movies);
         
     }

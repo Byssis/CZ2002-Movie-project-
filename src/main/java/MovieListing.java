@@ -34,7 +34,6 @@ public class MovieListing implements Serializable {
      * @param cineplex  Cineplex where movie is shown
      * @param cinema    Cinema where movie is shown
      * @param showing   Start time for movie
-     * @see Movie
      */
     public MovieListing(Movie movie, Cineplex cineplex, Cinema cinema, String showing){
         this.movie = movie;
@@ -43,12 +42,8 @@ public class MovieListing implements Serializable {
         this.showing = showing;
         this.bookings = new ArrayList<Booking>();
     }
-
-    /**
-     * Set cineplex
-     * @param cineplex name of cineplex
-     */
-    public void setCineplex(String cineplex)
+    
+    public void setCineplex(String cineplex) 
     {
     	ArrayList<Cineplex> cineplexlist = new ArrayList<Cineplex>();
     	cineplexlist = Storage.getCineplexList();
@@ -59,27 +54,20 @@ public class MovieListing implements Serializable {
     	}
     	
     }
-
-    /**
-     * Set cinema
-     * @param cinema name of cinema
-     */
-    public void setCinema(String cinema)
+    
+    public void setCinema(String cinema) 
     {
     	ArrayList<Cineplex> cineplexlist = new ArrayList<Cineplex>();
     	cineplexlist = Storage.getCineplexList();
     	int i;
-    	for (i=0; i<3 ;i++) {
-            if (cineplexlist.get(0).getCinema(i).getName().equals(cinema))
-                this.cinema = cineplexlist.get(0).getCinema(i);
-        }
+    	for (i=0; i<3 ;i++) 
+    	{
+    		if (cineplexlist.get(0).getCinema(i).getName().equals(cinema))
+    				this.cinema = cineplexlist.get(0).getCinema(i);
+    	}
+    	
     }
-
-    /**
-     * Set showing date
-     * @param showing showing date
-     */
-    public void setShowing(String showing)
+    public void setShowing(String showing) 
     {
     	this.showing = showing;
     	
@@ -138,50 +126,24 @@ public class MovieListing implements Serializable {
         return this.movie.getTitle();
     }
 
-    /**
-     * Get cinemacode
-     * @return cinemacode
-     */
     public String getCinemaCode() {
         return this.cineplex.getCineplexCode() + this.cinema.getCinemaCode();
     }
-
-    /**
-     * Get cineplex name
-     * @return cineplex name
-     */
+    
     public String getCineplexName() {
     	return this.cineplex.getName();
     }
-
-    /**
-     * Get cinema name
-     * @return cinema name
-     */
     public String getCinemaName() {
     	return this.cinema.getName();
     }
-
-    /**
-     * Get showing date
-     * @return  showing date
-     */
     public String getShowing() {
     	return showing;
     }
-
-    /**
-     * Get movie type
-     * @return movie type
-     */
+    
     public Type getMovieType() {
         return this.movie.getType();
     }
 
-    /**
-     * Get cinema type
-     * @return cinema type
-     */
     public CinemaType getCinemaType() {
         return this.cinema.getType();
     }

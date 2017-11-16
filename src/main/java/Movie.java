@@ -14,9 +14,9 @@ public class Movie implements Serializable {
 	private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	/**
 	 * 
-	 * @param start
-	 * @param end
-	 * @return
+	 * @param start startDate of movie
+	 * @param end endDate of movie
+	 * @return the day difference between the startDate and endDate
 	 */
 	public static long getDayCount(String start, String end) {
 	  long diff = -1;
@@ -24,10 +24,10 @@ public class Movie implements Serializable {
 	    Date dateStart = simpleDateFormat.parse(start);
 	    Date dateEnd = simpleDateFormat.parse(end);
 
-	    //time is always 00:00:00 so rounding should help to ignore the missing hour when going from winter to summer time as well as the extra hour in the other direction
+	    
 	    diff = Math.round((dateEnd.getTime() - dateStart.getTime()) / (double) 86400000);
 	  } catch (Exception e) {
-	    //handle the exception according to your own situation
+	   
 	  }
 	  return diff;
 	}
@@ -84,9 +84,9 @@ public class Movie implements Serializable {
         List of movieListings for movie
      */
     private ArrayList<MovieListing> movielistings;
-
-    private MovieStatus moviestatus;
-    
+    /*
+    	Movie classification like PG/NC16/M18
+     */
     private String movieclassification;
     /**
      * Create a new movie instance
@@ -98,6 +98,7 @@ public class Movie implements Serializable {
      * @param type      Type of movie
      * @param startDate First day of showing
      * @param endDate   Last day of showing
+     * @param movieAbstract Short write up/description about the movie
      * @para movieclassification PG/NC16/M18/R21
      */
     public Movie(String title, String director, String duration, ArrayList<String> cast, Type type, String startDate, String endDate, String movieAbstract,String classification) {
@@ -105,8 +106,8 @@ public class Movie implements Serializable {
         this.director = director;
         this.duration = duration;
         this.type = type;
-        this.startDate = startDate;                             // Not safe
-        this.endDate = endDate;                                 // Not safe
+        this.startDate = startDate;                             
+        this.endDate = endDate;                                 
         this.cast = new ArrayList<String>();
         this.ticketSales = 0;
         for (int i = 0; i < cast.size(); i++) {
@@ -120,13 +121,18 @@ public class Movie implements Serializable {
         findStatus();
     }
     
-    //setmovieclassification
+    /**
+     * @param c		movie classification
+     * To pass in a string and add it as the movie classification
+     */
     public void setMovieClass(String c){
     	this.movieclassification = c;
     }
     
-    
-    //findStatus
+    /**
+     * Using dateformatter class to compare the startDate and endDate and get the movie status
+     * 4 different status depending on the day difference
+     */
     public void findStatus(){
     	Date now = new Date();
 		SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -142,7 +148,10 @@ public class Movie implements Serializable {
 		}	
     }
     
-    //setStatus
+    /**
+     * @param option    option to set the movie status
+     * Function used by admin to overwrite the findStatus function and decide the status of the movie
+     */
     public void setStatus(String option){
     	if(option.equals("1"))
 			this.status = MovieStatus.PREVIEW;
@@ -156,13 +165,15 @@ public class Movie implements Serializable {
     	
     }
 
-    //getStatus
+    /**
+     *To return the current movie status
+     */
     public MovieStatus getStatus(){
     	return this.status;
     }
 
     /**
-     * String representation for the movie
+     * String representation for all the movie details
      *
      * @return String representation for the movie
      */
@@ -214,26 +225,34 @@ public class Movie implements Serializable {
     }
 
     /**
-     * Display movie information in stdout
+     * Print movie details
      */
     public void displayMovieInfo() {
         System.out.println(this.toString());
     }
 
-    /**
-     * Add a new rating to movie
-     *
+    /**  
      * @param rating Rating of movie
      * @see Rating
+     * Add a new rating to movie
      */
     public void addRating(Rating rating) {
         this.ratings.add(rating);
     }
 
+    /**  
+     * @param review Review of the movie
+     * @see Review
+     * Add a new review to the movie
+     */
     public void addReview(Review review) {
         this.reviews.add(review);
     }
+    
 
+    /**  
+     * Show all of the reviews to the movie
+    */
     public void showReviews() {
         if (reviews.size() == 0)
             System.out.println("No reviews available for movie...");
@@ -266,31 +285,42 @@ public class Movie implements Serializable {
         return this.title;
     }
     
-    /* Set Title Name*/
-
+    /**  
+     * @param newtitle new title for the movie 
+     * Set a new title to the movie
+     */
     public void setTitle(String newtitle) {
         this.title = newtitle;
     }
     
-    /* Set Director Name*/
+    /**  
+     * @param directorname new director name
+     * Set a new director name to the movie
+     */
 
     public void setDirectorname(String directorname) {
         director = directorname;
     }
     
-    /* Set Duration */
-
-    
+    /**  
+     * @param minutes new duration for the movie in minutes
+     * Set a new duration in minutes for the movie
+     */
     public void setDuration(String minutes) {
     	duration = minutes;
     }
-    /* update cast member - doing for one cast only */
-    /* since we will not update a whole list of cast */
+    /**  
+     * @param casts new cast name is passed in for update
+     * Set the cast name to the new cast name for the movie
+     */
     public void setCast(String casts, int k) {
         cast.set(k, casts);
     }
 
-    /* Add cast members in */
+    /**  
+     * @param casts new cast name is added into the cast list
+     * Add the cast member to the cast list
+     */
     public void addCast(String casts) {
         int i;
         for (i = 0; i < cast.size(); i++) {
@@ -298,7 +328,10 @@ public class Movie implements Serializable {
         }
     }
 
-    /* Remove cast members in */
+    /**  
+     * @param casts selected cast name is deleted from the cast list
+     * Remove the cast member from the cast list
+     */
     public void removeCast(String casts) {
         if (cast.contains(casts))
             cast.remove(casts);
@@ -306,18 +339,26 @@ public class Movie implements Serializable {
             System.out.println("Cast entered is invalid");
     }
 
-    /* Return the array of casts' names */
+    /**  
+     *
+     * Get the list of cast members
+     * @return ArrayList<String> arraylist of cast members
+     */
     public ArrayList<String> getCast() {
         return this.cast;
     }
 
-    /* Return the type of the movie */
+    /**  
+     * @return Type movie type 
+     * Return the type of the movie
+     */
     public Type getType() {
         return this.type;
     }
-    
-    /* Set the type of the movie */
-    
+    /**  
+     * @param option set movie type
+     * Set the movie type 
+     */
     public void setType(String option) {
     	if(option.equals("1"))
 			type = Type.ThreeD;
@@ -329,14 +370,20 @@ public class Movie implements Serializable {
     		System.out.println("Invalid value entered");
     }
 
-    /* Set the start date of the movie */
+    /**  
+     * @param startdate startdate of the movie
+     * Set the start date of the movie 
+     */
     public void setStartDate(String startdate) {
 
     		this.startDate = startdate;
     		findStatus();
     }   	
     
-    /* Set the end date of the movie */
+    /**  
+     * @param endDate endDate of the movie
+     * Set the end date of the movie 
+     */
     public void setEndDate(String enddate) {
     			this.endDate = enddate;
     			findStatus();
@@ -359,12 +406,17 @@ public class Movie implements Serializable {
     }
     
     
-    /* Returns new movie abstract */
+    /**  
+     * @return this.movieAbstract abstract of the movie
+     * Get the movie abstract of the movie
+     */
     public String getMovieAbstract() {
     	return this.movieAbstract;
     }
-    /* Allows new movie abstract */
-    
+    /**  
+     * @param movieabstract new movie abstract of the movie
+     * Set the new movie abstract
+     */
     public void setMovieAbstract(String movieabstract) {
     	this.movieAbstract = movieabstract;
     }
@@ -376,13 +428,16 @@ public class Movie implements Serializable {
      * @param cinema   In Cinema
      * @param showing  Showing date
      * @see MovieListing
+     * @see Cineplex
+     * @see Cinema
      */
     public void addMovieListing(Cineplex cineplex, Cinema cinema, String showing) {
         this.movielistings.add(new MovieListing(this, cineplex, cinema, showing));
     }
 
-    /**
-     * Show all movieListings in stdout
+    /**  User function
+     * @return true/false true if there is movielisting and false if there isn't any movielisting
+     * Print movielisting of the movie if it exists and only for movies that are now showing
      */
     public boolean showMovieListings() {
         String now = getToDaysDateString();
@@ -394,8 +449,9 @@ public class Movie implements Serializable {
         return (option == 1) ? true : false;
     }
     
-    /**
-     * return movelistings to admin
+    /**  
+     * Admin function
+     * Print movielisting of the movie if it exists even if movies are 
      */
     public void showAdminMovieListings() {
         for (int q = 0; q < movielistings.size(); q++) {
@@ -403,7 +459,9 @@ public class Movie implements Serializable {
         }
     }
     
- 
+    /**  
+     * To split the String of showing time into its year,month and etc...
+     */
     private static String getToDaysDateString() {
         Calendar cal = Calendar.getInstance();
         int year = cal.get(Calendar.YEAR);
@@ -426,8 +484,8 @@ public class Movie implements Serializable {
     }
 
     /**
-     * Get movieListing from index
-     *
+     * Get movieListing from index for user to use
+     * Only display available for booking ones (Preview and Now Showing)
      * @param index Index for movieListing
      * @return Movie Listings at index
      * @see MovieListing
@@ -443,10 +501,21 @@ public class Movie implements Serializable {
         return movielistings.get(q);
     }
     
+    /**
+     * Get movieListing from index for admin to use
+     * Print movielisting even though it is outdated
+     * @param index Index for movieListing
+     * @return Movie Listings at index
+     * @see MovieListing
+     */
     public MovieListing getAdminMovieListing(int index) {
        return movielistings.get(index);
     }
-    
+    /**
+     * Get Array List of movielisting for movie
+     * @return arrayList of movieListings
+     * @see MovieListing
+     */
     public ArrayList<MovieListing> getAllMovieListing()
     {
     	return movielistings;
@@ -461,7 +530,6 @@ public class Movie implements Serializable {
 
     /**
      * Get number of ticket sales for movie
-     *
      * @return Number of ticket sales
      */
     public int getTicketSales() {
@@ -483,14 +551,20 @@ public class Movie implements Serializable {
         return true;
     }
     
-    //return average rating
+    /**
+     * Calculate the average rating of the movie
+     * @return Rating of the movie
+     */
     public String averageRatingStr() {
         if(this.ratings.size() == 0)
             return "NA";
         return "" +this.averageRating();
     }
 
-    //return status of movie
+    /**
+     * Get the status of the movie
+     * @return Status return the status of the movie
+     */
     public String getStatusString() {
         MovieStatus status = this.getStatus();
         if(status == MovieStatus.COMING_SOON)

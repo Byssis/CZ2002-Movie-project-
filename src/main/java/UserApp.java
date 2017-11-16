@@ -5,6 +5,8 @@ import java.util.*;
  * Created by Albin on 2017-10-20.
  */
 public class UserApp {
+    //static List<Movie> movies = new ArrayList<Movie>();
+    //static List<MovieGoer> moviegoers = new ArrayList<MovieGoer>();
 
     public static void main(String[] args) {
         int option;
@@ -25,7 +27,7 @@ public class UserApp {
                     " \\______  /__|___|  /\\___  >__|_|  (____  /\n" +
                     "        \\/        \\/     \\/      \\/     \\/ ");
             UIFunctions.divider();
-            System.out.println("1: Book/Show movies");
+            System.out.println("1: List all movies");
             System.out.println("2. Search movie");
             System.out.println("3. List top 5 movies");
             System.out.println("4. Booking history");
@@ -456,8 +458,7 @@ public class UserApp {
 
         Scanner sc = new Scanner(System.in);
         int c = sc.nextInt();
-        UIFunctions.clear();
-        UIFunctions.divider();
+
         if (c == 1) {
             listTop5MoviesRating();
         } else if (c == 2) {
@@ -507,10 +508,12 @@ public class UserApp {
         UIFunctions.divider();
         System.out.println("Enter your name: ");
         Scanner sc = new Scanner(System.in);
-        String name = sc.nextLine();
+        String name = sc.next();
         System.out.println("Enter your phone number: ");
+
         String phone = sc.nextLine();
         UIFunctions.divider();
+
         for (MovieGoer mg : Storage.getUserList()) {
             if (name.equals(mg.getName()) && phone.equals(mg.getPhone())) {
                 mg.showBookingHistory();
@@ -538,7 +541,9 @@ public class UserApp {
         copy.sort(comparator);
 
         List<Movie> top5Movies = new ArrayList<Movie>();
+
         if(movies.size() < 1) return copy;
+
         for (int i = 0; i < 5; i++) {
             top5Movies.add(copy.get(i));
         }
@@ -546,7 +551,7 @@ public class UserApp {
     }
 
     /**
-     * Compare movies based on tickets sales
+     *
      */
     public static Comparator<Movie> tickets = new Comparator<Movie>() {
 
@@ -556,7 +561,7 @@ public class UserApp {
     };
 
     /**
-     * Compare movies based on ratings
+     *
      */
     public static Comparator<Movie> ratings = new Comparator<Movie>() {
         public int compare(Movie o1, Movie o2) {

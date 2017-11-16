@@ -19,14 +19,8 @@ public class Booking implements Serializable {
      */
     private final Seat[] seats;
 
-    /**
-     *  Transactions id
-     */
     private final String transactionID;
 
-    /**
-     *  Price for movie
-     */
     private final double price;
 
     /**

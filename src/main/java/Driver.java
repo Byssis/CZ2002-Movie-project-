@@ -7,7 +7,12 @@ import java.text.*;
 
 public class Driver {
 
-	public static boolean isValidDate(String inDate) {                        //check if the date passed in is a valid one
+	/**
+	 * Method to check if a date is valid
+	 * @param inDate : date to be checked
+	 * @return true if date is valid, false if not
+	 */
+	public static boolean isValidDate(String inDate) {                        
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		dateFormat.setLenient(false);
 		try {

@@ -17,9 +17,6 @@ public class Cinema implements Serializable {
      */
     private final CinemaType type;
 
-    /**
-     * Cinema code
-     */
     private final String cinemaCode;
 
     
@@ -138,18 +135,10 @@ public class Cinema implements Serializable {
         return false;
     }
 
-    /**
-     * Get cinema code
-     * @return cinema code
-     */
     public String getCinemaCode() {
         return cinemaCode;
     }
 
-    /**
-     * Return type of cinema as a string
-     * @return type of cinema string
-     */
     public String getTypeString() {
         if(this.getType() == CinemaType.PLATINUM)
             return "Platinum";
