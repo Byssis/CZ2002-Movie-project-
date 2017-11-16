@@ -153,6 +153,9 @@ public class Storage {
         ArrayList<String> cast2 = new ArrayList<String>();
         ArrayList<String> cast3 = new ArrayList<String>();
         ArrayList<String> cast4 = new ArrayList<String>();
+        ArrayList<String> cast5 = new ArrayList<String>();
+        ArrayList<String> cast6 = new ArrayList<String>();
+        ArrayList<String> cast7 = new ArrayList<String>();
         ArrayList<Cineplex> cineplexlist = new ArrayList<Cineplex>();
         cast.add("Albert");
         cast.add("Tom");
@@ -170,6 +173,14 @@ public class Storage {
         cast4.add("Xiao Li");
         cast4.add("Queenie");
         cast4.add("Desiree");
+        cast5.add("Bill Gates");
+        cast5.add("Trump");
+        cast6.add("Xiao Ma");
+        cast6.add("Xiao Tian");
+        cast7.add("Da Ma");
+        cast7.add("Da Niu");
+        
+        
         Cineplex cineplex1 = new Cineplex("Cineplex 1","XX1");
         cineplex1.addNewCinema("IMAX 1",CinemaType.PLATINUM, 10, 10, "XXX1");
         cineplex1.addNewCinema("IMAX 2",CinemaType.PLATINUM, 10, 10, "XXX2");
@@ -198,6 +209,15 @@ public class Storage {
         movies.add(new Movie("Spiderman", "Michael Bay", "130", cast3, Type.ThreeD, "2017-10-20", "2017-11-10","Spider becomes a man and saves the city","M18"));
         /* Coming Soon */
         movies.add(new Movie("Superman", "Wes Anderson", "140", cast4, Type.ThreeD, "2017-11-30", "2017-12-31","Alien from outer space, landed on Earth","PG"));
+        
+        movies.add(new Movie("Ninja Warrior", "Jack Ma", "90", cast5, Type.BLOCKBUSTER, "2017-11-01", "2017-12-30","Ninja fails at becoming a Warrior","PG"));
+        
+        movies.add(new Movie("Mission Impossible", "Bill Lee", "93", cast6, Type.BLOCKBUSTER, "2017-11-01", "2017-12-30","This mission is impossible","PG"));
+        
+        movies.add(new Movie("Suicide Squad", "John Legend", "110", cast7, Type.ThreeD, "2017-11-01", "2017-12-30","Watch the heroes join forces","NC16"));
+        
+        
+        
         movies.get(0).addMovieListing(cineplex1, cineplex1.getCinema(0) ,  "2017-11-05 | 10:00");
         movies.get(0).addMovieListing(cineplex1, cineplex1.getCinema(1) ,  "2017-11-10 | 15:00");
         movies.get(0).addMovieListing(cineplex1, cineplex1.getCinema(2) ,  "2017-11-15 | 17:00");
@@ -208,6 +228,8 @@ public class Storage {
         movies.get(2).addMovieListing(cineplex3, cineplex3.getCinema(1),  "2017-11-25 | 12:30");
         movies.get(2).addMovieListing(cineplex3, cineplex3.getCinema(2),  "2017-11-25 | 17:30");
         writeMovieList(movies);
+        
+        
         
     }
 

@@ -145,17 +145,16 @@ public class Driver {
 								System.out.println("Invalid option! Try again!");
 							}
 
+							a = sc.nextLine();
 							Storage.writePrice(price);
-							UIFunctions.waitForUser();
+							
+					
 								
 						}
 
 					} else {
 						ArrayList<String> hols = Storage.getHolidays();
-						System.out.println("Here are the current holidays:");
-						for (int x = 0; x < hols.size(); x++) {
-							System.out.println(hols.get(x));
-						}
+						
 						String opt;
 						while (true) {
 							System.out.println("What would you like to do?");
@@ -166,6 +165,10 @@ public class Driver {
 							if (opt.equals("1")) {//remove holiday
 								String holtodelete;
 								while (true) {
+									System.out.println("Here are the current holidays:");
+									for (int x = 0; x < hols.size(); x++) {
+										System.out.println(hols.get(x));
+									}
 									System.out.println("Enter the holiday to delete in the format YYYY-MM-DD");
 									holtodelete = sc.nextLine();
 									if (!hols.contains(holtodelete)) {
@@ -180,6 +183,10 @@ public class Driver {
 							} else if (opt.equals("2")) {
 								String newhol;
 								while (true) {
+									System.out.println("Here are the current holidays:");
+									for (int x = 0; x < hols.size(); x++) {
+										System.out.println(hols.get(x));
+									}
 									System.out.println("Enter the new holiday in the format YYYY-MM-DD");
 									newhol = sc.nextLine();
 									if (hols.contains(newhol)) {
@@ -406,7 +413,7 @@ public class Driver {
 									String newendDate = new String();
 									newendDate = sc.nextLine();
 									if(isValidDate(newendDate) && newendDate.compareTo(movies1.get(j).getStartDate())>0){
-										movies1.get(j).setStartDate(newendDate);
+										movies1.get(j).setEndDate(newendDate);
 										Storage.writeMovieList(movies1);
 										System.out.println("Movie's end date has been successfully updated");
 										break;}
@@ -505,7 +512,7 @@ public class Driver {
 											System.out.println("Invalid value entered.Please try again!");
 									}
 									
-									System.out.println("Please enter the showing time in this format : eg . YYYY-DD-MM | 20:00" );
+									System.out.println("Please enter the showing time in this format : eg . YYYY-MM-DD | 20:00" );
 									a = sc.nextLine();
 									newshowing = sc.nextLine();
 									ArrayList<Cineplex> cineplexlist = new ArrayList<Cineplex>();
@@ -549,7 +556,7 @@ public class Driver {
 										/* dummy scanner */
 										a= sc.nextLine();
 									
-										System.out.println("Please enter the movie showing time in this format : eg . YYYY-DD-MM | 20:00" );
+										System.out.println("Please enter the movie showing time in this format : eg . YYYY-MM-DD | 20:00" );
 										oldshowing = sc.nextLine();
 										
 										int c = 0;
@@ -604,7 +611,7 @@ public class Driver {
 											System.out.println("Invalid value entered.Please try again!");
 										}
 									
-									System.out.println("Please enter the showing time in this format : eg . YYYY-DD-MM | 20:00" );
+									System.out.println("Please enter the showing time in this format : eg . YYYY-MM-DD | 20:00" );
 									a = sc.nextLine();
 									updateshowing = sc.nextLine();
 									movies1.get(j).getAdminMovieListing(z).setCineplex(cineplexlist1.get(updatecineplex-1).getName());
@@ -654,7 +661,7 @@ public class Driver {
 									/* dummy scanner */
 									a= sc.nextLine();
 								
-									System.out.println("Please enter the movie showing time in this format : eg . YYYY-DD-MM | 20:00" );
+									System.out.println("Please enter the movie showing time in this format : eg . YYYY-MM-DD | 20:00" );
 									delshowing = sc.nextLine();
 									
 									int c = 0;
@@ -751,7 +758,7 @@ public class Driver {
 					System.out.println("Please enter the movie that you would like to remove : ");
 					String delmovie = new String();
 					delmovie = sc.nextLine();
-					int q = 0;
+					int q=0;
 					boolean key1 = false;
 	    			/* to get the index of the object in the Movie's array */
 					while (!key1) 
@@ -770,7 +777,7 @@ public class Driver {
 					}
 					movies2.remove(q);
 					Storage.writeMovieList(movies2);
-					System.out.println(movies2.get(q).getTitle() +" has been successfully removed");
+					System.out.println( delmovie +" has been successfully removed");
 					break;
 				}
 		
