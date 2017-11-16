@@ -12,7 +12,18 @@ public class UserApp {
         do {
             UIFunctions.clear();
             UIFunctions.divider();
-            System.out.println("User Menu: ");
+            System.out.println("  _________                                \n" +
+                    " /   _____/__ ________   ___________       \n" +
+                    " \\_____  \\|  |  \\____ \\_/ __ \\_  __ \\      \n" +
+                    " /        \\  |  /  |_> >  ___/|  | \\/      \n" +
+                    "/_______  /____/|   __/ \\___  >__|         \n" +
+                    "        \\/      |__|        \\/             \n" +
+                    "_________ .__                              \n" +
+                    "\\_   ___ \\|__| ____   ____   _____ _____   \n" +
+                    "/    \\  \\/|  |/    \\_/ __ \\ /     \\\\__  \\  \n" +
+                    "\\     \\___|  |   |  \\  ___/|  Y Y  \\/ __ \\_\n" +
+                    " \\______  /__|___|  /\\___  >__|_|  (____  /\n" +
+                    "        \\/        \\/     \\/      \\/     \\/ ");
             UIFunctions.divider();
             System.out.println("1: Book/Show movies");
             System.out.println("2. Search movie");
@@ -163,7 +174,7 @@ public class UserApp {
             UIFunctions.divider();
             int i = 1;
             if (movie.getStatus() != MovieStatus.END_OF_SHOWING)
-                System.out.println((i++) + ". Show movie listings");
+                System.out.println((i++) + ". Book movie");
             System.out.println((i++) + ". Show reviews");
             System.out.println((i++) + ". Review Movie");
             System.out.println((i++) + ". Rate Movie");
@@ -196,7 +207,8 @@ public class UserApp {
                 default:            // Error
                     return true;
             }
-        } while (c < 4);
+            UIFunctions.clear();
+        } while (c < 5  );
         return false;
     }
 
@@ -208,6 +220,9 @@ public class UserApp {
      * @see Movie
      */
     private static boolean rateMovie(Movie movie) {
+        UIFunctions.divider();
+        System.out.println(movie);
+        UIFunctions.divider();
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter your username(Press enter to finish):");
         String name = sc.nextLine();
@@ -220,7 +235,7 @@ public class UserApp {
         Rating r = new Rating(name, rating);
 
         movie.addRating(r);
-
+        UIFunctions.clear();
         return false;
     }
 
@@ -232,6 +247,10 @@ public class UserApp {
      * @see Movie
      */
     private static boolean reviewMovie(Movie movie) {
+        UIFunctions.divider();
+        System.out.println(movie);
+        UIFunctions.divider();
+
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter your username(Press enter to finish):");
         String name = sc.nextLine();
@@ -240,10 +259,8 @@ public class UserApp {
         String review = sc.nextLine();
 
         Review r = new Review(name, review);
-
-
         movie.addReview(r);
-
+        UIFunctions.clear();
         return false;
     }
 
@@ -255,8 +272,12 @@ public class UserApp {
      * @see UIFunctions
      */
     private static boolean showReviews(Movie movie) {
+        UIFunctions.divider();
+        System.out.println(movie);
+        UIFunctions.divider();
         movie.showReviews();
         UIFunctions.waitForUser();
+        UIFunctions.clear();
         return false;
     }
 
@@ -306,7 +327,7 @@ public class UserApp {
 
             Scanner sc = new Scanner(System.in);
             UIFunctions.divider();
-            System.out.println("1. Choose seats");
+            System.out.println("1. Book seats");
             System.out.println("2. Back");
             System.out.println("3. Go to menu");
             System.out.print("Enter option: ");
@@ -483,12 +504,13 @@ public class UserApp {
      * @see UIFunctions
      */
     private static void showBookingHistory() {
+        UIFunctions.divider();
         System.out.println("Enter your name: ");
         Scanner sc = new Scanner(System.in);
         String name = sc.nextLine();
         System.out.println("Enter your phone number: ");
         String phone = sc.nextLine();
-
+        UIFunctions.divider();
         for (MovieGoer mg : Storage.getUserList()) {
             if (name.equals(mg.getName()) && phone.equals(mg.getPhone())) {
                 mg.showBookingHistory();
@@ -508,22 +530,17 @@ public class UserApp {
      * @return  List with top 5 movies
      */
     public static List<Movie> top5Movies(List<Movie> movies, Comparator<Movie> comparator) {
+
+        List<Movie> copy = new ArrayList<Movie>();
+        for (Movie m : movies) {
+            copy.add(m);
+        }
+        copy.sort(comparator);
+
         List<Movie> top5Movies = new ArrayList<Movie>();
-        if(top5Movies.size() < 1) return movies;
+        if(movies.size() < 1) return copy;
         for (int i = 0; i < 5; i++) {
-            Movie m = movies.get(0);
-            for (Movie candidatemovie : movies) {
-                boolean inTop5 = false;
-                if (comparator.compare(candidatemovie, m) >= 0) {
-                    for (Movie top5movie : top5Movies) {
-                        if (candidatemovie.equals(top5movie))
-                            inTop5 = true;
-                    }
-                    if (inTop5 == false)
-                        m = candidatemovie;
-                }
-            }
-            top5Movies.add(m);
+            top5Movies.add(copy.get(i));
         }
         return top5Movies;
     }
@@ -534,7 +551,7 @@ public class UserApp {
     public static Comparator<Movie> tickets = new Comparator<Movie>() {
 
         public int compare(Movie o1, Movie o2) {
-            return o1.getTicketSales() - o2.getTicketSales();
+            return -1*(o1.getTicketSales() - o2.getTicketSales());
         }
     };
 
@@ -543,7 +560,7 @@ public class UserApp {
      */
     public static Comparator<Movie> ratings = new Comparator<Movie>() {
         public int compare(Movie o1, Movie o2) {
-            return Double.compare(o1.averageRating(), o2.averageRating());
+            return -1*Double.compare(o1.averageRating(), o2.averageRating());
         }
     };
 }

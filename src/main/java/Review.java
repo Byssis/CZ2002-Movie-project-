@@ -1,7 +1,9 @@
+import java.io.Serializable;
+
 /**
  * Created by Albin on 2017-10-20.
  */
-public class Review {
+public class Review implements Serializable {
     /*
         Name of user who wrote review
      */
