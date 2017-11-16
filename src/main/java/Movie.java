@@ -440,7 +440,7 @@ public class Movie implements Serializable {
      * Print movielisting of the movie if it exists and only for movies that are now showing
      */
     public boolean showMovieListings() {
-        String now = getToDaysDateString();
+        String now = getTodaysDateString();
         int option = 1;
         for (int q = 0; q < movielistings.size(); q++) {
             if (now.compareTo(movielistings.get(q).getShowing()) < 0)
@@ -462,7 +462,7 @@ public class Movie implements Serializable {
     /**  
      * To split the String of showing time into its year,month and etc...
      */
-    private static String getToDaysDateString() {
+    private static String getTodaysDateString() {
         Calendar cal = Calendar.getInstance();
         int year = cal.get(Calendar.YEAR);
         int month = cal.get(Calendar.MONTH);
@@ -491,7 +491,7 @@ public class Movie implements Serializable {
      * @see MovieListing
      */
     public MovieListing getMovieListing(int index) {
-        String now = getToDaysDateString();
+        String now = getTodaysDateString();
         int option = 1;
         int q = 0;
         for (; q < movielistings.size(); q++) {
