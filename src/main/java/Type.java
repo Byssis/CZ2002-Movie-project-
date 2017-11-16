@@ -3,7 +3,7 @@
  */
 
 /**
- * Different types of movies
+ * Different types of movies // ThreeD = 3D
  */
 public enum Type {
     ThreeD, BLOCKBUSTER, NORMAL

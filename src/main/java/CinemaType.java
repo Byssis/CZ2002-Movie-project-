@@ -1,6 +1,7 @@
 /**
  * Created by Albin on 2017-10-19.
  */
+/* Types of Cinema */
 public enum CinemaType {
-        /* Normal cinema */ NORMAL, /* Platinum cinema*/ PLATINUM
+        NORMAL, PLATINUM
 }
