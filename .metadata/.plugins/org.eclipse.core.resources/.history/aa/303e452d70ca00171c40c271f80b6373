@@ -16,10 +16,7 @@ public class Storage {
     public final static String HOLIDAYS_FILENAME = FILE_PATH + "pubhol.dat";
 
 
-    /**
-     * get current holidays
-     * @return arraylist of holidays
-     */
+
     public static ArrayList<String> getHolidays(){
         try {
             return (ArrayList)SerializeDB.readSerializedObject(HOLIDAYS_FILENAME);
