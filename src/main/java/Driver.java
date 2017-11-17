@@ -413,7 +413,7 @@ public class Driver {
 									String newendDate = new String();
 									newendDate = sc.nextLine();
 									if(isValidDate(newendDate) && newendDate.compareTo(movies1.get(j).getStartDate())>0){
-										movies1.get(j).setStartDate(newendDate);
+										movies1.get(j).setEndDate(newendDate);
 										Storage.writeMovieList(movies1);
 										System.out.println("Movie's end date has been successfully updated");
 										break;}

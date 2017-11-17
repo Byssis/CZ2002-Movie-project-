@@ -523,7 +523,7 @@ public class UserApp {
         UIFunctions.divider();
         System.out.println("Enter your name: ");
         Scanner sc = new Scanner(System.in);
-        String name = sc.next();
+        String name = sc.nextLine();
         System.out.println("Enter your phone number: ");
 
         String phone = sc.nextLine();
