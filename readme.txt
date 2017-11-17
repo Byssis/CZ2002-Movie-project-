@@ -1,8 +1,16 @@
 Readme 
 
 Super cinema app 
+Admin app
 
-Run admin app
+Note:
+If Storage files are missing or no movies are dispalyed in UserApp/Driver
+Run Storage class first to populate storage.
+1. Open cmd on windows
+2. Navigate to the directory of source files
+3. run Storage app: java Storage
+
+Run Admin App
 
 1. Open cmd on windows
 2. Navigate to the directory of source files
@@ -11,19 +19,11 @@ Run admin app
 5. user: user123
 6. password: password123
 
-Run user app
+Run User app
 
 1. Open cmd on windows
 2. Navigate to the directory of UserApp
 3. run admin app: java UserApp
-
-Note!
-If storage files are missing or no movies are dispalyed in UserApp/Driver
-Run storage to populate storage.
-1. Open cmd on windows
-2. Navigate to the directory of source files
-3. run storage app: java storage
-
 
 
 	
