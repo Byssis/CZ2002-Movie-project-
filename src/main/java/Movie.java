@@ -557,9 +557,9 @@ public class Movie implements Serializable {
      * @return Rating of the movie
      */
     public String averageRatingStr() {
-        if(this.ratings.size() == 0)
+        if(this.ratings.size() <= 1)
             return "NA";
-        return "" + (Math.round(this.averageRating()*100.0)/100.0);
+        return "" + (Math.round(this.averageRating()*10.0)/10.0);
     }
 
     /**
