@@ -39,7 +39,7 @@ public class UserApp {
             switch (option) {
                 case 1:         // List movies
                     List<Movie> movies = Storage.getMovieList();
-                    listMovies(movies, true);
+                    listMovies(filterEndOfShowing(movies), true);
                     Storage.writeMovieList(movies);
                     break;
 
@@ -64,6 +64,20 @@ public class UserApp {
 
             UIFunctions.clear();
         } while (option < 5);
+    }
+
+    /**
+     * Filter out END_OF_SHOWINGS movies
+     * @param movies List of movies to filter
+     * @return
+     */
+    private static List<Movie> filterEndOfShowing(List<Movie> movies) {
+        List<Movie> l = new ArrayList<Movie>();
+        for(Movie m: movies) {
+            if (m.getStatus() == MovieStatus.END_OF_SHOWING) continue;
+            l.add(m);
+        }
+        return l;
     }
 
     /**
@@ -114,7 +128,8 @@ public class UserApp {
      */
     private static void searchMovies() {
 
-        List<Movie> movies = Storage.getMovieList();
+        List<Movie> moviesFull = Storage.getMovieList();
+        List<Movie> movies = filterEndOfShowing(moviesFull);
         UIFunctions.divider();
         System.out.print("Enter search term: ");
 
@@ -135,7 +150,7 @@ public class UserApp {
             listMovies(searchresults, true);
         }
 
-        Storage.writeMovieList(movies);
+        Storage.writeMovieList(moviesFull);
 
     }
 
@@ -479,7 +494,7 @@ public class UserApp {
     private static void listTop5MoviesRating() {
         // iterate through movies list and save the top 5 movies into a list 
         List<Movie> movies = Storage.getMovieList();
-        listMovies(top5Movies(movies, ratings), true);
+        listMovies(top5Movies(filterEndOfShowing(movies), ratings), true);
         Storage.writeMovieList(movies);
     }
 
@@ -493,7 +508,7 @@ public class UserApp {
      */
     private static void listTop5TicketSales() {
         List<Movie> movies = Storage.getMovieList();
-        listMovies(top5Movies(movies, tickets), false);
+        listMovies(top5Movies(filterEndOfShowing(movies), tickets), false);
         Storage.writeMovieList(movies);
     }
 

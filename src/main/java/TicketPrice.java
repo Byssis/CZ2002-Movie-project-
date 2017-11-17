@@ -7,7 +7,7 @@ import java.text.*;
 public class TicketPrice 
 {
 	
-	private final double GST;
+	private double GST;
 	private double price;
 	private int customerAge;
 	private String date;	//to read current date
