@@ -99,7 +99,7 @@ public class Movie implements Serializable {
      * @param startDate First day of showing
      * @param endDate   Last day of showing
      * @param movieAbstract Short write up/description about the movie
-     * @para movieclassification PG/NC16/M18/R21
+     * @param classification PG/NC16/M18/R21
      */
     public Movie(String title, String director, String duration, ArrayList<String> cast, Type type, String startDate, String endDate, String movieAbstract,String classification) {
         this.title = title;
@@ -175,7 +175,7 @@ public class Movie implements Serializable {
     /**
      * String representation for all the movie details
      *
-     * @return String representation for the movie
+     * @return representation for the movie
      */
     public String toString() {
         StringBuilder out = new StringBuilder();                // Stringbuilder to build out string
@@ -342,7 +342,7 @@ public class Movie implements Serializable {
     /**  
      *
      * Get the list of cast members
-     * @return ArrayList<String> arraylist of cast members
+     * @return arraylist of cast members
      */
     public ArrayList<String> getCast() {
         return this.cast;
@@ -384,8 +384,8 @@ public class Movie implements Serializable {
      * @param endDate endDate of the movie
      * Set the end date of the movie 
      */
-    public void setEndDate(String enddate) {
-    			this.endDate = enddate;
+    public void setEndDate(String endDate) {
+    			this.endDate = endDate;
     			findStatus();
     }
     
@@ -406,16 +406,16 @@ public class Movie implements Serializable {
     }
     
     
-    /**  
-     * @return this.movieAbstract abstract of the movie
+    /**
      * Get the movie abstract of the movie
+     * @return abstract of the movie     *
      */
     public String getMovieAbstract() {
     	return this.movieAbstract;
     }
-    /**  
-     * @param movieabstract new movie abstract of the movie
+    /**
      * Set the new movie abstract
+     * @param movieabstract new movie abstract of the movie     *
      */
     public void setMovieAbstract(String movieabstract) {
     	this.movieAbstract = movieabstract;
@@ -436,8 +436,9 @@ public class Movie implements Serializable {
     }
 
     /**  User function
+     *  Print movielisting of the movie if it exists and only for movies that are now showing
      * @return true/false true if there is movielisting and false if there isn't any movielisting
-     * Print movielisting of the movie if it exists and only for movies that are now showing
+     *
      */
     public boolean showMovieListings() {
         String now = getTodaysDateString();
