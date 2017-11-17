@@ -154,9 +154,9 @@ public class Movie implements Serializable {
      */
     public void setStatus(String option){
     	if(option.equals("1"))
-			this.status = MovieStatus.PREVIEW;
-    	else if (option.equals("2"))
 			this.status = MovieStatus.COMING_SOON;
+    	else if (option.equals("2"))
+			this.status = MovieStatus.PREVIEW;
     	else if (option.equals("3"))
     		this.status = MovieStatus.NOW_SHOWING;
     	else{

@@ -363,6 +363,7 @@ public class Driver {
 								System.out.println("Please input the new Movie's duration : ");
 								String newDuration = "0";
 								newDuration = sc.next();
+								a = sc.nextLine();
 								movies1.get(j).setDuration(newDuration);
 								Storage.writeMovieList(movies1);
 								System.out.println("Movie's duration has been successfully updated");
@@ -383,7 +384,7 @@ public class Driver {
 							}
 							/*Update the new movie start date */
 							case "5": {
-							
+			
 								while(true){
 								System.out.println("Please input the Movie's new start date (in YYYY-MM-DD) : ");
 								String newstartDate = new String();
@@ -434,10 +435,10 @@ public class Driver {
 								oldcastname = sc.nextLine();
 								/* j is already the index of the movie in the movie arraylist */
 								/* Use k to iterate in the cast list inside movie */
-								for (k = 1; k < movies1.get(j).getCast().size(); k++) {
+								for (k = 0; k < movies1.get(j).getCast().size(); k++) {
 									if (movies1.get(j).getCast().get(k).equals(oldcastname))
 										break;
-									System.out.println(movies1.get(j).getCast().size());
+									
 								}
 								System.out.println("Please enter the new name that you would like to change it to ");
 								String newcastname = new String();
@@ -721,7 +722,7 @@ public class Driver {
 								movies1.get(j).setStatus(opt);
 								System.out.println("Movie's status has been successfully updated! ");
 								Storage.writeMovieList(movies1);
-								
+								break;
 								
 							}
 							/*Update movie classification*/
